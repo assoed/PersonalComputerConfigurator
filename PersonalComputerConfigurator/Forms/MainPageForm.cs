@@ -1,0 +1,112 @@
+﻿using PersonalComputerConfigurator.CustomControls;
+using PersonalComputerConfigurator.Services;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace PersonalComputerConfigurator.Forms
+{
+    public partial class MainPageForm : Form
+    {
+        private UserSession _currentUser;
+
+        private ProfileBlockUserControl _profileBlock;
+
+        public MainPageForm(UserSession userSession)
+        {
+            InitializeComponent();
+            _currentUser = userSession;
+        }
+
+        private void MainPageForm_Load(object sender, EventArgs e)
+        {
+            // Создаем один экземпляр ProfileBlockUserControl
+            _profileBlock = new ProfileBlockUserControl(_currentUser);
+
+            _profileBlock.Location = new Point(this.ClientSize.Width - _profileBlock.Width - 10, 10);
+            _profileBlock.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+
+            // Подписка на события
+            _profileBlock.LogoutClicked += UserControl_LogoutClicked;
+            _profileBlock.ProfileClicked += UserControl_ProfileClicked;
+
+             Controls.Add(_profileBlock);
+
+            lastNameTextBox.Text = _currentUser.lastName;
+            nameTextBox.Text = _currentUser.name;
+            middleNameTextBox.Text = _currentUser.middleName;
+            emailLabel.Text = _currentUser.email;
+            loginLabel.Text = _currentUser.login;
+        }
+
+        private void UserControl_LogoutClicked(object sender, EventArgs e)
+        {
+            // Закрываем текущую форму (MainPageForm)
+            this.Hide();
+
+            // Показать форму авторизации
+            AuthorizationForm authorizationForm = new AuthorizationForm();
+            authorizationForm.Show();
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserControl_ProfileClicked(object sender, EventArgs e)
+        {
+            mainTabControl.SelectedTab = profileTabPage;
+        }
+
+        private void saveProfileButton_Click(object sender, EventArgs e)
+        {
+            string newName = nameTextBox.Text;
+            string newLastName = lastNameTextBox.Text;
+            string newMiddleName = middleNameTextBox.Text;
+
+            // Проверка на пустые данные
+            if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrWhiteSpace(newLastName) || string.IsNullOrWhiteSpace(newMiddleName))
+            {
+                MessageBox.Show("Пожалуйста, заполните все поля.");
+                return;
+            }
+
+            // Получаем пользователя из базы данных с учетом его id
+            var user = Program.context.user.FirstOrDefault(u => u.id == _currentUser.id);
+
+            if (user != null)
+            {
+                user.name = newName;
+                user.lastName = newLastName;
+                user.middleName = newMiddleName;
+
+                Program.context.SaveChanges();
+
+                _currentUser.name = newName;
+                _currentUser.lastName = newLastName;
+                _currentUser.middleName = newMiddleName;
+
+                MessageBox.Show("Данные успешно сохранены.");
+            }
+
+            _profileBlock.UpdateProfileData();
+        }
+
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+
+        }
+    }  
+}
