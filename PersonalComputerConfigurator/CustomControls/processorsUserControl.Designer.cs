@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.nameLabel = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.nameValueLabel = new System.Windows.Forms.Label();
             this.socketLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.socketValueLabel = new System.Windows.Forms.Label();
             this.tdpLabel = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.tdpValueLabel = new System.Windows.Forms.Label();
+            this.descriptionValueLabel = new System.Windows.Forms.Label();
             this.descriptionLabel = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.boostValueLabel = new System.Windows.Forms.Label();
             this.boostLabel = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.frequencyValueLabel = new System.Windows.Forms.Label();
             this.frequencyLabel = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.priceValueLabel = new System.Windows.Forms.Label();
             this.priceLabel = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
+            this.threadsValueLabel = new System.Windows.Forms.Label();
             this.threadsLabel = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
+            this.coresValueLabel = new System.Windows.Forms.Label();
             this.coresLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -57,14 +57,14 @@
             this.nameLabel.TabIndex = 0;
             this.nameLabel.Text = "Название:";
             // 
-            // label2
+            // nameValueLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(59, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
+            this.nameValueLabel.AutoSize = true;
+            this.nameValueLabel.Location = new System.Drawing.Point(59, 12);
+            this.nameValueLabel.Name = "nameValueLabel";
+            this.nameValueLabel.Size = new System.Drawing.Size(27, 13);
+            this.nameValueLabel.TabIndex = 1;
+            this.nameValueLabel.Text = "имя";
             // 
             // socketLabel
             // 
@@ -75,15 +75,15 @@
             this.socketLabel.TabIndex = 2;
             this.socketLabel.Text = "СОКЕТ: ";
             // 
-            // label4
+            // socketValueLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(58, 37);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "label4";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.socketValueLabel.AutoSize = true;
+            this.socketValueLabel.Location = new System.Drawing.Point(58, 37);
+            this.socketValueLabel.Name = "socketValueLabel";
+            this.socketValueLabel.Size = new System.Drawing.Size(36, 13);
+            this.socketValueLabel.TabIndex = 3;
+            this.socketValueLabel.Text = "сокет";
+            this.socketValueLabel.Click += new System.EventHandler(this.label4_Click);
             // 
             // tdpLabel
             // 
@@ -94,23 +94,23 @@
             this.tdpLabel.TabIndex = 4;
             this.tdpLabel.Text = "TDP:";
             // 
-            // label6
+            // tdpValueLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(44, 64);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "label6";
+            this.tdpValueLabel.AutoSize = true;
+            this.tdpValueLabel.Location = new System.Drawing.Point(44, 64);
+            this.tdpValueLabel.Name = "tdpValueLabel";
+            this.tdpValueLabel.Size = new System.Drawing.Size(35, 13);
+            this.tdpValueLabel.TabIndex = 5;
+            this.tdpValueLabel.Text = "label6";
             // 
-            // label7
+            // descriptionValueLabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(239, 64);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "label7";
+            this.descriptionValueLabel.AutoSize = true;
+            this.descriptionValueLabel.Location = new System.Drawing.Point(239, 64);
+            this.descriptionValueLabel.Name = "descriptionValueLabel";
+            this.descriptionValueLabel.Size = new System.Drawing.Size(35, 13);
+            this.descriptionValueLabel.TabIndex = 11;
+            this.descriptionValueLabel.Text = "label7";
             // 
             // descriptionLabel
             // 
@@ -122,14 +122,14 @@
             this.descriptionLabel.Text = "ОПИСАНИЕ:";
             this.descriptionLabel.Click += new System.EventHandler(this.descriptionLabel_Click);
             // 
-            // label9
+            // boostValueLabel
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(233, 37);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "label9";
+            this.boostValueLabel.AutoSize = true;
+            this.boostValueLabel.Location = new System.Drawing.Point(233, 37);
+            this.boostValueLabel.Name = "boostValueLabel";
+            this.boostValueLabel.Size = new System.Drawing.Size(35, 13);
+            this.boostValueLabel.TabIndex = 9;
+            this.boostValueLabel.Text = "label9";
             // 
             // boostLabel
             // 
@@ -140,14 +140,14 @@
             this.boostLabel.TabIndex = 8;
             this.boostLabel.Text = "РАЗГОН:";
             // 
-            // label11
+            // frequencyValueLabel
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(239, 12);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 13);
-            this.label11.TabIndex = 7;
-            this.label11.Text = "label11";
+            this.frequencyValueLabel.AutoSize = true;
+            this.frequencyValueLabel.Location = new System.Drawing.Point(239, 12);
+            this.frequencyValueLabel.Name = "frequencyValueLabel";
+            this.frequencyValueLabel.Size = new System.Drawing.Size(41, 13);
+            this.frequencyValueLabel.TabIndex = 7;
+            this.frequencyValueLabel.Text = "label11";
             // 
             // frequencyLabel
             // 
@@ -159,14 +159,14 @@
             this.frequencyLabel.Text = "ЧАСТОТА:";
             this.frequencyLabel.Click += new System.EventHandler(this.frequencyLabel_Click);
             // 
-            // label13
+            // priceValueLabel
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(415, 64);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(41, 13);
-            this.label13.TabIndex = 17;
-            this.label13.Text = "label13";
+            this.priceValueLabel.AutoSize = true;
+            this.priceValueLabel.Location = new System.Drawing.Point(415, 64);
+            this.priceValueLabel.Name = "priceValueLabel";
+            this.priceValueLabel.Size = new System.Drawing.Size(41, 13);
+            this.priceValueLabel.TabIndex = 17;
+            this.priceValueLabel.Text = "label13";
             // 
             // priceLabel
             // 
@@ -177,14 +177,14 @@
             this.priceLabel.TabIndex = 16;
             this.priceLabel.Text = "ЦЕНА:";
             // 
-            // label15
+            // threadsValueLabel
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(415, 37);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(41, 13);
-            this.label15.TabIndex = 15;
-            this.label15.Text = "label15";
+            this.threadsValueLabel.AutoSize = true;
+            this.threadsValueLabel.Location = new System.Drawing.Point(415, 37);
+            this.threadsValueLabel.Name = "threadsValueLabel";
+            this.threadsValueLabel.Size = new System.Drawing.Size(41, 13);
+            this.threadsValueLabel.TabIndex = 15;
+            this.threadsValueLabel.Text = "label15";
             // 
             // threadsLabel
             // 
@@ -195,14 +195,14 @@
             this.threadsLabel.TabIndex = 14;
             this.threadsLabel.Text = "ПОТОКОВ:";
             // 
-            // label17
+            // coresValueLabel
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(415, 12);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(41, 13);
-            this.label17.TabIndex = 13;
-            this.label17.Text = "label17";
+            this.coresValueLabel.AutoSize = true;
+            this.coresValueLabel.Location = new System.Drawing.Point(415, 12);
+            this.coresValueLabel.Name = "coresValueLabel";
+            this.coresValueLabel.Size = new System.Drawing.Size(41, 13);
+            this.coresValueLabel.TabIndex = 13;
+            this.coresValueLabel.Text = "label17";
             // 
             // coresLabel
             // 
@@ -217,23 +217,23 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label13);
+            this.Controls.Add(this.priceValueLabel);
             this.Controls.Add(this.priceLabel);
-            this.Controls.Add(this.label15);
+            this.Controls.Add(this.threadsValueLabel);
             this.Controls.Add(this.threadsLabel);
-            this.Controls.Add(this.label17);
+            this.Controls.Add(this.coresValueLabel);
             this.Controls.Add(this.coresLabel);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.descriptionValueLabel);
             this.Controls.Add(this.descriptionLabel);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.boostValueLabel);
             this.Controls.Add(this.boostLabel);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.frequencyValueLabel);
             this.Controls.Add(this.frequencyLabel);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.tdpValueLabel);
             this.Controls.Add(this.tdpLabel);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.socketValueLabel);
             this.Controls.Add(this.socketLabel);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.nameValueLabel);
             this.Controls.Add(this.nameLabel);
             this.Name = "processorsUserControl";
             this.Size = new System.Drawing.Size(499, 135);
@@ -245,22 +245,22 @@
         #endregion
 
         private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label nameValueLabel;
         private System.Windows.Forms.Label socketLabel;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label socketValueLabel;
         private System.Windows.Forms.Label tdpLabel;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label tdpValueLabel;
+        private System.Windows.Forms.Label descriptionValueLabel;
         private System.Windows.Forms.Label descriptionLabel;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label boostValueLabel;
         private System.Windows.Forms.Label boostLabel;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label frequencyValueLabel;
         private System.Windows.Forms.Label frequencyLabel;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label priceValueLabel;
         private System.Windows.Forms.Label priceLabel;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label threadsValueLabel;
         private System.Windows.Forms.Label threadsLabel;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label coresValueLabel;
         private System.Windows.Forms.Label coresLabel;
     }
 }

@@ -108,5 +108,10 @@ namespace PersonalComputerConfigurator.Forms
         {
 
         }
+
+        private void showProcessors(object sender, EventArgs e)
+        {
+            List<_processors>
+        }
     }  
 }
