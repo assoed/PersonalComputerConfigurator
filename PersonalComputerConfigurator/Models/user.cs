@@ -9,7 +9,6 @@ namespace PersonalComputerConfigurator.Models
     [Table("user")]
     public partial class user
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
         [StringLength(50)]
@@ -25,10 +24,12 @@ namespace PersonalComputerConfigurator.Models
 
         public int? role { get; set; }
 
-        public virtual userRole userRole { get; set; }
-
+        [StringLength(50)]
         public string email { get; set; }
 
+        [StringLength(50)]
         public string login { get; set; }
+
+        public virtual userRole userRole { get; set; }
     }
 }

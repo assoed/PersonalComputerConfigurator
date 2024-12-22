@@ -1,4 +1,5 @@
 ﻿using PersonalComputerConfigurator.CustomControls;
+using PersonalComputerConfigurator.Models;
 using PersonalComputerConfigurator.Services;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace PersonalComputerConfigurator.Forms
             middleNameTextBox.Text = _currentUser.middleName;
             emailLabel.Text = _currentUser.email;
             loginLabel.Text = _currentUser.login;
+            showProcessors(sender, e);
         }
 
         private void UserControl_LogoutClicked(object sender, EventArgs e)
@@ -53,6 +55,13 @@ namespace PersonalComputerConfigurator.Forms
             // Показать форму авторизации
             AuthorizationForm authorizationForm = new AuthorizationForm();
             authorizationForm.Show();
+        }
+
+        private void ProcessorUserControl_EditFormDataSaved(object sender, EventArgs e)
+        {
+            // После сохранения данных обновляем отображение
+            processorsFlowLayoutPanel.Controls.Clear();  // Очистка старых данных
+            showProcessors(null, null);  // Перезагрузка процессоров
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -111,7 +120,19 @@ namespace PersonalComputerConfigurator.Forms
 
         private void showProcessors(object sender, EventArgs e)
         {
-            List<_processors>
+            processorsFlowLayoutPanel.Controls.Clear();
+
+            List <processors> processors = Program.context.processors.ToList();
+
+            foreach (processors processor in processors)
+            {
+                processorsFlowLayoutPanel.Controls.Add(new processorsUserControl(processor));
+            }
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            showProcessors(sender, e);
         }
     }  
 }
