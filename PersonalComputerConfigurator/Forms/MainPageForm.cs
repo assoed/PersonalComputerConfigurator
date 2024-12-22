@@ -37,7 +37,7 @@ namespace PersonalComputerConfigurator.Forms
             _profileBlock.LogoutClicked += UserControl_LogoutClicked;
             _profileBlock.ProfileClicked += UserControl_ProfileClicked;
 
-             Controls.Add(_profileBlock);
+            mainPageSplitContainer.Panel1.Controls.Add(_profileBlock);
 
             lastNameTextBox.Text = _currentUser.lastName;
             nameTextBox.Text = _currentUser.name;
@@ -133,6 +133,21 @@ namespace PersonalComputerConfigurator.Forms
         private void updateButton_Click(object sender, EventArgs e)
         {
             showProcessors(sender, e);
+        }
+
+        private void userFIOLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void profilePictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+
         }
     }  
 }
