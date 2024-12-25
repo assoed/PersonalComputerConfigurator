@@ -8,7 +8,6 @@ namespace PersonalComputerConfigurator.Models
 
     public partial class cases
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         [StringLength(50)]
@@ -22,5 +21,8 @@ namespace PersonalComputerConfigurator.Models
 
         [StringLength(255)]
         public string size { get; set; }
+
+        [StringLength(50)]
+        public string price { get; set; }
     }
 }

@@ -18,9 +18,18 @@ namespace PersonalComputerConfigurator
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AuthorizationForm());
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new AuthorizationForm());
+            }
+            catch (Exception ex)
+            {
+                // Показываем сообщение об ошибке
+                MessageBox.Show($"Ошибка: {ex.Message}\n{ex.StackTrace}");
+            }
         }
+
     }
 }

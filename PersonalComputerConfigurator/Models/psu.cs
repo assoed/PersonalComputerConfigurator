@@ -6,20 +6,25 @@ namespace PersonalComputerConfigurator.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("hdd")]
-    public partial class hdd
+    [Table("psu")]
+    public partial class psu
     {
         public int id { get; set; }
 
         [StringLength(50)]
         public string name { get; set; }
 
-        [StringLength(255)]
+        [StringLength(50)]
         public string description { get; set; }
 
-        public int? capacity { get; set; }
+        [StringLength(50)]
+        public string powerSupply { get; set; }
 
-        public int? speed { get; set; }
+        [StringLength(50)]
+        public string formFactor { get; set; }
+
+        [StringLength(50)]
+        public string certificate { get; set; }
 
         [StringLength(50)]
         public string price { get; set; }

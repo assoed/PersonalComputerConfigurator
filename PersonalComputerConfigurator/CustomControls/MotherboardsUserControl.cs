@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,37 +12,19 @@ using System.Windows.Forms;
 
 namespace PersonalComputerConfigurator.CustomControls
 {
-    public partial class ProcessorsUserControl : UserControl
+    public partial class MotherboardsUserControl : UserControl
     {
-        private processors _processor;
+        private motherboards _motherboard;
 
-        public event EventHandler ProcessorDeleted;
+        public event EventHandler MotherboardDeleted;
 
-        public ProcessorsUserControl(processors processors)
+        public MotherboardsUserControl(motherboards motherboard)
         {
             InitializeComponent();
-            _processor = processors;
+            _motherboard = motherboard;
             UserRightsSegregation userRightsSegregation = new UserRightsSegregation();
             userRightsSegregation.SetButtonsVisibilityAndEnabledState(this);
             setLabelsValue();
-        }
-
-        private void setLabelsValue()
-        {
-            nameValueLabel.Text = _processor.name;
-            descriptionValueLabel.Text = _processor.description;
-            tdpValueLabel.Text = _processor.tdp.ToString();
-            socketValueLabel.Text = _processor.socket;
-            frequencyValueLabel.Text = _processor?.frequency.ToString();
-            boostValueLabel.Text = _processor?.boost.ToString();
-            priceValueLabel.Text = _processor.price.ToString();
-            coresValueLabel.Text = _processor.cores.ToString();
-            threadsValueLabel.Text = _processor?.threads.ToString();
-        }
-
-        private void tdpLabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void tdpValueLabel_Click(object sender, EventArgs e)
@@ -51,20 +32,21 @@ namespace PersonalComputerConfigurator.CustomControls
 
         }
 
-        private void socketLabel_Click(object sender, EventArgs e)
+        private void setLabelsValue()
         {
-
-        }
-
-        private void socketValueLabel_Click(object sender, EventArgs e)
-        {
-
+            nameValueLabel.Text = _motherboard.name;
+            descriptionValueLabel.Text = _motherboard.description;
+            socketValueLabel.Text = _motherboard.socket;
+            formFactorValueLabel.Text = _motherboard.formFactor;
+            priceValueLabel.Text = _motherboard.price?.ToString() ?? "Цена не установлена";
+            chipsetValueLabel.Text = _motherboard.chipset.ToString();
+            ramTypeValueLabel.Text= _motherboard.ramType;
         }
 
         private void editPictureBox_Click(object sender, EventArgs e)
         {
             GenericEditFormCreator formCreator = new GenericEditFormCreator();
-            Form editForm = formCreator.CreateEditForm(_processor);
+            Form editForm = formCreator.CreateEditForm(_motherboard);
 
             // Открываем форму для редактирования
             editForm.ShowDialog();
@@ -84,21 +66,26 @@ namespace PersonalComputerConfigurator.CustomControls
             if (dialogResult == DialogResult.Yes)
             {
                 // Удаляем процессор из базы данных
-                var processorToDelete = Program.context.processors.FirstOrDefault(p => p.id == _processor.id);
-                if (processorToDelete != null)
+                var productToDelete = Program.context.motherboards.FirstOrDefault(p => p.id == _motherboard.id);
+                if (productToDelete != null)
                 {
-                    Program.context.processors.Remove(processorToDelete);
+                    Program.context.motherboards.Remove(productToDelete);
                     Program.context.SaveChanges(); // Сохраняем изменения в базе данных
 
                     // Удаляем этот процессор с панели
                     Controls.Remove(this); // 'this' - это текущий UserControl
 
                     // Вызываем событие, чтобы родительская форма обновила список
-                    ProcessorDeleted?.Invoke(this, EventArgs.Empty);
+                    MotherboardDeleted?.Invoke(this, EventArgs.Empty);
 
                     MessageBox.Show("Товар успешно удален.");
                 }
             }
+        }
+
+        private void chipsetValueLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -47,6 +47,16 @@
             this.emailLabel = new System.Windows.Forms.Label();
             this.registrationButton = new System.Windows.Forms.Button();
             this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.РОЛЬ = new System.Windows.Forms.Label();
+            this.personalComputerConfiguratorDatabaseDataSet = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.userTableAdapter();
+            this.userRoleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userRoleTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.userRoleTableAdapter();
+            this.userRoleComboBox = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userRoleBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // nameTextBox
@@ -192,11 +202,57 @@
             this.emailTextBox.Size = new System.Drawing.Size(561, 20);
             this.emailTextBox.TabIndex = 14;
             // 
+            // РОЛЬ
+            // 
+            this.РОЛЬ.AutoSize = true;
+            this.РОЛЬ.Location = new System.Drawing.Point(537, 68);
+            this.РОЛЬ.Name = "РОЛЬ";
+            this.РОЛЬ.Size = new System.Drawing.Size(37, 13);
+            this.РОЛЬ.TabIndex = 17;
+            this.РОЛЬ.Text = "РОЛЬ";
+            this.РОЛЬ.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // personalComputerConfiguratorDatabaseDataSet
+            // 
+            this.personalComputerConfiguratorDatabaseDataSet.DataSetName = "personalComputerConfiguratorDatabaseDataSet";
+            this.personalComputerConfiguratorDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataMember = "user";
+            this.userBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
+            // 
+            // userTableAdapter
+            // 
+            this.userTableAdapter.ClearBeforeFill = true;
+            // 
+            // userRoleBindingSource
+            // 
+            this.userRoleBindingSource.DataMember = "userRole";
+            this.userRoleBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
+            // 
+            // userRoleTableAdapter
+            // 
+            this.userRoleTableAdapter.ClearBeforeFill = true;
+            // 
+            // userRoleComboBox
+            // 
+            this.userRoleComboBox.DataSource = this.userRoleBindingSource;
+            this.userRoleComboBox.DisplayMember = "roleName";
+            this.userRoleComboBox.FormattingEnabled = true;
+            this.userRoleComboBox.Location = new System.Drawing.Point(580, 65);
+            this.userRoleComboBox.Name = "userRoleComboBox";
+            this.userRoleComboBox.Size = new System.Drawing.Size(121, 21);
+            this.userRoleComboBox.TabIndex = 18;
+            this.userRoleComboBox.ValueMember = "id";
+            // 
             // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.userRoleComboBox);
+            this.Controls.Add(this.РОЛЬ);
             this.Controls.Add(this.registrationButton);
             this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.emailTextBox);
@@ -216,6 +272,9 @@
             this.Name = "RegistrationForm";
             this.Text = "RegistrationForm";
             this.Load += new System.EventHandler(this.RegistrationForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userRoleBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,5 +300,12 @@
         private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.Button registrationButton;
         private System.Windows.Forms.TextBox emailTextBox;
+        private System.Windows.Forms.Label РОЛЬ;
+        private personalComputerConfiguratorDatabaseDataSet personalComputerConfiguratorDatabaseDataSet;
+        private System.Windows.Forms.BindingSource userBindingSource;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.userTableAdapter userTableAdapter;
+        private System.Windows.Forms.BindingSource userRoleBindingSource;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.userRoleTableAdapter userRoleTableAdapter;
+        private System.Windows.Forms.ComboBox userRoleComboBox;
     }
 }

@@ -6,9 +6,11 @@ namespace PersonalComputerConfigurator.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class coolers
+    [Table("gpu")]
+    public partial class gpu
     {
-        public int id { get; set; }
+        [StringLength(10)]
+        public string id { get; set; }
 
         [StringLength(255)]
         public string name { get; set; }
@@ -16,19 +18,22 @@ namespace PersonalComputerConfigurator.Models
         [StringLength(255)]
         public string description { get; set; }
 
-        [StringLength(255)]
-        public string socket { get; set; }
-
-        [StringLength(255)]
-        public string power { get; set; }
-
-        [StringLength(255)]
-        public string type { get; set; }
+        [StringLength(50)]
+        public string gpuFrequency { get; set; }
 
         [StringLength(50)]
-        public string material { get; set; }
+        public string gpuBoost { get; set; }
+
+        [StringLength(50)]
+        public string memorySize { get; set; }
+
+        [StringLength(50)]
+        public string memoryType { get; set; }
 
         [StringLength(50)]
         public string price { get; set; }
+
+        [StringLength(50)]
+        public string tdp { get; set; }
     }
 }

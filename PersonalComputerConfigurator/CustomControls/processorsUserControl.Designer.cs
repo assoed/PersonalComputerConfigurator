@@ -1,6 +1,6 @@
 ﻿namespace PersonalComputerConfigurator.CustomControls
 {
-    partial class processorsUserControl
+    partial class ProcessorsUserControl
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(processorsUserControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProcessorsUserControl));
             this.nameLabel = new System.Windows.Forms.Label();
             this.nameValueLabel = new System.Windows.Forms.Label();
             this.socketLabel = new System.Windows.Forms.Label();
@@ -266,7 +266,7 @@
             this.Controls.Add(this.nameValueLabel);
             this.Controls.Add(this.nameLabel);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Name = "processorsUserControl";
+            this.Name = "ProcessorsUserControl";
             this.Size = new System.Drawing.Size(499, 135);
             ((System.ComponentModel.ISupportInitialize)(this.deletePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).EndInit();

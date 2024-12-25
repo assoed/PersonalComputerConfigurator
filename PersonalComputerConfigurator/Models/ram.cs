@@ -9,7 +9,6 @@ namespace PersonalComputerConfigurator.Models
     [Table("ram")]
     public partial class ram
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         [StringLength(255)]
@@ -18,13 +17,19 @@ namespace PersonalComputerConfigurator.Models
         [StringLength(255)]
         public string description { get; set; }
 
-        public int? type { get; set; }
+        [StringLength(255)]
+        public string type { get; set; }
 
         [StringLength(255)]
         public string formFactor { get; set; }
 
-        public int? capacity { get; set; }
+        [StringLength(255)]
+        public string capacity { get; set; }
 
-        public int? frequency { get; set; }
+        [StringLength(255)]
+        public string frequency { get; set; }
+
+        [MaxLength(50)]
+        public string price { get; set; }
     }
 }

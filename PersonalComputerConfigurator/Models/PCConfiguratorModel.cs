@@ -14,9 +14,11 @@ namespace PersonalComputerConfigurator.Models
 
         public virtual DbSet<cases> cases { get; set; }
         public virtual DbSet<coolers> coolers { get; set; }
+        public virtual DbSet<gpu> gpu { get; set; }
         public virtual DbSet<hdd> hdd { get; set; }
         public virtual DbSet<motherboards> motherboards { get; set; }
         public virtual DbSet<processors> processors { get; set; }
+        public virtual DbSet<psu> psu { get; set; }
         public virtual DbSet<ram> ram { get; set; }
         public virtual DbSet<ssd> ssd { get; set; }
         public virtual DbSet<user> user { get; set; }
@@ -40,6 +42,10 @@ namespace PersonalComputerConfigurator.Models
                 .Property(e => e.size)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<cases>()
+                .Property(e => e.price)
+                .IsUnicode(false);
+
             modelBuilder.Entity<coolers>()
                 .Property(e => e.name)
                 .IsUnicode(false);
@@ -53,7 +59,55 @@ namespace PersonalComputerConfigurator.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<coolers>()
+                .Property(e => e.power)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<coolers>()
+                .Property(e => e.type)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<coolers>()
                 .Property(e => e.material)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<coolers>()
+                .Property(e => e.price)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<gpu>()
+                .Property(e => e.id)
+                .IsFixedLength();
+
+            modelBuilder.Entity<gpu>()
+                .Property(e => e.name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<gpu>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<gpu>()
+                .Property(e => e.gpuFrequency)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<gpu>()
+                .Property(e => e.gpuBoost)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<gpu>()
+                .Property(e => e.memorySize)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<gpu>()
+                .Property(e => e.memoryType)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<gpu>()
+                .Property(e => e.price)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<gpu>()
+                .Property(e => e.tdp)
                 .IsUnicode(false);
 
             modelBuilder.Entity<hdd>()
@@ -62,6 +116,34 @@ namespace PersonalComputerConfigurator.Models
 
             modelBuilder.Entity<hdd>()
                 .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<hdd>()
+                .Property(e => e.price)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<psu>()
+                .Property(e => e.name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<psu>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<psu>()
+                .Property(e => e.powerSupply)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<psu>()
+                .Property(e => e.formFactor)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<psu>()
+                .Property(e => e.certificate)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<psu>()
+                .Property(e => e.price)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ssd>()

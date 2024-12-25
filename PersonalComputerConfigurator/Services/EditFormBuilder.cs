@@ -4,17 +4,19 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Drawing;
 using PersonalComputerConfigurator.Services;
+using System.Data.Entity;
+using PersonalComputerConfigurator.Models;
 
-public class EditFormBuilder<T>
+public class EditFormBuilder
 {
     private Form _editForm;
     private List<Control> _controls;
-    private T _targetObject;
+    private object _targetObject;
     private bool _isNewObject;  // Флаг для создания нового объекта
     public event EventHandler DataSaved;
 
     // Конструктор с флагом для нового объекта
-    public EditFormBuilder(T targetObject, bool isNewObject = false)
+    public EditFormBuilder(object targetObject, bool isNewObject = false)
     {
         _editForm = new Form
         {
@@ -89,16 +91,23 @@ public class EditFormBuilder<T>
     // Обновление значений в объекте на основе данных из текстовых полей
     public void SaveChanges()
     {
-        PropertyInfo[] properties = typeof(T).GetProperties();
+        PropertyInfo[] properties = _targetObject.GetType().GetProperties();
 
+        // Убираем "id" из обновлений
         foreach (var property in properties)
         {
+            // Пропускаем поле id
+            if (property.Name.Equals("id", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
             TextBox textBox = _controls.Find(ctrl => ctrl.Name == property.Name) as TextBox;
             if (textBox != null)
             {
                 try
                 {
-                    // Преобразуем значение из текстового поля в тип свойства и обновляем его
+                    // Преобразуем значение в тип свойства
                     object value = Convert.ChangeType(textBox.Text, property.PropertyType);
                     property.SetValue(_targetObject, value);
                 }
@@ -109,18 +118,38 @@ public class EditFormBuilder<T>
             }
         }
 
+        using (var context = new PCConfiguratorModel())
+        {
+            // Если объект новый, устанавливаем состояние как Added
+            if (_isNewObject)
+            {
+                context.Set(_targetObject.GetType()).Add(_targetObject);  // Добавляем новый объект
+            }
+            else
+            {
+                // Привязываем объект к контексту для существующего объекта
+                context.Entry(_targetObject).State = EntityState.Modified;
+            }
+
+            // Сохраняем изменения
+            context.SaveChanges();
+        }
+
+        // Сигнализируем об успешном сохранении
         DataSaved?.Invoke(this, EventArgs.Empty);
     }
+
+
 }
 
 public class GenericEditFormCreator
 {
-    public Form CreateEditForm<T>(T targetObject, bool isNewObject = false)
+    public Form CreateEditForm(object targetObject, bool isNewObject = false)
     {
-        EditFormBuilder<T> builder = new EditFormBuilder<T>(targetObject, isNewObject); // Передаем флаг
+        EditFormBuilder builder = new EditFormBuilder(targetObject, isNewObject); // Передаем флаг
 
-        // Получаем все свойства типа T с помощью рефлексии
-        PropertyInfo[] properties = typeof(T).GetProperties();
+        // Получаем все свойства типа targetObject с помощью рефлексии
+        PropertyInfo[] properties = targetObject.GetType().GetProperties();
 
         // Для каждого свойства создаем параметр
         foreach (var property in properties)
@@ -128,7 +157,10 @@ public class GenericEditFormCreator
             if (property.CanRead)
             {
                 string translatedName = TranslateService.translate(property.Name);
-
+                if (isNewObject && property.Name.Equals("id", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue; // Пропускаем добавление поля id
+                }
                 // Если свойство - id, отображаем его как Label
                 if (property.Name.Equals("id", StringComparison.OrdinalIgnoreCase))
                 {
@@ -151,5 +183,3 @@ public class GenericEditFormCreator
         return builder.Build();
     }
 }
-
-

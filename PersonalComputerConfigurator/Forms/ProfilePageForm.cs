@@ -14,12 +14,10 @@ namespace PersonalComputerConfigurator.Forms
 {
     public partial class ProfilePageForm : Form
     {
-        private UserSession _currentUser;
 
-        public ProfilePageForm(UserSession userSession)
+        public ProfilePageForm()
         {
             InitializeComponent();
-            _currentUser = userSession;
         }
 
         private void saveProfileButton_Click(object sender, EventArgs e)
@@ -36,7 +34,7 @@ namespace PersonalComputerConfigurator.Forms
             }
 
             // Получаем пользователя из базы данных с учетом его id
-            var user = Program.context.user.FirstOrDefault(u => u.id == _currentUser.id);
+            var user = Program.context.user.FirstOrDefault(u => u.id == UserSession.Id);
 
             if (user != null)
             {
@@ -46,9 +44,9 @@ namespace PersonalComputerConfigurator.Forms
 
                 Program.context.SaveChanges();
 
-                _currentUser.name = newName;
-                _currentUser.lastName = newLastName;
-                _currentUser.middleName = newMiddleName;
+                UserSession.Name = newName;
+                UserSession.LastName = newLastName;
+                UserSession.MiddleName = newMiddleName;
 
                 MessageBox.Show("Данные успешно сохранены.");
             }
@@ -56,11 +54,11 @@ namespace PersonalComputerConfigurator.Forms
 
         private void ProfilePageForm_Load(object sender, EventArgs e)
         {
-            lastNameTextBox.Text = _currentUser.lastName;
-            nameTextBox.Text = _currentUser.name;
-            middleNameTextBox.Text = _currentUser.middleName;
-            emailLabel.Text = _currentUser.email;
-            loginLabel.Text = _currentUser.login;
+            lastNameTextBox.Text = UserSession.LastName;
+            nameTextBox.Text = UserSession.Name;
+            middleNameTextBox.Text = UserSession.MiddleName;
+            emailLabel.Text = UserSession.Email;
+            loginLabel.Text = UserSession.Login;
         }
     }
 }

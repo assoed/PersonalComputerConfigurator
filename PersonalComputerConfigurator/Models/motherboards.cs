@@ -8,7 +8,6 @@ namespace PersonalComputerConfigurator.Models
 
     public partial class motherboards
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         [StringLength(255)]
@@ -20,11 +19,16 @@ namespace PersonalComputerConfigurator.Models
         [StringLength(255)]
         public string socket { get; set; }
 
-        public int? ramType { get; set; }
+        [StringLength(255)]
+        public string ramType { get; set; }
 
         [StringLength(50)]
         public string chipset { get; set; }
 
-        public int? formFactor { get; set; }
+        [StringLength(255)]
+        public string formFactor { get; set; }
+
+        [StringLength(255)]
+        public string price { get; set; }
     }
 }

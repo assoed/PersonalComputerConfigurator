@@ -9,7 +9,6 @@ namespace PersonalComputerConfigurator.Models
     [Table("ssd")]
     public partial class ssd
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         [StringLength(50)]

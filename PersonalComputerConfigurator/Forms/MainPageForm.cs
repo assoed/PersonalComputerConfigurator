@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,20 +16,18 @@ namespace PersonalComputerConfigurator.Forms
 {
     public partial class MainPageForm : Form
     {
-        private UserSession _currentUser;
-
         private ProfileBlockUserControl _profileBlock;
 
-        public MainPageForm(UserSession userSession)
+        public MainPageForm()
         {
             InitializeComponent();
-            _currentUser = userSession;
         }
+
 
         private void MainPageForm_Load(object sender, EventArgs e)
         {
             // Создаем один экземпляр ProfileBlockUserControl
-            _profileBlock = new ProfileBlockUserControl(_currentUser);
+            _profileBlock = new ProfileBlockUserControl();
 
             _profileBlock.Location = new Point(this.ClientSize.Width - _profileBlock.Width - 10, 10);
             _profileBlock.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -39,12 +38,15 @@ namespace PersonalComputerConfigurator.Forms
 
             mainPageSplitContainer.Panel1.Controls.Add(_profileBlock);
 
-            lastNameTextBox.Text = _currentUser.lastName;
-            nameTextBox.Text = _currentUser.name;
-            middleNameTextBox.Text = _currentUser.middleName;
-            emailLabel.Text = _currentUser.email;
-            loginLabel.Text = _currentUser.login;
+            lastNameTextBox.Text = UserSession.LastName;
+            nameTextBox.Text = UserSession.Name;
+            middleNameTextBox.Text = UserSession.MiddleName;
+            emailLabel.Text = UserSession.Email;
+            loginLabel.Text = UserSession.Login;
             showProcessors(sender, e);
+            showMotherboards(sender, e);
+            showRAM(sender, e);
+            showCoolers(sender, e);
         }
 
         private void UserControl_LogoutClicked(object sender, EventArgs e)
@@ -93,7 +95,7 @@ namespace PersonalComputerConfigurator.Forms
             }
 
             // Получаем пользователя из базы данных с учетом его id
-            var user = Program.context.user.FirstOrDefault(u => u.id == _currentUser.id);
+            var user = Program.context.user.FirstOrDefault(u => u.id == UserSession.Id);
 
             if (user != null)
             {
@@ -103,9 +105,9 @@ namespace PersonalComputerConfigurator.Forms
 
                 Program.context.SaveChanges();
 
-                _currentUser.name = newName;
-                _currentUser.lastName = newLastName;
-                _currentUser.middleName = newMiddleName;
+                UserSession.Name = newName;
+                UserSession.LastName = newLastName;
+                UserSession.MiddleName = newMiddleName;
 
                 MessageBox.Show("Данные успешно сохранены.");
             }
@@ -126,28 +128,104 @@ namespace PersonalComputerConfigurator.Forms
 
             foreach (processors processor in processors)
             {
-                processorsFlowLayoutPanel.Controls.Add(new processorsUserControl(processor));
+                processorsFlowLayoutPanel.Controls.Add(new ProcessorsUserControl(processor));
             }
         }
+
+        private void showMotherboards(object sender, EventArgs e)
+        {
+            motherboardFlowLayoutPanel.Controls.Clear();
+
+            List<motherboards> motherboards = Program.context.motherboards.ToList();
+
+            foreach (motherboards motherboard in motherboards)
+            {
+                motherboardFlowLayoutPanel.Controls.Add(new MotherboardsUserControl(motherboard));
+            }
+        }
+
+        private void showRAM(object sender, EventArgs e)
+        {
+            ramFlowLayoutPanel.Controls.Clear();
+
+            List<ram> rams = Program.context.ram.ToList();
+
+            foreach (ram ram in rams)
+            {
+                ramFlowLayoutPanel.Controls.Add(new RamUserControl(ram));
+            }
+        }
+
+        private void showCoolers(object sender, EventArgs e)
+        {
+            coolersFlowLayoutPanel.Controls.Clear();
+
+            List<coolers> coolers = Program.context.coolers.ToList();
+
+            foreach (coolers cooler in coolers)
+            {
+                coolersFlowLayoutPanel.Controls.Add(new CoolersUserControl(cooler));
+            }
+        }
+
+        private void showCases(object sender, EventArgs e)
+        {
+            casesFlowLayoutPanel.Controls.Clear();
+
+            List<cases> cases = Program.context.cases.ToList();
+
+            foreach (cases pcCase in cases)
+            {
+                coolersFlowLayoutPanel.Controls.Add(new CasesUserControl(pcCase));
+            }
+        }
+
 
         private void updateButton_Click(object sender, EventArgs e)
         {
             showProcessors(sender, e);
+            showMotherboards(sender, e);
+            showRAM(sender, e);
+            showCoolers(sender, e);
         }
 
-        private void userFIOLabel_Click(object sender, EventArgs e)
+        private void addNewButton_Click(object sender, EventArgs e)
+        {
+            // Получаем имя выбранной вкладки
+            var selectedTab = mainTabControl.SelectedTab.Name; // Получаем имя текущей выбранной вкладки
+
+            // Проверяем, есть ли для этой вкладки модель в словаре
+            if (ComponentsDictionary.tabModelMapping.TryGetValue(selectedTab, out Type modelType))
+            {
+                // Создаем экземпляр модели с помощью рефлексии
+                var modelInstance = Activator.CreateInstance(modelType);
+
+                // Создаем форму редактирования
+                GenericEditFormCreator formCreator = new GenericEditFormCreator();
+                Form newEditForm = formCreator.CreateEditForm(modelInstance, isNewObject: true);
+
+                // Показываем форму
+                newEditForm.ShowDialog();
+            }
+            else
+            {
+                // Если для вкладки нет соответствующей модели, показываем сообщение об ошибке
+                MessageBox.Show("Для этой вкладки нет связанной модели.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+
+        private void updateButton_Click_1(object sender, EventArgs e)
         {
 
         }
 
-        private void profilePictureBox_Click(object sender, EventArgs e)
+        private void ramFlowLayoutPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void logoutButton_Click(object sender, EventArgs e)
-        {
 
-        }
+
     }  
 }

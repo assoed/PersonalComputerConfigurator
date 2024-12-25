@@ -59,15 +59,14 @@ namespace PersonalComputerConfigurator.Forms
 
             MessageBox.Show("Добро пожаловать, " + user.name + "!");
 
-            UserSession _currentUser = new UserSession();
-            _currentUser.id = user.id;
-            _currentUser.name = user.name;
-            _currentUser.lastName = user.lastName;
-            _currentUser.middleName = user.middleName;
-            _currentUser.login = user.login;
-            _currentUser.email = user.email;
+            UserSession.Id = user.id;
+            UserSession.Name = user.name;
+            UserSession.LastName = user.lastName;
+            UserSession.MiddleName = user.middleName;
+            UserSession.Login = user.login;
+            UserSession.Email = user.email;
 
-            MainPageForm mainPageForm = new MainPageForm(_currentUser);
+            MainPageForm mainPageForm = new MainPageForm();
             mainPageForm.Show();
             this.Hide();
         }

@@ -8,7 +8,6 @@ namespace PersonalComputerConfigurator.Models
 
     public partial class processors
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         [StringLength(255)]

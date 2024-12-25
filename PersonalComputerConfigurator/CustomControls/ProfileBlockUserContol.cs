@@ -14,32 +14,30 @@ namespace PersonalComputerConfigurator.CustomControls
 {
     public partial class ProfileBlockUserControl : UserControl
     {
-        private UserSession _currentUser;
-
         public event EventHandler LogoutClicked;
 
         public event EventHandler ProfileClicked;
 
         public event EventHandler UserDataUpdated;
 
-        public ProfileBlockUserControl(UserSession userSession)
+        public ProfileBlockUserControl()
         {
             InitializeComponent();
-            _currentUser = userSession;
             UpdateProfileData();
         }
 
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            _currentUser.logOut();
+            UserSession.logOut();
+  
 
             LogoutClicked?.Invoke(this, EventArgs.Empty);
         }
 
         private void ProfileBlockUserControl_Load(object sender, EventArgs e)
         {
-            userFIOLabel.Text = $"{_currentUser.lastName} {_currentUser.name} {_currentUser.middleName}";
+            userFIOLabel.Text = $"{UserSession.LastName} {UserSession.Name} {UserSession.MiddleName}";
 
             ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(profilePictureBox, "Перейти в профиль");
@@ -58,7 +56,7 @@ namespace PersonalComputerConfigurator.CustomControls
 
         public void UpdateProfileData()
         {
-            userFIOLabel.Text = $"{_currentUser.lastName} {_currentUser.name} {_currentUser.middleName}";
+            userFIOLabel.Text = $"{UserSession.LastName} {UserSession.Name} {UserSession.MiddleName}";
         }
     }
 }
