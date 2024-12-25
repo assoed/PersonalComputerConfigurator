@@ -29,8 +29,9 @@ namespace PersonalComputerConfigurator.Forms
             string password = passwordTextBox.Text;
             string confirmPassword = repeatPasswordTextBox.Text;
             string email = emailTextBox.Text;
+            int roleId = (int)userRoleComboBox.SelectedValue;
 
-            var newUser = new user
+            user newUser = new user
             {
                 name = firstName,
                 middleName = middleName,
@@ -38,6 +39,7 @@ namespace PersonalComputerConfigurator.Forms
                 password = Services.PasswordHashService.hashPassword(password),
                 login = login,
                 email = email,
+                role = roleId,
             };
 
             if (password != confirmPassword)
@@ -67,7 +69,15 @@ namespace PersonalComputerConfigurator.Forms
 
         private void RegistrationForm_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "personalComputerConfiguratorDatabaseDataSet.userRole". При необходимости она может быть перемещена или удалена.
+            this.userRoleTableAdapter.Fill(this.personalComputerConfiguratorDatabaseDataSet.userRole);
             passwordTextBox.PasswordChar = '*';
+            repeatPasswordTextBox.PasswordChar = '*';
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

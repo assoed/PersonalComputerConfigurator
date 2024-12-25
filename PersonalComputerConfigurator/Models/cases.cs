@@ -6,30 +6,23 @@ namespace PersonalComputerConfigurator.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("user")]
-    public partial class user
+    public partial class cases
     {
         public int id { get; set; }
 
         [StringLength(50)]
         public string name { get; set; }
 
-        [StringLength(50)]
-        public string middleName { get; set; }
+        [StringLength(255)]
+        public string description { get; set; }
 
         [StringLength(50)]
-        public string lastName { get; set; }
+        public string formFaktor { get; set; }
 
-        public string password { get; set; }
-
-        public int? role { get; set; }
-
-        [StringLength(50)]
-        public string email { get; set; }
+        [StringLength(255)]
+        public string size { get; set; }
 
         [StringLength(50)]
-        public string login { get; set; }
-
-        public virtual userRole userRole { get; set; }
+        public string price { get; set; }
     }
 }

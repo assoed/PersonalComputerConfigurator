@@ -1,34 +1,43 @@
-﻿using System;
+﻿using PersonalComputerConfigurator.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PersonalComputerConfigurator.Services
 {
-    public class UserSession
+    public static class UserSession
     {
-        // Свойства для хранения информации о пользователе
-        public int id { get; set; }               // ID пользователя
-        public string name { get; set; }          // Имя пользователя
-        public string middleName { get; set; }
-        public string lastName { get; set; }
-        public string login { get; set; }         // Логин пользователя
-        public string email { get; set; }         // Email пользователя
-
-        // Метод, позволяющий проверить, авторизован ли пользователь
-        public bool IsAuthenticated => id > 0;
+        public static int Id { get; set; }
+        public static string Name { get; set; }
+        public static string LastName { get; set; }
+        public static string MiddleName { get; set; }
+        public static string Login { get; set; }
+        public static string Email { get; set; }
+        public static int? RoleId { get; set; }
 
         // Метод для выхода из системы (очистка данных)
-        public void logOut()
+        public static void logOut()
         {
-            id = 0;
-            name = null;
-            login = null;
-            email = null;
-            lastName = null;
-            middleName = null;
+            Id = 0;
+            Name = null;
+            LastName = null;
+            MiddleName = null;
+            Login = null;
+            Email = null;
+        }
+
+        public static void initialazeUser(user user)
+        {
+            Id = user.id;
+            Name = user.name;
+            LastName = user.lastName;
+            MiddleName = user.middleName;
+            Login = user.login;
+            Email = user.email;
+            RoleId = user.role;
         }
     }
-
 }
