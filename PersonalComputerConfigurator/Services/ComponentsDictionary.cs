@@ -12,15 +12,15 @@ namespace PersonalComputerConfigurator.Services
     {
         public static readonly Dictionary<string, Type> tabModelMapping = new Dictionary<string, Type>
         {
-            { "processorsTab", typeof(processors) },
-            { "motherboardsTab", typeof(motherboards) },
-            { "ramTab", typeof(ram) },
-            { "coolersTab", typeof(coolers) },
-            { "casesTab", typeof(cases) },
-            { "hddTab", typeof(hdd) },
-            { "ssdTab", typeof(ssd) },
-            { "gpuTab", typeof(gpu) },
-            { "psuTab", typeof(psu) }
+            { "processorsTab", typeof(Processor) },
+            { "motherboardsTab", typeof(Motherboard) },
+            { "ramTab", typeof(RAM) },
+            { "coolersTab", typeof(Cooler) },
+            { "casesTab", typeof(Case) },
+            { "hddTab", typeof(HDD) },
+            { "ssdTab", typeof(SSD) },
+            { "gpuTab", typeof(GPU) },
+            { "psuTab", typeof(PSU) }
         };
 
 

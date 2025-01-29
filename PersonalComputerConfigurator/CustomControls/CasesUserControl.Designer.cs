@@ -54,6 +54,7 @@
             this.editPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.editPictureBox.TabIndex = 83;
             this.editPictureBox.TabStop = false;
+            this.editPictureBox.Click += new System.EventHandler(this.editPictureBox_Click);
             // 
             // deletePictureBox
             // 

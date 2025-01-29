@@ -14,10 +14,10 @@ namespace PersonalComputerConfigurator.CustomControls
 {
     public partial class RamUserControl : UserControl
     {
-        private ram _ram;
+        private RAM _ram;
 
         public event EventHandler MotherboardDeleted;
-        public RamUserControl(ram ram)
+        public RamUserControl(RAM ram)
         {
             InitializeComponent();
             _ram = ram;
@@ -34,13 +34,13 @@ namespace PersonalComputerConfigurator.CustomControls
 
         private void setLabelsValue()
         {
-            nameValueLabel.Text = _ram.name;
-            descriptionValueLabel.Text = _ram.description;
-            ramTypeValueLabel.Text = _ram.type.ToString();
-            formFactorValueLabel.Text = _ram.formFactor;
-            priceValueLabel.Text = _ram.price?.ToString() ?? "Цена не установлена";
-            frequencyValueLabel.Text = _ram.frequency.ToString();
-            capacityValueLabel.Text = _ram.capacity;
+            nameValueLabel.Text = _ram.Name;
+            descriptionValueLabel.Text = _ram.Description;
+            ramTypeValueLabel.Text = _ram.Type.ToString();
+            formFactorValueLabel.Text = _ram.FormFactor;
+            priceValueLabel.Text = _ram.Price?.ToString() ?? "Цена не установлена";
+            frequencyValueLabel.Text = _ram.Frequency.ToString();
+            capacityValueLabel.Text = _ram.Capacity;
         }
 
         private void editPictureBox_Click(object sender, EventArgs e)
@@ -66,10 +66,10 @@ namespace PersonalComputerConfigurator.CustomControls
             if (dialogResult == DialogResult.Yes)
             {
                 // Удаляем процессор из базы данных
-                var productToDelete = Program.context.ram.FirstOrDefault(p => p.id == _ram.id);
+                var productToDelete = Program.context.RAM.FirstOrDefault(p => p.ID == _ram.ID);
                 if (productToDelete != null)
                 {
-                    Program.context.ram.Remove(productToDelete);
+                    Program.context.RAM.Remove(productToDelete);
                     Program.context.SaveChanges(); // Сохраняем изменения в базе данных
 
                     // Удаляем этот процессор с панели

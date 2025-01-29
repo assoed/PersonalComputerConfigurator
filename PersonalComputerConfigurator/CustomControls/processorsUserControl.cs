@@ -15,14 +15,14 @@ namespace PersonalComputerConfigurator.CustomControls
 {
     public partial class ProcessorsUserControl : UserControl
     {
-        private processors _processor;
+        private Processor _processor;
 
         public event EventHandler ProcessorDeleted;
 
-        public ProcessorsUserControl(processors processors)
+        public ProcessorsUserControl(Processor processor)
         {
             InitializeComponent();
-            _processor = processors;
+            _processor = processor;
             UserRightsSegregation userRightsSegregation = new UserRightsSegregation();
             userRightsSegregation.SetButtonsVisibilityAndEnabledState(this);
             setLabelsValue();
@@ -30,15 +30,15 @@ namespace PersonalComputerConfigurator.CustomControls
 
         private void setLabelsValue()
         {
-            nameValueLabel.Text = _processor.name;
-            descriptionValueLabel.Text = _processor.description;
-            tdpValueLabel.Text = _processor.tdp.ToString();
-            socketValueLabel.Text = _processor.socket;
-            frequencyValueLabel.Text = _processor?.frequency.ToString();
-            boostValueLabel.Text = _processor?.boost.ToString();
-            priceValueLabel.Text = _processor.price.ToString();
-            coresValueLabel.Text = _processor.cores.ToString();
-            threadsValueLabel.Text = _processor?.threads.ToString();
+            nameValueLabel.Text = _processor.Name;
+            descriptionValueLabel.Text = _processor.Description;
+            tdpValueLabel.Text = _processor.Tdp.ToString();
+            socketValueLabel.Text = _processor.Socket;
+            frequencyValueLabel.Text = _processor?.Frequency.ToString();
+            boostValueLabel.Text = _processor?.Boost.ToString();
+            priceValueLabel.Text = _processor.Price.ToString();
+            coresValueLabel.Text = _processor.Cores.ToString();
+            threadsValueLabel.Text = _processor?.Threads.ToString();
         }
 
         private void tdpLabel_Click(object sender, EventArgs e)
@@ -84,10 +84,10 @@ namespace PersonalComputerConfigurator.CustomControls
             if (dialogResult == DialogResult.Yes)
             {
                 // Удаляем процессор из базы данных
-                var processorToDelete = Program.context.processors.FirstOrDefault(p => p.id == _processor.id);
+                var processorToDelete = Program.context.Processor.FirstOrDefault(p => p.ID == _processor.ID);
                 if (processorToDelete != null)
                 {
-                    Program.context.processors.Remove(processorToDelete);
+                    Program.context.Processor.Remove(processorToDelete);
                     Program.context.SaveChanges(); // Сохраняем изменения в базе данных
 
                     // Удаляем этот процессор с панели

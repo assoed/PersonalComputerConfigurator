@@ -14,11 +14,11 @@ namespace PersonalComputerConfigurator.CustomControls
 {
     public partial class MotherboardsUserControl : UserControl
     {
-        private motherboards _motherboard;
+        private Motherboard _motherboard;
 
         public event EventHandler MotherboardDeleted;
 
-        public MotherboardsUserControl(motherboards motherboard)
+        public MotherboardsUserControl(Motherboard motherboard)
         {
             InitializeComponent();
             _motherboard = motherboard;
@@ -34,13 +34,13 @@ namespace PersonalComputerConfigurator.CustomControls
 
         private void setLabelsValue()
         {
-            nameValueLabel.Text = _motherboard.name;
-            descriptionValueLabel.Text = _motherboard.description;
-            socketValueLabel.Text = _motherboard.socket;
-            formFactorValueLabel.Text = _motherboard.formFactor;
-            priceValueLabel.Text = _motherboard.price?.ToString() ?? "Цена не установлена";
-            chipsetValueLabel.Text = _motherboard.chipset.ToString();
-            ramTypeValueLabel.Text= _motherboard.ramType;
+            nameValueLabel.Text = _motherboard.Name;
+            descriptionValueLabel.Text = _motherboard.Description;
+            socketValueLabel.Text = _motherboard.Socket;
+            formFactorValueLabel.Text = _motherboard.FormFactor;
+            priceValueLabel.Text = _motherboard.Price?.ToString() ?? "Цена не установлена";
+            chipsetValueLabel.Text = _motherboard.Chipset.ToString();
+            ramTypeValueLabel.Text= _motherboard.RamType;
         }
 
         private void editPictureBox_Click(object sender, EventArgs e)
@@ -66,10 +66,10 @@ namespace PersonalComputerConfigurator.CustomControls
             if (dialogResult == DialogResult.Yes)
             {
                 // Удаляем процессор из базы данных
-                var productToDelete = Program.context.motherboards.FirstOrDefault(p => p.id == _motherboard.id);
+                var productToDelete = Program.context.Motherboard.FirstOrDefault(p => p.ID == _motherboard.ID);
                 if (productToDelete != null)
                 {
-                    Program.context.motherboards.Remove(productToDelete);
+                    Program.context.Motherboard.Remove(productToDelete);
                     Program.context.SaveChanges(); // Сохраняем изменения в базе данных
 
                     // Удаляем этот процессор с панели

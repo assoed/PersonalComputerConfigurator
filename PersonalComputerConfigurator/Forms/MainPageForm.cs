@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PersonalComputerConfigurator.Constants;
 
 namespace PersonalComputerConfigurator.Forms
 {
@@ -47,6 +48,10 @@ namespace PersonalComputerConfigurator.Forms
             showMotherboards(sender, e);
             showRAM(sender, e);
             showCoolers(sender, e);
+            showUsers(sender, e);
+            showCases(sender, e);
+            showHDD(sender, e);
+            showSSD(sender, e);
         }
 
         private void UserControl_LogoutClicked(object sender, EventArgs e)
@@ -78,7 +83,7 @@ namespace PersonalComputerConfigurator.Forms
 
         private void UserControl_ProfileClicked(object sender, EventArgs e)
         {
-            mainTabControl.SelectedTab = profileTabPage;
+            adminTabControl.SelectedTab = profileTabPage;
         }
 
         private void saveProfileButton_Click(object sender, EventArgs e)
@@ -95,13 +100,13 @@ namespace PersonalComputerConfigurator.Forms
             }
 
             // Получаем пользователя из базы данных с учетом его id
-            var user = Program.context.user.FirstOrDefault(u => u.id == UserSession.Id);
+            var user = Program.context.User.FirstOrDefault(u => u.ID == UserSession.Id);
 
             if (user != null)
             {
-                user.name = newName;
-                user.lastName = newLastName;
-                user.middleName = newMiddleName;
+                user.Name = newName;
+                user.LastName = newLastName;
+                user.MiddleName = newMiddleName;
 
                 Program.context.SaveChanges();
 
@@ -124,9 +129,9 @@ namespace PersonalComputerConfigurator.Forms
         {
             processorsFlowLayoutPanel.Controls.Clear();
 
-            List <processors> processors = Program.context.processors.ToList();
+            List <Processor> processors = Program.context.Processor.ToList();
 
-            foreach (processors processor in processors)
+            foreach (Processor processor in processors)
             {
                 processorsFlowLayoutPanel.Controls.Add(new ProcessorsUserControl(processor));
             }
@@ -136,9 +141,9 @@ namespace PersonalComputerConfigurator.Forms
         {
             motherboardFlowLayoutPanel.Controls.Clear();
 
-            List<motherboards> motherboards = Program.context.motherboards.ToList();
+            List<Motherboard> motherboards = Program.context.Motherboard.ToList();
 
-            foreach (motherboards motherboard in motherboards)
+            foreach (Motherboard motherboard in motherboards)
             {
                 motherboardFlowLayoutPanel.Controls.Add(new MotherboardsUserControl(motherboard));
             }
@@ -148,9 +153,9 @@ namespace PersonalComputerConfigurator.Forms
         {
             ramFlowLayoutPanel.Controls.Clear();
 
-            List<ram> rams = Program.context.ram.ToList();
+            List<RAM> rams = Program.context.RAM.ToList();
 
-            foreach (ram ram in rams)
+            foreach (RAM ram in rams)
             {
                 ramFlowLayoutPanel.Controls.Add(new RamUserControl(ram));
             }
@@ -160,9 +165,9 @@ namespace PersonalComputerConfigurator.Forms
         {
             coolersFlowLayoutPanel.Controls.Clear();
 
-            List<coolers> coolers = Program.context.coolers.ToList();
+            List<Cooler> coolers = Program.context.Cooler.ToList();
 
-            foreach (coolers cooler in coolers)
+            foreach (Cooler cooler in coolers)
             {
                 coolersFlowLayoutPanel.Controls.Add(new CoolersUserControl(cooler));
             }
@@ -172,14 +177,49 @@ namespace PersonalComputerConfigurator.Forms
         {
             casesFlowLayoutPanel.Controls.Clear();
 
-            List<cases> cases = Program.context.cases.ToList();
+            List<Case> cases = Program.context.Case.ToList();
 
-            foreach (cases pcCase in cases)
+            foreach (Case pcCase in cases)
             {
-                coolersFlowLayoutPanel.Controls.Add(new CasesUserControl(pcCase));
+                casesFlowLayoutPanel.Controls.Add(new CasesUserControl(pcCase));
             }
         }
 
+        private void showHDD(object sender, EventArgs e)
+        {
+            hddFlowLayoutPanel.Controls.Clear();
+
+            List<HDD> hdds = Program.context.HDD.ToList();
+
+            foreach (HDD hdd in hdds)
+            {
+               hddFlowLayoutPanel.Controls.Add(new HddUserControl(hdd));
+            }
+        }
+
+
+        private void showUsers(object sender, EventArgs e)
+        {
+
+            List<User> users = Program.context.User.ToList();
+
+            foreach (User user in users)
+            {
+                usersEdtiorFlowLayoutPanel.Controls.Add(new UserEditorAdminControl(user));
+            }
+        }
+
+        private void showSSD(object sender, EventArgs e)
+        {
+            ssdFlowLayoutPanel.Controls.Clear();
+
+            List<SSD> ssds = Program.context.SSD.ToList();
+
+            foreach (SSD ssd in ssds)
+            {
+                ssdFlowLayoutPanel.Controls.Add(new SsdUserControl(ssd));
+            }
+        }
 
         private void updateButton_Click(object sender, EventArgs e)
         {
@@ -187,12 +227,16 @@ namespace PersonalComputerConfigurator.Forms
             showMotherboards(sender, e);
             showRAM(sender, e);
             showCoolers(sender, e);
+            showUsers(sender, e);
+            showCases(sender, e);
+            showHDD(sender, e);
+            showSSD(sender, e);
         }
 
         private void addNewButton_Click(object sender, EventArgs e)
         {
             // Получаем имя выбранной вкладки
-            var selectedTab = mainTabControl.SelectedTab.Name; // Получаем имя текущей выбранной вкладки
+            var selectedTab = adminTabControl.SelectedTab.Name; // Получаем имя текущей выбранной вкладки
 
             // Проверяем, есть ли для этой вкладки модель в словаре
             if (ComponentsDictionary.tabModelMapping.TryGetValue(selectedTab, out Type modelType))
@@ -226,6 +270,35 @@ namespace PersonalComputerConfigurator.Forms
         }
 
 
+        private bool IsAdmin()
+        {
 
+            if (UserSession.RoleId == Constants.Constants.AdministratorRoleId)
+            {
+                return true;
+            }
+            else 
+            { 
+                return false;
+            }
+        }
+
+        private void deletePictureBox_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Вы уверены, что хотите удалить этого пользователя", "Подтверждение", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                // Удаляем процессор из базы данных
+                var userToDelete = Program.context.User.FirstOrDefault(p => p.ID == UserSession.Id);
+                if (userToDelete != null)
+                {
+                    Program.context.User.Remove(userToDelete);
+                    Program.context.SaveChanges();
+
+                    Controls.Remove(this);
+                    MessageBox.Show("Пользователь успешно удален.");
+                }
+            }
+        }
     }  
 }

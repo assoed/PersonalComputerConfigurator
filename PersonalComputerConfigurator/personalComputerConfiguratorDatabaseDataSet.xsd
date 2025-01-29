@@ -129,57 +129,66 @@ SELECT id, roleName FROM userRole WHERE (id = @id)</CommandText>
               <Mapping SourceColumn="id" DataSetColumn="id" />
               <Mapping SourceColumn="roleName" DataSetColumn="roleName" />
             </Mappings>
-            <Sources />
+            <Sources>
+              <DbSource ConnectionRef="personalComputerConfiguratorDatabaseConnectionString (Settings)" DbObjectName="personalComputerConfiguratorDatabase.dbo.userRole" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT id, roleName FROM dbo.userRole</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
           </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="personalComputerConfiguratorDatabaseDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_UserDSName="personalComputerConfiguratorDatabaseDataSet" msprop:Generator_DataSetName="personalComputerConfiguratorDatabaseDataSet">
+  <xs:element name="personalComputerConfiguratorDatabaseDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="personalComputerConfiguratorDatabaseDataSet" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="personalComputerConfiguratorDatabaseDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="user" msprop:Generator_RowEvHandlerName="userRowChangeEventHandler" msprop:Generator_RowDeletedName="userRowDeleted" msprop:Generator_RowDeletingName="userRowDeleting" msprop:Generator_RowEvArgName="userRowChangeEvent" msprop:Generator_TablePropName="user" msprop:Generator_RowChangedName="userRowChanged" msprop:Generator_RowChangingName="userRowChanging" msprop:Generator_TableClassName="userDataTable" msprop:Generator_RowClassName="userRow" msprop:Generator_TableVarName="tableuser" msprop:Generator_UserTableName="user">
+        <xs:element name="user" msprop:Generator_RowClassName="userRow" msprop:Generator_RowEvHandlerName="userRowChangeEventHandler" msprop:Generator_RowDeletedName="userRowDeleted" msprop:Generator_RowDeletingName="userRowDeleting" msprop:Generator_RowEvArgName="userRowChangeEvent" msprop:Generator_TablePropName="user" msprop:Generator_RowChangedName="userRowChanged" msprop:Generator_UserTableName="user" msprop:Generator_RowChangingName="userRowChanging" msprop:Generator_TableClassName="userDataTable" msprop:Generator_TableVarName="tableuser">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="id" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_UserColumnName="id" type="xs:int" />
-              <xs:element name="name" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_UserColumnName="name" minOccurs="0">
+              <xs:element name="id" msprop:Generator_UserColumnName="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnVarNameInTable="columnid" type="xs:int" />
+              <xs:element name="name" msprop:Generator_UserColumnName="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnVarNameInTable="columnname" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="middleName" msprop:Generator_ColumnPropNameInRow="middleName" msprop:Generator_ColumnPropNameInTable="middleNameColumn" msprop:Generator_ColumnVarNameInTable="columnmiddleName" msprop:Generator_UserColumnName="middleName" minOccurs="0">
+              <xs:element name="middleName" msprop:Generator_UserColumnName="middleName" msprop:Generator_ColumnPropNameInTable="middleNameColumn" msprop:Generator_ColumnPropNameInRow="middleName" msprop:Generator_ColumnVarNameInTable="columnmiddleName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="lastName" msprop:Generator_ColumnPropNameInRow="lastName" msprop:Generator_ColumnPropNameInTable="lastNameColumn" msprop:Generator_ColumnVarNameInTable="columnlastName" msprop:Generator_UserColumnName="lastName" minOccurs="0">
+              <xs:element name="lastName" msprop:Generator_UserColumnName="lastName" msprop:Generator_ColumnPropNameInTable="lastNameColumn" msprop:Generator_ColumnPropNameInRow="lastName" msprop:Generator_ColumnVarNameInTable="columnlastName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="password" msprop:Generator_ColumnPropNameInRow="password" msprop:Generator_ColumnPropNameInTable="passwordColumn" msprop:Generator_ColumnVarNameInTable="columnpassword" msprop:Generator_UserColumnName="password" minOccurs="0">
+              <xs:element name="password" msprop:Generator_UserColumnName="password" msprop:Generator_ColumnPropNameInTable="passwordColumn" msprop:Generator_ColumnPropNameInRow="password" msprop:Generator_ColumnVarNameInTable="columnpassword" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2147483647" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="role" msprop:Generator_ColumnPropNameInRow="role" msprop:Generator_ColumnPropNameInTable="roleColumn" msprop:Generator_ColumnVarNameInTable="columnrole" msprop:Generator_UserColumnName="role" type="xs:int" minOccurs="0" />
+              <xs:element name="role" msprop:Generator_UserColumnName="role" msprop:Generator_ColumnPropNameInTable="roleColumn" msprop:Generator_ColumnPropNameInRow="role" msprop:Generator_ColumnVarNameInTable="columnrole" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="userRole" msprop:Generator_RowEvHandlerName="userRoleRowChangeEventHandler" msprop:Generator_RowDeletedName="userRoleRowDeleted" msprop:Generator_RowDeletingName="userRoleRowDeleting" msprop:Generator_RowEvArgName="userRoleRowChangeEvent" msprop:Generator_TablePropName="userRole" msprop:Generator_RowChangedName="userRoleRowChanged" msprop:Generator_RowChangingName="userRoleRowChanging" msprop:Generator_TableClassName="userRoleDataTable" msprop:Generator_RowClassName="userRoleRow" msprop:Generator_TableVarName="tableuserRole" msprop:Generator_UserTableName="userRole">
+        <xs:element name="userRole" msprop:Generator_RowClassName="userRoleRow" msprop:Generator_RowEvHandlerName="userRoleRowChangeEventHandler" msprop:Generator_RowDeletedName="userRoleRowDeleted" msprop:Generator_RowDeletingName="userRoleRowDeleting" msprop:Generator_RowEvArgName="userRoleRowChangeEvent" msprop:Generator_TablePropName="userRole" msprop:Generator_RowChangedName="userRoleRowChanged" msprop:Generator_UserTableName="userRole" msprop:Generator_RowChangingName="userRoleRowChanging" msprop:Generator_TableClassName="userRoleDataTable" msprop:Generator_TableVarName="tableuserRole">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="id" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_UserColumnName="id" type="xs:int" />
-              <xs:element name="roleName" msprop:Generator_ColumnPropNameInRow="roleName" msprop:Generator_ColumnPropNameInTable="roleNameColumn" msprop:Generator_ColumnVarNameInTable="columnroleName" msprop:Generator_UserColumnName="roleName" minOccurs="0">
+              <xs:element name="id" msprop:Generator_UserColumnName="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnVarNameInTable="columnid" type="xs:int" />
+              <xs:element name="roleName" msprop:Generator_UserColumnName="roleName" msprop:Generator_ColumnPropNameInTable="roleNameColumn" msprop:Generator_ColumnPropNameInRow="roleName" msprop:Generator_ColumnVarNameInTable="columnroleName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
@@ -202,7 +211,7 @@ SELECT id, roleName FROM userRole WHERE (id = @id)</CommandText>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_user_userRole" msdata:parent="userRole" msdata:child="user" msdata:parentkey="id" msdata:childkey="role" msprop:Generator_UserParentTable="userRole" msprop:Generator_UserChildTable="user" msprop:Generator_RelationVarName="relationFK_user_userRole" msprop:Generator_UserRelationName="FK_user_userRole" msprop:Generator_ChildPropName="GetuserRows" msprop:Generator_ParentPropName="userRoleRow" />
+      <msdata:Relationship name="FK_user_userRole" msdata:parent="userRole" msdata:child="user" msdata:parentkey="id" msdata:childkey="role" msprop:Generator_UserParentTable="userRole" msprop:Generator_UserChildTable="user" msprop:Generator_RelationVarName="relationFK_user_userRole" msprop:Generator_ChildPropName="GetuserRows" msprop:Generator_ParentPropName="userRoleRow" msprop:Generator_UserRelationName="FK_user_userRole" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

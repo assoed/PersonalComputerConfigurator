@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PersonalComputerConfigurator.Constants;
 
 namespace PersonalComputerConfigurator.Services
 {
@@ -16,7 +17,7 @@ namespace PersonalComputerConfigurator.Services
         public static string MiddleName { get; set; }
         public static string Login { get; set; }
         public static string Email { get; set; }
-        public static int? RoleId { get; set; }
+        public static int? RoleId { get; set; } = Constants.Constants.UserRoleId;
 
         // Метод для выхода из системы (очистка данных)
         public static void logOut()
@@ -29,15 +30,15 @@ namespace PersonalComputerConfigurator.Services
             Email = null;
         }
 
-        public static void initialazeUser(user user)
+        public static void initialazeUser(User user)
         {
-            Id = user.id;
-            Name = user.name;
-            LastName = user.lastName;
-            MiddleName = user.middleName;
-            Login = user.login;
-            Email = user.email;
-            RoleId = user.role;
+            Id = user.ID;
+            Name = user.Name;
+            LastName = user.LastName;
+            MiddleName = user.MiddleName;
+            Login = user.Login;
+            Email = user.Email;
+            RoleId = user.Role;
         }
     }
 }

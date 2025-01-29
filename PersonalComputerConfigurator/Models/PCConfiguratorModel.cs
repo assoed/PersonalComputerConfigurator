@@ -8,188 +8,182 @@ namespace PersonalComputerConfigurator.Models
     public partial class PCConfiguratorModel : DbContext
     {
         public PCConfiguratorModel()
-            : base("name=PCConfiguratorModel")
+            : base("name=PersonalComputerConfiguratorModel")
         {
         }
 
-        public virtual DbSet<cases> cases { get; set; }
-        public virtual DbSet<coolers> coolers { get; set; }
-        public virtual DbSet<gpu> gpu { get; set; }
-        public virtual DbSet<hdd> hdd { get; set; }
-        public virtual DbSet<motherboards> motherboards { get; set; }
-        public virtual DbSet<processors> processors { get; set; }
-        public virtual DbSet<psu> psu { get; set; }
-        public virtual DbSet<ram> ram { get; set; }
-        public virtual DbSet<ssd> ssd { get; set; }
-        public virtual DbSet<user> user { get; set; }
-        public virtual DbSet<userRole> userRole { get; set; }
+        public virtual DbSet<Case> Case { get; set; }
+        public virtual DbSet<Configuration> Configuration { get; set; }
+        public virtual DbSet<Cooler> Cooler { get; set; }
+        public virtual DbSet<GPU> GPU { get; set; }
+        public virtual DbSet<HDD> HDD { get; set; }
+        public virtual DbSet<Motherboard> Motherboard { get; set; }
+        public virtual DbSet<Processor> Processor { get; set; }
+        public virtual DbSet<PSU> PSU { get; set; }
+        public virtual DbSet<RAM> RAM { get; set; }
+        public virtual DbSet<SSD> SSD { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserRole> UserRole { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<cases>()
-                .Property(e => e.name)
+            modelBuilder.Entity<Case>()
+                .Property(e => e.Name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<cases>()
-                .Property(e => e.description)
+            modelBuilder.Entity<Case>()
+                .Property(e => e.Description)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<cases>()
-                .Property(e => e.formFaktor)
+            modelBuilder.Entity<Case>()
+                .Property(e => e.FormFaktor)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<cases>()
-                .Property(e => e.size)
+            modelBuilder.Entity<Case>()
+                .Property(e => e.Size)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<cases>()
-                .Property(e => e.price)
+            modelBuilder.Entity<Case>()
+                .Property(e => e.Price)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<coolers>()
-                .Property(e => e.name)
+            modelBuilder.Entity<Cooler>()
+                .Property(e => e.Name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<coolers>()
-                .Property(e => e.description)
+            modelBuilder.Entity<Cooler>()
+                .Property(e => e.Description)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<coolers>()
-                .Property(e => e.socket)
+            modelBuilder.Entity<Cooler>()
+                .Property(e => e.Socket)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<coolers>()
-                .Property(e => e.power)
+            modelBuilder.Entity<Cooler>()
+                .Property(e => e.Power)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<coolers>()
-                .Property(e => e.type)
+            modelBuilder.Entity<Cooler>()
+                .Property(e => e.Type)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<coolers>()
-                .Property(e => e.material)
+            modelBuilder.Entity<Cooler>()
+                .Property(e => e.Material)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<coolers>()
-                .Property(e => e.price)
+            modelBuilder.Entity<Cooler>()
+                .Property(e => e.Price)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gpu>()
-                .Property(e => e.id)
+            modelBuilder.Entity<GPU>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GPU>()
+                .Property(e => e.Description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GPU>()
+                .Property(e => e.GpuFrequency)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GPU>()
+                .Property(e => e.GpuBoost)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GPU>()
+                .Property(e => e.MemorySize)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GPU>()
+                .Property(e => e.MemoryType)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GPU>()
+                .Property(e => e.Price)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GPU>()
+                .Property(e => e.Tdp)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<HDD>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<HDD>()
+                .Property(e => e.Description)
+                .IsUnicode(false);
+      
+            modelBuilder.Entity<PSU>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PSU>()
+                .Property(e => e.Description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PSU>()
+                .Property(e => e.PowerSupply)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PSU>()
+                .Property(e => e.FormFactor)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PSU>()
+                .Property(e => e.Certificate)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PSU>()
+                .Property(e => e.Price)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SSD>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SSD>()
+                .Property(e => e.Description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SSD>()
+                .Property(e => e.Capacity)
                 .IsFixedLength();
 
-            modelBuilder.Entity<gpu>()
-                .Property(e => e.name)
+            modelBuilder.Entity<User>()
+                .Property(e => e.Name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gpu>()
-                .Property(e => e.description)
+            modelBuilder.Entity<User>()
+                .Property(e => e.MiddleName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gpu>()
-                .Property(e => e.gpuFrequency)
+            modelBuilder.Entity<User>()
+                .Property(e => e.LastName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gpu>()
-                .Property(e => e.gpuBoost)
+            modelBuilder.Entity<User>()
+                .Property(e => e.Password)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gpu>()
-                .Property(e => e.memorySize)
+            modelBuilder.Entity<User>()
+                .Property(e => e.Email)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gpu>()
-                .Property(e => e.memoryType)
+            modelBuilder.Entity<User>()
+                .Property(e => e.Login)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gpu>()
-                .Property(e => e.price)
+            modelBuilder.Entity<UserRole>()
+                .Property(e => e.RoleName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<gpu>()
-                .Property(e => e.tdp)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<hdd>()
-                .Property(e => e.name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<hdd>()
-                .Property(e => e.description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<hdd>()
-                .Property(e => e.price)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<psu>()
-                .Property(e => e.name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<psu>()
-                .Property(e => e.description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<psu>()
-                .Property(e => e.powerSupply)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<psu>()
-                .Property(e => e.formFactor)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<psu>()
-                .Property(e => e.certificate)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<psu>()
-                .Property(e => e.price)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ssd>()
-                .Property(e => e.name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ssd>()
-                .Property(e => e.description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ssd>()
-                .Property(e => e.capacity)
-                .IsFixedLength();
-
-            modelBuilder.Entity<user>()
-                .Property(e => e.name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<user>()
-                .Property(e => e.middleName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<user>()
-                .Property(e => e.lastName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<user>()
-                .Property(e => e.password)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<user>()
-                .Property(e => e.email)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<user>()
-                .Property(e => e.login)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<userRole>()
-                .Property(e => e.roleName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<userRole>()
-                .HasMany(e => e.user)
-                .WithOptional(e => e.userRole)
-                .HasForeignKey(e => e.role);
+            modelBuilder.Entity<UserRole>()
+                .HasMany(e => e.User)
+                .WithOptional(e => e.UserRole)
+                .HasForeignKey(e => e.Role);
         }
     }
 }

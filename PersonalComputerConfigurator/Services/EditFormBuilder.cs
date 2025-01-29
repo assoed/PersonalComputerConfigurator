@@ -93,10 +93,8 @@ public class EditFormBuilder
     {
         PropertyInfo[] properties = _targetObject.GetType().GetProperties();
 
-        // Убираем "id" из обновлений
         foreach (var property in properties)
         {
-            // Пропускаем поле id
             if (property.Name.Equals("id", StringComparison.OrdinalIgnoreCase))
             {
                 continue;
@@ -107,8 +105,19 @@ public class EditFormBuilder
             {
                 try
                 {
-                    // Преобразуем значение в тип свойства
-                    object value = Convert.ChangeType(textBox.Text, property.PropertyType);
+                    object value;
+
+                    // Если свойство называется "Price", конвертируем в int
+                    if (property.Name.Equals("Price", StringComparison.OrdinalIgnoreCase) &&
+                        property.PropertyType == typeof(int))
+                    {
+                        value = int.TryParse(textBox.Text, out int intValue) ? intValue : 0;
+                    }
+                    else
+                    {
+                        value = Convert.ChangeType(textBox.Text, property.PropertyType);
+                    }
+
                     property.SetValue(_targetObject, value);
                 }
                 catch (Exception ex)
@@ -120,26 +129,20 @@ public class EditFormBuilder
 
         using (var context = new PCConfiguratorModel())
         {
-            // Если объект новый, устанавливаем состояние как Added
             if (_isNewObject)
             {
-                context.Set(_targetObject.GetType()).Add(_targetObject);  // Добавляем новый объект
+                context.Set(_targetObject.GetType()).Add(_targetObject);
             }
             else
             {
-                // Привязываем объект к контексту для существующего объекта
                 context.Entry(_targetObject).State = EntityState.Modified;
             }
 
-            // Сохраняем изменения
             context.SaveChanges();
         }
 
-        // Сигнализируем об успешном сохранении
         DataSaved?.Invoke(this, EventArgs.Empty);
     }
-
-
 }
 
 public class GenericEditFormCreator

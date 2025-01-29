@@ -14,15 +14,20 @@ namespace PersonalComputerConfigurator.CustomControls
 {
     public partial class CasesUserControl : UserControl
     {
-        private cases _pcCase;
+        private Case _pcCase;
 
 
-        public CasesUserControl(cases pcCase)
+        public CasesUserControl(Case pcCase)
         {
             InitializeComponent();
             _pcCase = pcCase;
             UserRightsSegregation userRightsSegregation = new UserRightsSegregation();
             userRightsSegregation.SetButtonsVisibilityAndEnabledState(this);
+        }
+
+        private void editPictureBox_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

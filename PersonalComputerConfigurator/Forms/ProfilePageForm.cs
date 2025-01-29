@@ -34,13 +34,13 @@ namespace PersonalComputerConfigurator.Forms
             }
 
             // Получаем пользователя из базы данных с учетом его id
-            var user = Program.context.user.FirstOrDefault(u => u.id == UserSession.Id);
+            var user = Program.context.User.FirstOrDefault(u => u.ID == UserSession.Id);
 
             if (user != null)
             {
-                user.name = newName;
-                user.lastName = newLastName;
-                user.middleName = newMiddleName;
+                user.Name = newName;
+                user.LastName = newLastName;
+                user.MiddleName = newMiddleName;
 
                 Program.context.SaveChanges();
 

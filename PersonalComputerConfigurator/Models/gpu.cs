@@ -6,34 +6,43 @@ namespace PersonalComputerConfigurator.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("gpu")]
-    public partial class gpu
+    [Table("GPU")]
+    public partial class GPU
     {
-        [StringLength(10)]
-        public string id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GPU()
+        {
+            Configuration = new HashSet<Configuration>();
+        }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ID { get; set; }
 
         [StringLength(255)]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [StringLength(255)]
-        public string description { get; set; }
+        public string Description { get; set; }
 
         [StringLength(50)]
-        public string gpuFrequency { get; set; }
+        public string GpuFrequency { get; set; }
 
         [StringLength(50)]
-        public string gpuBoost { get; set; }
+        public string GpuBoost { get; set; }
 
         [StringLength(50)]
-        public string memorySize { get; set; }
+        public string MemorySize { get; set; }
 
         [StringLength(50)]
-        public string memoryType { get; set; }
+        public string MemoryType { get; set; }
 
         [StringLength(50)]
-        public string price { get; set; }
+        public string Price { get; set; }
 
         [StringLength(50)]
-        public string tdp { get; set; }
+        public string Tdp { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Configuration> Configuration { get; set; }
     }
 }

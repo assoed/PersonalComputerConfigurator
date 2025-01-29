@@ -35,14 +35,14 @@
             this.priceLabel = new System.Windows.Forms.Label();
             this.descriptionValueLabel = new System.Windows.Forms.Label();
             this.descriptionLabel = new System.Windows.Forms.Label();
-            this.speedValueLabel = new System.Windows.Forms.Label();
-            this.SpeedSupplyLabel = new System.Windows.Forms.Label();
             this.nameValueLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
             this.readingValueLabel = new System.Windows.Forms.Label();
             this.readLabel = new System.Windows.Forms.Label();
             this.writingValueLabel = new System.Windows.Forms.Label();
             this.writingLabel = new System.Windows.Forms.Label();
+            this.capacityValueLabel = new System.Windows.Forms.Label();
+            this.capacityLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deletePictureBox)).BeginInit();
             this.SuspendLayout();
@@ -88,7 +88,7 @@
             // descriptionValueLabel
             // 
             this.descriptionValueLabel.AutoSize = true;
-            this.descriptionValueLabel.Location = new System.Drawing.Point(245, 10);
+            this.descriptionValueLabel.Location = new System.Drawing.Point(3, 58);
             this.descriptionValueLabel.Name = "descriptionValueLabel";
             this.descriptionValueLabel.Size = new System.Drawing.Size(35, 13);
             this.descriptionValueLabel.TabIndex = 89;
@@ -97,29 +97,11 @@
             // descriptionLabel
             // 
             this.descriptionLabel.AutoSize = true;
-            this.descriptionLabel.Location = new System.Drawing.Point(154, 10);
+            this.descriptionLabel.Location = new System.Drawing.Point(3, 35);
             this.descriptionLabel.Name = "descriptionLabel";
             this.descriptionLabel.Size = new System.Drawing.Size(71, 13);
             this.descriptionLabel.TabIndex = 88;
             this.descriptionLabel.Text = "ОПИСАНИЕ:";
-            // 
-            // speedValueLabel
-            // 
-            this.speedValueLabel.AutoSize = true;
-            this.speedValueLabel.Location = new System.Drawing.Point(85, 48);
-            this.speedValueLabel.Name = "speedValueLabel";
-            this.speedValueLabel.Size = new System.Drawing.Size(35, 13);
-            this.speedValueLabel.TabIndex = 87;
-            this.speedValueLabel.Text = "label9";
-            // 
-            // SpeedSupplyLabel
-            // 
-            this.SpeedSupplyLabel.AutoSize = true;
-            this.SpeedSupplyLabel.Location = new System.Drawing.Point(5, 48);
-            this.SpeedSupplyLabel.Name = "SpeedSupplyLabel";
-            this.SpeedSupplyLabel.Size = new System.Drawing.Size(68, 13);
-            this.SpeedSupplyLabel.TabIndex = 86;
-            this.SpeedSupplyLabel.Text = "СКОРОСТЬ:";
             // 
             // nameValueLabel
             // 
@@ -141,44 +123,68 @@
             // readingValueLabel
             // 
             this.readingValueLabel.AutoSize = true;
-            this.readingValueLabel.Location = new System.Drawing.Point(85, 81);
+            this.readingValueLabel.Location = new System.Drawing.Point(291, 10);
             this.readingValueLabel.Name = "readingValueLabel";
-            this.readingValueLabel.Size = new System.Drawing.Size(35, 13);
+            this.readingValueLabel.Size = new System.Drawing.Size(28, 13);
             this.readingValueLabel.TabIndex = 95;
-            this.readingValueLabel.Text = "label9";
+            this.readingValueLabel.Text = "read";
+            this.readingValueLabel.Click += new System.EventHandler(this.readingValueLabel_Click);
             // 
             // readLabel
             // 
             this.readLabel.AutoSize = true;
-            this.readLabel.Location = new System.Drawing.Point(5, 81);
+            this.readLabel.Location = new System.Drawing.Point(211, 10);
             this.readLabel.Name = "readLabel";
             this.readLabel.Size = new System.Drawing.Size(52, 13);
             this.readLabel.TabIndex = 94;
             this.readLabel.Text = "ЧТЕНИЕ";
+            this.readLabel.Click += new System.EventHandler(this.readLabel_Click);
             // 
             // writingValueLabel
             // 
             this.writingValueLabel.AutoSize = true;
-            this.writingValueLabel.Location = new System.Drawing.Point(85, 110);
+            this.writingValueLabel.Location = new System.Drawing.Point(291, 39);
             this.writingValueLabel.Name = "writingValueLabel";
-            this.writingValueLabel.Size = new System.Drawing.Size(35, 13);
+            this.writingValueLabel.Size = new System.Drawing.Size(29, 13);
             this.writingValueLabel.TabIndex = 97;
-            this.writingValueLabel.Text = "label9";
+            this.writingValueLabel.Text = "write";
+            this.writingValueLabel.Click += new System.EventHandler(this.writingValueLabel_Click);
             // 
             // writingLabel
             // 
             this.writingLabel.AutoSize = true;
-            this.writingLabel.Location = new System.Drawing.Point(5, 110);
+            this.writingLabel.Location = new System.Drawing.Point(211, 39);
             this.writingLabel.Name = "writingLabel";
             this.writingLabel.Size = new System.Drawing.Size(54, 13);
             this.writingLabel.TabIndex = 96;
             this.writingLabel.Text = "ЗАПИСЬ:";
+            this.writingLabel.Click += new System.EventHandler(this.writingLabel_Click);
+            // 
+            // capacityValueLabel
+            // 
+            this.capacityValueLabel.AutoSize = true;
+            this.capacityValueLabel.Location = new System.Drawing.Point(291, 70);
+            this.capacityValueLabel.Name = "capacityValueLabel";
+            this.capacityValueLabel.Size = new System.Drawing.Size(29, 13);
+            this.capacityValueLabel.TabIndex = 99;
+            this.capacityValueLabel.Text = "write";
+            // 
+            // capacityLabel
+            // 
+            this.capacityLabel.AutoSize = true;
+            this.capacityLabel.Location = new System.Drawing.Point(211, 70);
+            this.capacityLabel.Name = "capacityLabel";
+            this.capacityLabel.Size = new System.Drawing.Size(49, 13);
+            this.capacityLabel.TabIndex = 98;
+            this.capacityLabel.Text = "ОБЪЕМ:";
             // 
             // SsdUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumPurple;
+            this.Controls.Add(this.capacityValueLabel);
+            this.Controls.Add(this.capacityLabel);
             this.Controls.Add(this.writingValueLabel);
             this.Controls.Add(this.writingLabel);
             this.Controls.Add(this.readingValueLabel);
@@ -189,8 +195,6 @@
             this.Controls.Add(this.priceLabel);
             this.Controls.Add(this.descriptionValueLabel);
             this.Controls.Add(this.descriptionLabel);
-            this.Controls.Add(this.speedValueLabel);
-            this.Controls.Add(this.SpeedSupplyLabel);
             this.Controls.Add(this.nameValueLabel);
             this.Controls.Add(this.nameLabel);
             this.Name = "SsdUserControl";
@@ -210,13 +214,13 @@
         private System.Windows.Forms.Label priceLabel;
         private System.Windows.Forms.Label descriptionValueLabel;
         private System.Windows.Forms.Label descriptionLabel;
-        private System.Windows.Forms.Label speedValueLabel;
-        private System.Windows.Forms.Label SpeedSupplyLabel;
         private System.Windows.Forms.Label nameValueLabel;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label readingValueLabel;
         private System.Windows.Forms.Label readLabel;
         private System.Windows.Forms.Label writingValueLabel;
         private System.Windows.Forms.Label writingLabel;
+        private System.Windows.Forms.Label capacityValueLabel;
+        private System.Windows.Forms.Label capacityLabel;
     }
 }

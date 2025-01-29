@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\Constants.cs" />
     <Compile Include="CustomControls\ProfileBlockUserContol.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -116,11 +117,29 @@
     <Compile Include="CustomControls\GpuUserControl.Designer.cs">
       <DependentUpon>GpuUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\UserEditorAdminControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\UserEditorAdminControl.Designer.cs">
+      <DependentUpon>UserEditorAdminControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AuthorizationForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AuthorizationForm.Designer.cs">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserEditForm.Designer.cs">
+      <DependentUpon>UserEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainPageUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainPageUserForm.Designer.cs">
+      <DependentUpon>MainPageUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ProfilePageForm.cs">
       <SubType>Form</SubType>
@@ -140,18 +159,20 @@
     <Compile Include="Forms\RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\cases.cs" />
-    <Compile Include="Models\coolers.cs" />
-    <Compile Include="Models\gpu.cs" />
-    <Compile Include="Models\hdd.cs" />
+    <Compile Include="Models\Case.cs" />
+    <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\Cooler.cs" />
+    <Compile Include="Models\GPU.cs" />
+    <Compile Include="Models\HDD.cs" />
     <Compile Include="Models\PCConfiguratorModel.cs" />
-    <Compile Include="Models\motherboards.cs" />
-    <Compile Include="Models\processors.cs" />
-    <Compile Include="Models\psu.cs" />
-    <Compile Include="Models\ram.cs" />
-    <Compile Include="Models\ssd.cs" />
-    <Compile Include="Models\user.cs" />
-    <Compile Include="Models\userRole.cs" />
+    <Compile Include="Models\Motherboard.cs" />
+    <Compile Include="Models\Processor.cs" />
+    <Compile Include="Models\PSU.cs" />
+    <Compile Include="Models\RAM.cs" />
+    <Compile Include="Models\SSD.cs" />
+    <Compile Include="Models\sysdiagrams.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRole.cs" />
     <Compile Include="personalComputerConfiguratorDatabaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -196,11 +217,20 @@
     <EmbeddedResource Include="CustomControls\GpuUserControl.resx">
       <DependentUpon>GpuUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\UserEditorAdminControl.resx">
+      <DependentUpon>UserEditorAdminControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserEditForm.resx">
+      <DependentUpon>UserEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainPageForm.resx">
       <DependentUpon>MainPageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainPageUserForm.resx">
+      <DependentUpon>MainPageUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProfilePageForm.resx">
       <DependentUpon>ProfilePageForm.cs</DependentUpon>

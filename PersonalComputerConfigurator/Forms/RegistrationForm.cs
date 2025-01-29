@@ -31,15 +31,15 @@ namespace PersonalComputerConfigurator.Forms
             string email = emailTextBox.Text;
             int roleId = (int)userRoleComboBox.SelectedValue;
 
-            user newUser = new user
+            User newUser = new User
             {
-                name = firstName,
-                middleName = middleName,
-                lastName = lastName,
-                password = Services.PasswordHashService.hashPassword(password),
-                login = login,
-                email = email,
-                role = roleId,
+                Name = firstName,
+                MiddleName = middleName,
+                LastName = lastName,
+                Password = Services.PasswordHashService.hashPassword(password),
+                Login = login,
+                Email = email,
+                Role = roleId,
             };
 
             if (password != confirmPassword)
@@ -59,7 +59,7 @@ namespace PersonalComputerConfigurator.Forms
                 return; 
             }
 
-            Program.context.user.Add(newUser);
+            Program.context.User.Add(newUser);
             Program.context.SaveChanges();
     
             MessageBox.Show("Регистрация прошла успешно!");

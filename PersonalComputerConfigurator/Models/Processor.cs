@@ -6,41 +6,45 @@ namespace PersonalComputerConfigurator.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("User")]
-    public partial class User
+    [Table("Processor")]
+    public partial class Processor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Processor()
         {
             Configuration = new HashSet<Configuration>();
         }
 
         public int ID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(255)]
         public string Name { get; set; }
 
-        [StringLength(50)]
-        public string MiddleName { get; set; }
+        [StringLength(255)]
+        public string Description { get; set; }
+
+        [StringLength(255)]
+        public string Socket { get; set; }
 
         [StringLength(50)]
-        public string LastName { get; set; }
-
-        public string Password { get; set; }
-
-        public int? Role { get; set; }
+        public string Tdp { get; set; }
 
         [StringLength(50)]
-        public string Email { get; set; }
+        public string Frequency { get; set; }
 
         [StringLength(50)]
-        public string Login { get; set; }
+        public string Boost { get; set; }
 
-        public int? IsBlocked { get; set; }
+        [StringLength(50)]
+        public string Cores { get; set; }
+
+        [StringLength(50)]
+        public string Threads { get; set; }
+
+        [StringLength(50)]
+        public string Price { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Configuration> Configuration { get; set; }
-
-        public virtual UserRole UserRole { get; set; }
     }
 }

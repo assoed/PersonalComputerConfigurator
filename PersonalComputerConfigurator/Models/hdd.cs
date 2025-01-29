@@ -6,22 +6,30 @@ namespace PersonalComputerConfigurator.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("hdd")]
-    public partial class hdd
+    [Table("HDD")]
+    public partial class HDD
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HDD()
+        {
+            Configuration = new HashSet<Configuration>();
+        }
+
+        public int ID { get; set; }
 
         [StringLength(50)]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [StringLength(255)]
-        public string description { get; set; }
+        public string Description { get; set; }
 
-        public int? capacity { get; set; }
+        public int? Capacity { get; set; }
 
-        public int? speed { get; set; }
+        public int? Speed { get; set; }
 
-        [StringLength(50)]
-        public string price { get; set; }
+        public int Price { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Configuration> Configuration { get; set; }
     }
 }

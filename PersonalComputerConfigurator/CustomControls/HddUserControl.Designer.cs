@@ -39,6 +39,8 @@
             this.SpeedSupplyLabel = new System.Windows.Forms.Label();
             this.nameValueLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
+            this.capacityValueLabel = new System.Windows.Forms.Label();
+            this.capacityLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deletePictureBox)).BeginInit();
             this.SuspendLayout();
@@ -84,7 +86,7 @@
             // descriptionValueLabel
             // 
             this.descriptionValueLabel.AutoSize = true;
-            this.descriptionValueLabel.Location = new System.Drawing.Point(245, 10);
+            this.descriptionValueLabel.Location = new System.Drawing.Point(235, 48);
             this.descriptionValueLabel.Name = "descriptionValueLabel";
             this.descriptionValueLabel.Size = new System.Drawing.Size(35, 13);
             this.descriptionValueLabel.TabIndex = 79;
@@ -93,7 +95,7 @@
             // descriptionLabel
             // 
             this.descriptionLabel.AutoSize = true;
-            this.descriptionLabel.Location = new System.Drawing.Point(154, 10);
+            this.descriptionLabel.Location = new System.Drawing.Point(144, 48);
             this.descriptionLabel.Name = "descriptionLabel";
             this.descriptionLabel.Size = new System.Drawing.Size(71, 13);
             this.descriptionLabel.TabIndex = 78;
@@ -134,11 +136,31 @@
             this.nameLabel.TabIndex = 70;
             this.nameLabel.Text = "Название:";
             // 
+            // capacityValueLabel
+            // 
+            this.capacityValueLabel.AutoSize = true;
+            this.capacityValueLabel.Location = new System.Drawing.Point(85, 81);
+            this.capacityValueLabel.Name = "capacityValueLabel";
+            this.capacityValueLabel.Size = new System.Drawing.Size(35, 13);
+            this.capacityValueLabel.TabIndex = 85;
+            this.capacityValueLabel.Text = "label9";
+            // 
+            // capacityLabel
+            // 
+            this.capacityLabel.AutoSize = true;
+            this.capacityLabel.Location = new System.Drawing.Point(5, 81);
+            this.capacityLabel.Name = "capacityLabel";
+            this.capacityLabel.Size = new System.Drawing.Size(49, 13);
+            this.capacityLabel.TabIndex = 84;
+            this.capacityLabel.Text = "ОБЪЕМ:";
+            // 
             // HddUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumPurple;
+            this.Controls.Add(this.capacityValueLabel);
+            this.Controls.Add(this.capacityLabel);
             this.Controls.Add(this.editPictureBox);
             this.Controls.Add(this.deletePictureBox);
             this.Controls.Add(this.priceValueLabel);
@@ -151,6 +173,7 @@
             this.Controls.Add(this.nameLabel);
             this.Name = "HddUserControl";
             this.Size = new System.Drawing.Size(499, 135);
+            this.Load += new System.EventHandler(this.HddUserControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deletePictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -170,5 +193,7 @@
         private System.Windows.Forms.Label SpeedSupplyLabel;
         private System.Windows.Forms.Label nameValueLabel;
         private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label capacityValueLabel;
+        private System.Windows.Forms.Label capacityLabel;
     }
 }

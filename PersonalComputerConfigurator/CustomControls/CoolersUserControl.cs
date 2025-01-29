@@ -14,8 +14,8 @@ namespace PersonalComputerConfigurator.CustomControls
 {
     public partial class CoolersUserControl : UserControl
     {
-        private coolers _coolers;
-        public CoolersUserControl(coolers coolers)
+        private Cooler _coolers;
+        public CoolersUserControl(Cooler coolers)
         {
             InitializeComponent();
             _coolers = coolers;
@@ -26,12 +26,12 @@ namespace PersonalComputerConfigurator.CustomControls
 
         private void setLabelsValue()
         {
-            nameValueLabel.Text = _coolers.name;
-            descriptionValueLabel.Text = _coolers.description;
-            powerValueLabel.Text = _coolers.power.ToString();
-            typeValueLabel.Text = _coolers.socket;
-            materialValueLabel.Text = _coolers?.material.ToString();
-            priceValueLabel.Text = _coolers.price.ToString();
+            nameValueLabel.Text = _coolers.Name;
+            descriptionValueLabel.Text = _coolers.Description;
+            powerValueLabel.Text = _coolers.Power.ToString();
+            typeValueLabel.Text = _coolers.Socket;
+            materialValueLabel.Text = _coolers?.Material.ToString();
+            priceValueLabel.Text = _coolers.Price.ToString();
         }
 
         private void editPictureBox_Click(object sender, EventArgs e)
@@ -57,10 +57,10 @@ namespace PersonalComputerConfigurator.CustomControls
             if (dialogResult == DialogResult.Yes)
             {
                 // Удаляем процессор из базы данных
-                var productToDelete = Program.context.coolers.FirstOrDefault(p => p.id == _coolers.id);
+                var productToDelete = Program.context.Cooler.FirstOrDefault(p => p.ID == _coolers.ID);
                 if (productToDelete != null)
                 {
-                    Program.context.coolers.Remove(productToDelete);
+                    Program.context.Cooler.Remove(productToDelete);
                     Program.context.SaveChanges(); // Сохраняем изменения в базе данных
 
                     // Удаляем этот процессор с панели
