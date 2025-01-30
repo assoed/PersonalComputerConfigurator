@@ -178,6 +178,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>personalComputerConfiguratorDatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="personalComputerConfiguratorDatabaseDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>personalComputerConfiguratorDatabaseDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\UserRightsSegregation.cs" />
@@ -258,6 +263,17 @@
     </None>
     <None Include="personalComputerConfiguratorDatabaseDataSet.xss">
       <DependentUpon>personalComputerConfiguratorDatabaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="personalComputerConfiguratorDatabaseDataSet1.xsc">
+      <DependentUpon>personalComputerConfiguratorDatabaseDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="personalComputerConfiguratorDatabaseDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>personalComputerConfiguratorDatabaseDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="personalComputerConfiguratorDatabaseDataSet1.xss">
+      <DependentUpon>personalComputerConfiguratorDatabaseDataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

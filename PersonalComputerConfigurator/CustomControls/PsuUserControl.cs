@@ -7,14 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PersonalComputerConfigurator.Forms;
+using PersonalComputerConfigurator.Models;
+
 
 namespace PersonalComputerConfigurator.CustomControls
 {
+
     public partial class PsuUserControl : UserControl
     {
-        public PsuUserControl()
+        private PSU _psu;
+
+        public PsuUserControl(PSU psu)
         {
             InitializeComponent();
+            _psu = psu;
         }
     }
 }

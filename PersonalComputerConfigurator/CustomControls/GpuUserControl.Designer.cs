@@ -33,7 +33,7 @@
             this.deletePictureBox = new System.Windows.Forms.PictureBox();
             this.priceValueLabel = new System.Windows.Forms.Label();
             this.priceLabel = new System.Windows.Forms.Label();
-            this.threadsValueLabel = new System.Windows.Forms.Label();
+            this.memoryTypeValueLabel = new System.Windows.Forms.Label();
             this.memoryTypeLabel = new System.Windows.Forms.Label();
             this.memoryValueLabel = new System.Windows.Forms.Label();
             this.memoryLabel = new System.Windows.Forms.Label();
@@ -60,6 +60,7 @@
             this.editPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.editPictureBox.TabIndex = 39;
             this.editPictureBox.TabStop = false;
+            this.editPictureBox.Click += new System.EventHandler(this.editPictureBox_Click);
             // 
             // deletePictureBox
             // 
@@ -70,6 +71,7 @@
             this.deletePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.deletePictureBox.TabIndex = 38;
             this.deletePictureBox.TabStop = false;
+            this.deletePictureBox.Click += new System.EventHandler(this.deletePictureBox_Click);
             // 
             // priceValueLabel
             // 
@@ -89,14 +91,14 @@
             this.priceLabel.TabIndex = 36;
             this.priceLabel.Text = "ЦЕНА:";
             // 
-            // threadsValueLabel
+            // memoryTypeValueLabel
             // 
-            this.threadsValueLabel.AutoSize = true;
-            this.threadsValueLabel.Location = new System.Drawing.Point(396, 51);
-            this.threadsValueLabel.Name = "threadsValueLabel";
-            this.threadsValueLabel.Size = new System.Drawing.Size(41, 13);
-            this.threadsValueLabel.TabIndex = 35;
-            this.threadsValueLabel.Text = "label15";
+            this.memoryTypeValueLabel.AutoSize = true;
+            this.memoryTypeValueLabel.Location = new System.Drawing.Point(396, 51);
+            this.memoryTypeValueLabel.Name = "memoryTypeValueLabel";
+            this.memoryTypeValueLabel.Size = new System.Drawing.Size(41, 13);
+            this.memoryTypeValueLabel.TabIndex = 35;
+            this.memoryTypeValueLabel.Text = "label15";
             // 
             // memoryTypeLabel
             // 
@@ -225,7 +227,7 @@
             this.Controls.Add(this.deletePictureBox);
             this.Controls.Add(this.priceValueLabel);
             this.Controls.Add(this.priceLabel);
-            this.Controls.Add(this.threadsValueLabel);
+            this.Controls.Add(this.memoryTypeValueLabel);
             this.Controls.Add(this.memoryTypeLabel);
             this.Controls.Add(this.memoryValueLabel);
             this.Controls.Add(this.memoryLabel);
@@ -254,7 +256,7 @@
         private System.Windows.Forms.PictureBox deletePictureBox;
         private System.Windows.Forms.Label priceValueLabel;
         private System.Windows.Forms.Label priceLabel;
-        private System.Windows.Forms.Label threadsValueLabel;
+        private System.Windows.Forms.Label memoryTypeValueLabel;
         private System.Windows.Forms.Label memoryTypeLabel;
         private System.Windows.Forms.Label memoryValueLabel;
         private System.Windows.Forms.Label memoryLabel;

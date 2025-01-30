@@ -52,6 +52,7 @@ namespace PersonalComputerConfigurator.Forms
             showCases(sender, e);
             showHDD(sender, e);
             showSSD(sender, e);
+
         }
 
         private void UserControl_LogoutClicked(object sender, EventArgs e)
@@ -221,6 +222,31 @@ namespace PersonalComputerConfigurator.Forms
             }
         }
 
+        private void showGPU(object sender, EventArgs e)
+        {
+            gpuFlowLayoutPanel.Controls.Clear();
+
+            List<GPU> gpus = Program.context.GPU.ToList();
+
+            foreach (GPU gpu in gpus)
+            {
+                gpuFlowLayoutPanel.Controls.Add(new GpuUserControl(gpu));
+            }
+        }
+
+        private void showPSU(object sender, EventArgs e)
+        {
+            ssdFlowLayoutPanel.Controls.Clear();
+
+            List<PSU> psus = Program.context.PSU.ToList();
+
+            foreach (PSU psu in psus)
+            {
+                psuFlowLayoutPanel.Controls.Add(new PsuUserControl(psu));
+            }
+        }
+
+
         private void updateButton_Click(object sender, EventArgs e)
         {
             showProcessors(sender, e);
@@ -231,6 +257,8 @@ namespace PersonalComputerConfigurator.Forms
             showCases(sender, e);
             showHDD(sender, e);
             showSSD(sender, e);
+            showGPU(sender,e);
+            showPSU(sender, e); 
         }
 
         private void addNewButton_Click(object sender, EventArgs e)
@@ -299,6 +327,16 @@ namespace PersonalComputerConfigurator.Forms
                     MessageBox.Show("Пользователь успешно удален.");
                 }
             }
+        }
+
+        private void psuTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }  
 }

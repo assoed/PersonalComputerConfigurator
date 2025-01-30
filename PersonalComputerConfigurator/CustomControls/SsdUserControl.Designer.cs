@@ -56,6 +56,7 @@
             this.editPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.editPictureBox.TabIndex = 93;
             this.editPictureBox.TabStop = false;
+            this.editPictureBox.Click += new System.EventHandler(this.editPictureBox_Click);
             // 
             // deletePictureBox
             // 
@@ -66,6 +67,7 @@
             this.deletePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.deletePictureBox.TabIndex = 92;
             this.deletePictureBox.TabStop = false;
+            this.deletePictureBox.Click += new System.EventHandler(this.deletePictureBox_Click);
             // 
             // priceValueLabel
             // 

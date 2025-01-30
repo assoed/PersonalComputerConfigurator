@@ -6,6 +6,7 @@ using System.Drawing;
 using PersonalComputerConfigurator.Services;
 using System.Data.Entity;
 using PersonalComputerConfigurator.Models;
+using System.Linq;
 
 public class EditFormBuilder
 {
@@ -95,9 +96,10 @@ public class EditFormBuilder
 
         foreach (var property in properties)
         {
-            if (property.Name.Equals("id", StringComparison.OrdinalIgnoreCase))
+            if (property.Name.Equals("id", StringComparison.OrdinalIgnoreCase) ||
+                (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>)))
             {
-                continue;
+                continue; // Пропускаем id и коллекции
             }
 
             TextBox textBox = _controls.Find(ctrl => ctrl.Name == property.Name) as TextBox;
@@ -107,11 +109,13 @@ public class EditFormBuilder
                 {
                     object value;
 
-                    // Если свойство называется "Price", конвертируем в int
-                    if (property.Name.Equals("Price", StringComparison.OrdinalIgnoreCase) &&
-                        property.PropertyType == typeof(int))
+                    if (property.PropertyType == typeof(int))
                     {
                         value = int.TryParse(textBox.Text, out int intValue) ? intValue : 0;
+                    }
+                    else if (property.PropertyType == typeof(decimal))
+                    {
+                        value = decimal.TryParse(textBox.Text, out decimal decValue) ? decValue : 0m;
                     }
                     else
                     {
@@ -129,17 +133,63 @@ public class EditFormBuilder
 
         using (var context = new PCConfiguratorModel())
         {
+            var dbSet = context.Set(_targetObject.GetType());
+            var keyProperty = _targetObject.GetType().GetProperty("id");
+            var key = keyProperty?.GetValue(_targetObject);
+
             if (_isNewObject)
             {
-                context.Set(_targetObject.GetType()).Add(_targetObject);
+                dbSet.Add(_targetObject);
             }
             else
             {
-                context.Entry(_targetObject).State = EntityState.Modified;
+                var existingObject = dbSet.Find(key);
+
+                if (existingObject != null)
+                {
+                    context.Entry(existingObject).CurrentValues.SetValues(_targetObject);
+                }
+                else
+                {
+                    // Убираем объект из другого контекста перед повторным добавлением
+                    var localObject = context.Set(_targetObject.GetType()).Local.ToList()
+                        .FirstOrDefault(e => keyProperty?.GetValue(e).Equals(key) == true);
+
+                    if (localObject != null)
+                    {
+                        context.Entry(localObject).State = EntityState.Detached;
+                    }
+
+                    try
+                    {
+                        dbSet.Attach(_targetObject);
+                        context.Entry(_targetObject).State = EntityState.Modified;
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        context.Entry(_targetObject).State = EntityState.Detached;
+                        var reloadedObject = dbSet.Find(key);
+                        if (reloadedObject != null)
+                        {
+                            context.Entry(reloadedObject).CurrentValues.SetValues(_targetObject);
+                        }
+                        else
+                        {
+                            dbSet.Attach(_targetObject);
+                            context.Entry(_targetObject).State = EntityState.Modified;
+                        }
+                    }
+                }
             }
 
             context.SaveChanges();
         }
+
+    }
+
+    context.SaveChanges();
+        }
+
 
         DataSaved?.Invoke(this, EventArgs.Empty);
     }
@@ -149,12 +199,10 @@ public class GenericEditFormCreator
 {
     public Form CreateEditForm(object targetObject, bool isNewObject = false)
     {
-        EditFormBuilder builder = new EditFormBuilder(targetObject, isNewObject); // Передаем флаг
+        EditFormBuilder builder = new EditFormBuilder(targetObject, isNewObject);
 
-        // Получаем все свойства типа targetObject с помощью рефлексии
         PropertyInfo[] properties = targetObject.GetType().GetProperties();
 
-        // Для каждого свойства создаем параметр
         foreach (var property in properties)
         {
             if (property.CanRead)
@@ -162,21 +210,20 @@ public class GenericEditFormCreator
                 string translatedName = TranslateService.translate(property.Name);
                 if (isNewObject && property.Name.Equals("id", StringComparison.OrdinalIgnoreCase))
                 {
-                    continue; // Пропускаем добавление поля id
+                    continue;
                 }
-                // Если свойство - id, отображаем его как Label
+
                 if (property.Name.Equals("id", StringComparison.OrdinalIgnoreCase))
                 {
                     builder.AddLabel(translatedName, property.GetValue(targetObject)?.ToString());
                 }
-                else
+                else if (!(property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>)))
                 {
                     builder.AddParameter(translatedName, property.Name, property.GetValue(targetObject));
                 }
             }
         }
 
-        // Добавляем кнопку сохранения с логикой сохранения
         builder.AddSaveButton(() =>
         {
             builder.SaveChanges();

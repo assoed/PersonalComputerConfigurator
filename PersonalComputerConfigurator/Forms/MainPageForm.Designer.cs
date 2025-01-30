@@ -71,11 +71,14 @@
             this.ssdFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.gpuTab = new System.Windows.Forms.TabPage();
             this.usersSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.gpuFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.psuTab = new System.Windows.Forms.TabPage();
+            this.psuSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.psuFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.UserEditorAdminTab = new System.Windows.Forms.TabPage();
             this.userEditorSplitContainer = new System.Windows.Forms.SplitContainer();
             this.usersEdtiorFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.personalComputerConfiguratorDatabaseDataSet1 = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1();
             ((System.ComponentModel.ISupportInitialize)(this.mainPageSplitContainer)).BeginInit();
             this.mainPageSplitContainer.Panel1.SuspendLayout();
             this.mainPageSplitContainer.Panel2.SuspendLayout();
@@ -114,10 +117,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.usersSplitContainer)).BeginInit();
             this.usersSplitContainer.Panel2.SuspendLayout();
             this.usersSplitContainer.SuspendLayout();
+            this.psuTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.psuSplitContainer)).BeginInit();
+            this.psuSplitContainer.Panel2.SuspendLayout();
+            this.psuSplitContainer.SuspendLayout();
             this.UserEditorAdminTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userEditorSplitContainer)).BeginInit();
             this.userEditorSplitContainer.Panel2.SuspendLayout();
             this.userEditorSplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPageSplitContainer
@@ -134,6 +142,7 @@
             // 
             // mainPageSplitContainer.Panel2
             // 
+            this.mainPageSplitContainer.Panel2.AutoScroll = true;
             this.mainPageSplitContainer.Panel2.Controls.Add(this.adminTabControl);
             this.mainPageSplitContainer.Size = new System.Drawing.Size(1384, 694);
             this.mainPageSplitContainer.SplitterDistance = 60;
@@ -579,21 +588,22 @@
             // 
             // usersSplitContainer.Panel2
             // 
-            this.usersSplitContainer.Panel2.Controls.Add(this.flowLayoutPanel1);
+            this.usersSplitContainer.Panel2.Controls.Add(this.gpuFlowLayoutPanel);
             this.usersSplitContainer.Size = new System.Drawing.Size(1367, 598);
             this.usersSplitContainer.SplitterDistance = 90;
             this.usersSplitContainer.TabIndex = 0;
             // 
-            // flowLayoutPanel1
+            // gpuFlowLayoutPanel
             // 
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1367, 504);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.gpuFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gpuFlowLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.gpuFlowLayoutPanel.Name = "gpuFlowLayoutPanel";
+            this.gpuFlowLayoutPanel.Size = new System.Drawing.Size(1367, 504);
+            this.gpuFlowLayoutPanel.TabIndex = 0;
             // 
             // psuTab
             // 
+            this.psuTab.Controls.Add(this.psuSplitContainer);
             this.psuTab.Location = new System.Drawing.Point(4, 22);
             this.psuTab.Name = "psuTab";
             this.psuTab.Padding = new System.Windows.Forms.Padding(3);
@@ -601,6 +611,29 @@
             this.psuTab.TabIndex = 11;
             this.psuTab.Text = "БЛОКИ ПИТАНИЯ";
             this.psuTab.UseVisualStyleBackColor = true;
+            this.psuTab.Click += new System.EventHandler(this.psuTab_Click);
+            // 
+            // psuSplitContainer
+            // 
+            this.psuSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.psuSplitContainer.Location = new System.Drawing.Point(3, 3);
+            this.psuSplitContainer.Name = "psuSplitContainer";
+            this.psuSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // psuSplitContainer.Panel2
+            // 
+            this.psuSplitContainer.Panel2.Controls.Add(this.psuFlowLayoutPanel);
+            this.psuSplitContainer.Size = new System.Drawing.Size(1367, 598);
+            this.psuSplitContainer.SplitterDistance = 90;
+            this.psuSplitContainer.TabIndex = 0;
+            // 
+            // psuFlowLayoutPanel
+            // 
+            this.psuFlowLayoutPanel.Location = new System.Drawing.Point(3, 3);
+            this.psuFlowLayoutPanel.Name = "psuFlowLayoutPanel";
+            this.psuFlowLayoutPanel.Size = new System.Drawing.Size(1359, 493);
+            this.psuFlowLayoutPanel.TabIndex = 1;
+            this.psuFlowLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel2_Paint);
             // 
             // UserEditorAdminTab
             // 
@@ -635,6 +668,11 @@
             this.usersEdtiorFlowLayoutPanel.Name = "usersEdtiorFlowLayoutPanel";
             this.usersEdtiorFlowLayoutPanel.Size = new System.Drawing.Size(1367, 504);
             this.usersEdtiorFlowLayoutPanel.TabIndex = 0;
+            // 
+            // personalComputerConfiguratorDatabaseDataSet1
+            // 
+            this.personalComputerConfiguratorDatabaseDataSet1.DataSetName = "personalComputerConfiguratorDatabaseDataSet1";
+            this.personalComputerConfiguratorDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // MainPageForm
             // 
@@ -684,10 +722,15 @@
             this.usersSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.usersSplitContainer)).EndInit();
             this.usersSplitContainer.ResumeLayout(false);
+            this.psuTab.ResumeLayout(false);
+            this.psuSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.psuSplitContainer)).EndInit();
+            this.psuSplitContainer.ResumeLayout(false);
             this.UserEditorAdminTab.ResumeLayout(false);
             this.userEditorSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.userEditorSplitContainer)).EndInit();
             this.userEditorSplitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -736,10 +779,13 @@
         private System.Windows.Forms.TabPage UserEditorAdminTab;
         private System.Windows.Forms.FlowLayoutPanel casesFlowLayoutPanel;
         private System.Windows.Forms.SplitContainer usersSplitContainer;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel gpuFlowLayoutPanel;
         private System.Windows.Forms.SplitContainer userEditorSplitContainer;
         private System.Windows.Forms.FlowLayoutPanel usersEdtiorFlowLayoutPanel;
         private System.Windows.Forms.Label deleteProfileLabel;
         private System.Windows.Forms.PictureBox deletePictureBox;
+        private personalComputerConfiguratorDatabaseDataSet1 personalComputerConfiguratorDatabaseDataSet1;
+        private System.Windows.Forms.SplitContainer psuSplitContainer;
+        private System.Windows.Forms.FlowLayoutPanel psuFlowLayoutPanel;
     }
 }
