@@ -1,4 +1,5 @@
 ﻿using PersonalComputerConfigurator.Models;
+using PersonalComputerConfigurator.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,15 +32,21 @@ namespace PersonalComputerConfigurator.Forms
             string email = emailTextBox.Text;
             int roleId = (int)userRoleComboBox.SelectedValue;
 
+            if (UserSession.RoleId != Constants.Constants.AdministratorRoleId)
+            {
+                roleId = Constants.Constants.UserRoleId;
+            }
+
             User newUser = new User
             {
                 Name = firstName,
                 MiddleName = middleName,
                 LastName = lastName,
-                Password = Services.PasswordHashService.hashPassword(password),
+                Password = PasswordHashService.hashPassword(password),
                 Login = login,
                 Email = email,
                 Role = roleId,
+                IsBlocked = 0,
             };
 
             if (password != confirmPassword)
@@ -69,6 +76,20 @@ namespace PersonalComputerConfigurator.Forms
 
         private void RegistrationForm_Load(object sender, EventArgs e)
         {
+            if(UserSession.RoleId != Constants.Constants.AdministratorRoleId)
+            {
+                userRoleComboBox.Visible = false;
+                userRoleComboBox.Enabled = false;
+
+                userRoleLabel.Enabled = false;
+                userRoleLabel.Visible = false;
+            } 
+            if(UserSession.RoleId != Constants.Constants.UserRoleId)
+            {
+                registrationLabel.Text = "ДОБАВИТЬ НОВОГО ПОЛЬЗОВАТЕЛЯ";
+                registrationButton.Text = "СОХРАНИТЬ ПОЛЬЗОВАТЕЛЯ";
+            }
+
             // TODO: данная строка кода позволяет загрузить данные в таблицу "personalComputerConfiguratorDatabaseDataSet.userRole". При необходимости она может быть перемещена или удалена.
             this.userRoleTableAdapter.Fill(this.personalComputerConfiguratorDatabaseDataSet.userRole);
             passwordTextBox.PasswordChar = '*';

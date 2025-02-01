@@ -131,6 +131,8 @@ public class EditFormBuilder
             }
         }
 
+     
+
         using (var context = new PCConfiguratorModel())
         {
             var dbSet = context.Set(_targetObject.GetType());
@@ -151,43 +153,11 @@ public class EditFormBuilder
                 }
                 else
                 {
-                    // Убираем объект из другого контекста перед повторным добавлением
-                    var localObject = context.Set(_targetObject.GetType()).Local.ToList()
-                        .FirstOrDefault(e => keyProperty?.GetValue(e).Equals(key) == true);
-
-                    if (localObject != null)
-                    {
-                        context.Entry(localObject).State = EntityState.Detached;
-                    }
-
-                    try
-                    {
-                        dbSet.Attach(_targetObject);
-                        context.Entry(_targetObject).State = EntityState.Modified;
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        context.Entry(_targetObject).State = EntityState.Detached;
-                        var reloadedObject = dbSet.Find(key);
-                        if (reloadedObject != null)
-                        {
-                            context.Entry(reloadedObject).CurrentValues.SetValues(_targetObject);
-                        }
-                        else
-                        {
-                            dbSet.Attach(_targetObject);
-                            context.Entry(_targetObject).State = EntityState.Modified;
-                        }
-                    }
+                    context.Entry(_targetObject).State = EntityState.Modified;
                 }
             }
 
             context.SaveChanges();
-        }
-
-    }
-
-    context.SaveChanges();
         }
 
 

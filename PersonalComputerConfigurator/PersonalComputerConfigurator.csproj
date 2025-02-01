@@ -56,67 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\Constants.cs" />
-    <Compile Include="CustomControls\ProfileBlockUserContol.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\.Designer.cs">
-      <DependentUpon>ProfileBlockUserContol.cs</DependentUpon>
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\ProcessorsUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\ProcessorsUserControl.Designer.cs">
-      <DependentUpon>ProcessorsUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\MotherboardsUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\MotherboardsUserControl.Designer.cs">
-      <DependentUpon>MotherboardsUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\PsuUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\PsuUserControl.Designer.cs">
-      <DependentUpon>PsuUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\CoolersUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\CoolersUserControl.Designer.cs">
-      <DependentUpon>CoolersUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\HddUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\HddUserControl.Designer.cs">
-      <DependentUpon>HddUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\CasesUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\CasesUserControl.Designer.cs">
-      <DependentUpon>CasesUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\RamUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\RamUserControl.Designer.cs">
-      <DependentUpon>RamUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\SsdUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\SsdUserControl.Designer.cs">
-      <DependentUpon>SsdUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\GpuUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomControls\GpuUserControl.Designer.cs">
-      <DependentUpon>GpuUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="CustomControls\UserEditorAdminControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -192,36 +131,6 @@
     <Compile Include="Services\EditFormBuilder.cs" />
     <Compile Include="Services\UserSessionService.cs" />
     <Compile Include="Services\PasswordHashService.cs" />
-    <EmbeddedResource Include="CustomControls\CasesUserControl.resx">
-      <DependentUpon>CasesUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\HddUserControl.resx">
-      <DependentUpon>HddUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\ProcessorsUserControl.resx">
-      <DependentUpon>ProcessorsUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\ProfileBlockUserContol.resx">
-      <DependentUpon>ProfileBlockUserContol.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\MotherboardsUserControl.resx">
-      <DependentUpon>MotherboardsUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\PsuUserControl.resx">
-      <DependentUpon>PsuUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\CoolersUserControl.resx">
-      <DependentUpon>CoolersUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\RamUserControl.resx">
-      <DependentUpon>RamUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\SsdUserControl.resx">
-      <DependentUpon>SsdUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\GpuUserControl.resx">
-      <DependentUpon>GpuUserControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\UserEditorAdminControl.resx">
       <DependentUpon>UserEditorAdminControl.cs</DependentUpon>
     </EmbeddedResource>

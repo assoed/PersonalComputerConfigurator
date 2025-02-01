@@ -1,206 +1,58 @@
 ﻿using PersonalComputerConfigurator.CustomControls;
 using PersonalComputerConfigurator.Models;
 using PersonalComputerConfigurator.Services;
+using PersonalComputerConfigurator.Constants;
+using PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PersonalComputerConfigurator.Constants;
 
 namespace PersonalComputerConfigurator.Forms
 {
     public partial class MainPageForm : Form
     {
-        private ProfileBlockUserControl _profileBlock;
+        // Поля для BindingNavigator
+        private BindingNavigator psuBindingNavigator, gpuBindingNavigator, ssdBindingNavigator,
+            processorBindingNavigator, ramBindingNavigator, coolerBindingNavigator,
+            hddBindingNavigator, caseBindingNavigator, motherboardBindingNavigator;
+
+        private readonly Dictionary<string, (BindingNavigator navigator, BindingSource source, dynamic adapter)> _bindings;
 
         public MainPageForm()
         {
             InitializeComponent();
-        }
 
+            // Инициализация словаря биндингов
+            _bindings = new Dictionary<string, (BindingNavigator, BindingSource, dynamic)>
+            {
+                { "PSU", (psuBindingNavigator = new BindingNavigator(true), pSUBindingSource, pSUTableAdapter) },
+                { "GPU", (gpuBindingNavigator = new BindingNavigator(true), gPUBindingSource, gPUTableAdapter) },
+                { "SSD", (ssdBindingNavigator = new BindingNavigator(true), sSDBindingSource, sSDTableAdapter) },
+                { "Processor", (processorBindingNavigator = new BindingNavigator(true), processorBindingSource, processorTableAdapter) },
+                { "RAM", (ramBindingNavigator = new BindingNavigator(true), rAMBindingSource, rAMTableAdapter) },
+                { "Cooler", (coolerBindingNavigator = new BindingNavigator(true), coolerBindingSource, coolerTableAdapter) },
+                { "HDD", (hddBindingNavigator = new BindingNavigator(true), hDDBindingSource, hDDTableAdapter) },
+                { "Case", (caseBindingNavigator = new BindingNavigator(true), caseBindingSource, caseTableAdapter) },
+                { "Motherboard", (motherboardBindingNavigator = new BindingNavigator(true), motherboardBindingSource, motherboardTableAdapter) }
+            };
+        }
 
         private void MainPageForm_Load(object sender, EventArgs e)
         {
-            // Создаем один экземпляр ProfileBlockUserControl
-            _profileBlock = new ProfileBlockUserControl();
-
-            _profileBlock.Location = new Point(this.ClientSize.Width - _profileBlock.Width - 10, 10);
-            _profileBlock.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-
-            // Подписка на события
-            _profileBlock.LogoutClicked += UserControl_LogoutClicked;
-            _profileBlock.ProfileClicked += UserControl_ProfileClicked;
-
-            mainPageSplitContainer.Panel1.Controls.Add(_profileBlock);
-
-            lastNameTextBox.Text = UserSession.LastName;
-            nameTextBox.Text = UserSession.Name;
-            middleNameTextBox.Text = UserSession.MiddleName;
-            emailLabel.Text = UserSession.Email;
-            loginLabel.Text = UserSession.Login;
-            showProcessors(sender, e);
-            showMotherboards(sender, e);
-            showRAM(sender, e);
-            showCoolers(sender, e);
+            LoadData();
+            BindDataGrids();
+            InitializeBindingNavigators();
+            SetupEventHandlers();
+            SetupProfileBlock();
             showUsers(sender, e);
-            showCases(sender, e);
-            showHDD(sender, e);
-            showSSD(sender, e);
-
         }
-
-        private void UserControl_LogoutClicked(object sender, EventArgs e)
-        {
-            // Закрываем текущую форму (MainPageForm)
-            this.Hide();
-
-            // Показать форму авторизации
-            AuthorizationForm authorizationForm = new AuthorizationForm();
-            authorizationForm.Show();
-        }
-
-        private void ProcessorUserControl_EditFormDataSaved(object sender, EventArgs e)
-        {
-            // После сохранения данных обновляем отображение
-            processorsFlowLayoutPanel.Controls.Clear();  // Очистка старых данных
-            showProcessors(null, null);  // Перезагрузка процессоров
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UserControl_ProfileClicked(object sender, EventArgs e)
-        {
-            adminTabControl.SelectedTab = profileTabPage;
-        }
-
-        private void saveProfileButton_Click(object sender, EventArgs e)
-        {
-            string newName = nameTextBox.Text;
-            string newLastName = lastNameTextBox.Text;
-            string newMiddleName = middleNameTextBox.Text;
-
-            // Проверка на пустые данные
-            if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrWhiteSpace(newLastName) || string.IsNullOrWhiteSpace(newMiddleName))
-            {
-                MessageBox.Show("Пожалуйста, заполните все поля.");
-                return;
-            }
-
-            // Получаем пользователя из базы данных с учетом его id
-            var user = Program.context.User.FirstOrDefault(u => u.ID == UserSession.Id);
-
-            if (user != null)
-            {
-                user.Name = newName;
-                user.LastName = newLastName;
-                user.MiddleName = newMiddleName;
-
-                Program.context.SaveChanges();
-
-                UserSession.Name = newName;
-                UserSession.LastName = newLastName;
-                UserSession.MiddleName = newMiddleName;
-
-                MessageBox.Show("Данные успешно сохранены.");
-            }
-
-            _profileBlock.UpdateProfileData();
-        }
-
-        private void tabPage5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void showProcessors(object sender, EventArgs e)
-        {
-            processorsFlowLayoutPanel.Controls.Clear();
-
-            List <Processor> processors = Program.context.Processor.ToList();
-
-            foreach (Processor processor in processors)
-            {
-                processorsFlowLayoutPanel.Controls.Add(new ProcessorsUserControl(processor));
-            }
-        }
-
-        private void showMotherboards(object sender, EventArgs e)
-        {
-            motherboardFlowLayoutPanel.Controls.Clear();
-
-            List<Motherboard> motherboards = Program.context.Motherboard.ToList();
-
-            foreach (Motherboard motherboard in motherboards)
-            {
-                motherboardFlowLayoutPanel.Controls.Add(new MotherboardsUserControl(motherboard));
-            }
-        }
-
-        private void showRAM(object sender, EventArgs e)
-        {
-            ramFlowLayoutPanel.Controls.Clear();
-
-            List<RAM> rams = Program.context.RAM.ToList();
-
-            foreach (RAM ram in rams)
-            {
-                ramFlowLayoutPanel.Controls.Add(new RamUserControl(ram));
-            }
-        }
-
-        private void showCoolers(object sender, EventArgs e)
-        {
-            coolersFlowLayoutPanel.Controls.Clear();
-
-            List<Cooler> coolers = Program.context.Cooler.ToList();
-
-            foreach (Cooler cooler in coolers)
-            {
-                coolersFlowLayoutPanel.Controls.Add(new CoolersUserControl(cooler));
-            }
-        }
-
-        private void showCases(object sender, EventArgs e)
-        {
-            casesFlowLayoutPanel.Controls.Clear();
-
-            List<Case> cases = Program.context.Case.ToList();
-
-            foreach (Case pcCase in cases)
-            {
-                casesFlowLayoutPanel.Controls.Add(new CasesUserControl(pcCase));
-            }
-        }
-
-        private void showHDD(object sender, EventArgs e)
-        {
-            hddFlowLayoutPanel.Controls.Clear();
-
-            List<HDD> hdds = Program.context.HDD.ToList();
-
-            foreach (HDD hdd in hdds)
-            {
-               hddFlowLayoutPanel.Controls.Add(new HddUserControl(hdd));
-            }
-        }
-
 
         private void showUsers(object sender, EventArgs e)
         {
+            usersEdtiorFlowLayoutPanel.Controls.Clear(); // Очищаем перед загрузкой
 
             List<User> users = Program.context.User.ToList();
 
@@ -210,133 +62,195 @@ namespace PersonalComputerConfigurator.Forms
             }
         }
 
-        private void showSSD(object sender, EventArgs e)
+
+        private void LoadData()
         {
-            ssdFlowLayoutPanel.Controls.Clear();
+            motherboardTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.Motherboard);
+            pSUTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.PSU);
+            gPUTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.GPU);
+            sSDTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.SSD);
+            hDDTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.HDD);
+            caseTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.Case);
+            coolerTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.Cooler);
+            rAMTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.RAM);
+            processorTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.Processor);
+        }
 
-            List<SSD> ssds = Program.context.SSD.ToList();
+        private void BindDataGrids()
+        {
+            pSUDataGridView.DataSource = pSUBindingSource;
+            gPUDataGridView.DataSource = gPUBindingSource;
+            sSDDataGridView.DataSource = sSDBindingSource;
+            processorDataGridView.DataSource = processorBindingSource;
+            rAMDataGridView.DataSource = rAMBindingSource;
+            hDDDataGridView.DataSource = hDDBindingSource;
+            caseDataGridView.DataSource = caseBindingSource;
+            coolerDataGridView.DataSource = coolerBindingSource;
+            motherboardDataGridView.DataSource = motherboardBindingSource;
+        }
 
-            foreach (SSD ssd in ssds)
+        private void InitializeBindingNavigators()
+        {
+            foreach (var binding in _bindings)
             {
-                ssdFlowLayoutPanel.Controls.Add(new SsdUserControl(ssd));
+                binding.Value.navigator.BindingSource = binding.Value.source;
+                binding.Value.navigator.Dock = DockStyle.Top;
+                AddSaveButton(binding.Value.navigator, binding.Value.source, binding.Value.adapter);
+            }
+
+            // Добавляем BindingNavigator в соответствующие вкладки
+            psuTab.Controls.Add(psuBindingNavigator);
+            gpuTab.Controls.Add(gpuBindingNavigator);
+            ssdTab.Controls.Add(ssdBindingNavigator);
+            processorsTab.Controls.Add(processorBindingNavigator);
+            ramTab.Controls.Add(ramBindingNavigator);
+            coolersTab.Controls.Add(coolerBindingNavigator);
+            hddTab.Controls.Add(hddBindingNavigator);
+            casesTab.Controls.Add(caseBindingNavigator);
+            motherboardTab.Controls.Add(motherboardBindingNavigator);
+        }
+
+        private void addNewUserPictureBox_Click(object sender, EventArgs e)
+        {
+            RegistrationForm registrationForm = new RegistrationForm();
+            registrationForm.ShowDialog();
+        }
+
+        private void saveProfileButton_Click(object sender, EventArgs e)
+        {
+
+            string lastName = lastNameTextBox.Text;
+            string firstName = nameTextBox.Text;
+            string middleName = middleNameTextBox.Text;
+
+            // Проверка на заполненность полей
+            if (string.IsNullOrWhiteSpace(lastName) ||
+                string.IsNullOrWhiteSpace(firstName))
+            {
+                MessageBox.Show("Все поля обязательны для заполнения.");
+                return;
+            }
+
+
+            var existingUser = Program.context.User.FirstOrDefault(u => u.ID == UserSession.Id);
+    
+            // Обновляем данные пользователя
+            existingUser.Name = firstName;
+            existingUser.MiddleName = middleName;
+            existingUser.LastName = lastName;
+
+            // Сохраняем изменения в базе данных
+            Program.context.SaveChanges();
+
+            UserSession.Name = firstName;
+            UserSession.LastName = lastName;
+            UserSession.MiddleName = middleName;
+
+            userFIOLabel.Text = $"{UserSession.LastName} {UserSession.Name} {UserSession.MiddleName}";
+            MessageBox.Show("Данные пользователя успешно обновлены!");
+        }
+
+        private void SetupEventHandlers()
+        {
+            foreach (var dataGridView in new[] { pSUDataGridView, gPUDataGridView, sSDDataGridView, processorDataGridView,
+                                                 rAMDataGridView, hDDDataGridView, caseDataGridView, coolerDataGridView, motherboardDataGridView })
+            {
+                dataGridView.CellValidating += DataGridView_CellValidating;
+                dataGridView.DataError += DataGridView_DataError;
             }
         }
 
-        private void showGPU(object sender, EventArgs e)
+        private void SetupProfileBlock()
         {
-            gpuFlowLayoutPanel.Controls.Clear();
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(profilePictureBox, "Перейти в профиль");
+            toolTip.SetToolTip(userFIOLabel, "Перейти в профиль");
+            userFIOLabel.Text = $"{UserSession.LastName} {UserSession.Name} {UserSession.MiddleName}";
 
-            List<GPU> gpus = Program.context.GPU.ToList();
 
-            foreach (GPU gpu in gpus)
-            {
-                gpuFlowLayoutPanel.Controls.Add(new GpuUserControl(gpu));
-            }
-        }
-
-        private void showPSU(object sender, EventArgs e)
-        {
-            ssdFlowLayoutPanel.Controls.Clear();
-
-            List<PSU> psus = Program.context.PSU.ToList();
-
-            foreach (PSU psu in psus)
-            {
-                psuFlowLayoutPanel.Controls.Add(new PsuUserControl(psu));
-            }
+            lastNameTextBox.Text = UserSession.LastName;
+            nameTextBox.Text = UserSession.Name;
+            middleNameTextBox.Text = UserSession.MiddleName;
+            emailLabel.Text = UserSession.Email;
+            loginLabel.Text = UserSession.Login;
         }
 
 
-        private void updateButton_Click(object sender, EventArgs e)
+        private void logoutButton_Click(object sender, EventArgs e)
         {
-            showProcessors(sender, e);
-            showMotherboards(sender, e);
-            showRAM(sender, e);
-            showCoolers(sender, e);
-            showUsers(sender, e);
-            showCases(sender, e);
-            showHDD(sender, e);
-            showSSD(sender, e);
-            showGPU(sender,e);
-            showPSU(sender, e); 
+            // Закрываем текущую форму (MainPageForm)
+            this.Hide();
+
+            // Показать форму авторизации
+            AuthorizationForm authorizationForm = new AuthorizationForm();
+            authorizationForm.Show();
         }
 
-        private void addNewButton_Click(object sender, EventArgs e)
+
+        private void profilePictureBox_Click(object sender, EventArgs e)
         {
-            // Получаем имя выбранной вкладки
-            var selectedTab = adminTabControl.SelectedTab.Name; // Получаем имя текущей выбранной вкладки
+            adminTabControl.SelectedTab = profileTabPage;
+        }
 
-            // Проверяем, есть ли для этой вкладки модель в словаре
-            if (ComponentsDictionary.tabModelMapping.TryGetValue(selectedTab, out Type modelType))
+
+        private void DataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            var dataGridView = sender as DataGridView;
+            if (dataGridView == null) return;
+
+            var columnName = dataGridView.Columns[e.ColumnIndex].HeaderText;
+            var integerColumns = new HashSet<string> { "ИДЕНТИФИКАТОР", "МОЩНОСТЬ", "ЦЕНА", "ЧАСТОТА ГПУ", "РАЗГОН ГПУ", "ОБЪЕМ ВИДЕОПАМЯТИ", "ТДП" };
+
+            if (integerColumns.Contains(columnName) && !long.TryParse(e.FormattedValue.ToString(), out _))
             {
-                // Создаем экземпляр модели с помощью рефлексии
-                var modelInstance = Activator.CreateInstance(modelType);
-
-                // Создаем форму редактирования
-                GenericEditFormCreator formCreator = new GenericEditFormCreator();
-                Form newEditForm = formCreator.CreateEditForm(modelInstance, isNewObject: true);
-
-                // Показываем форму
-                newEditForm.ShowDialog();
+                MessageBox.Show($"Ошибка: Введите только целое число в столбце '{columnName}'!", "Ошибка валидации", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "Должно быть целое число!";
+                e.Cancel = true;
             }
             else
             {
-                // Если для вкладки нет соответствующей модели, показываем сообщение об ошибке
-                MessageBox.Show("Для этой вкладки нет связанной модели.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "";
             }
         }
 
-
-        private void updateButton_Click_1(object sender, EventArgs e)
+        private void DataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-
+            MessageBox.Show($"Ошибка в данных: введите только число.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            e.Cancel = true;
         }
 
-        private void ramFlowLayoutPanel_Paint(object sender, PaintEventArgs e)
+        private void AddSaveButton(BindingNavigator navigator, BindingSource source, dynamic adapter)
         {
-
-        }
-
-
-        private bool IsAdmin()
-        {
-
-            if (UserSession.RoleId == Constants.Constants.AdministratorRoleId)
+            if (!navigator.Items.Cast<ToolStripItem>().Any(i => i.Text == "Сохранить"))
             {
-                return true;
-            }
-            else 
-            { 
-                return false;
-            }
-        }
-
-        private void deletePictureBox_Click(object sender, EventArgs e)
-        {
-            DialogResult dialogResult = MessageBox.Show("Вы уверены, что хотите удалить этого пользователя", "Подтверждение", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                // Удаляем процессор из базы данных
-                var userToDelete = Program.context.User.FirstOrDefault(p => p.ID == UserSession.Id);
-                if (userToDelete != null)
+                var saveButton = new ToolStripButton("Сохранить")
                 {
-                    Program.context.User.Remove(userToDelete);
-                    Program.context.SaveChanges();
-
-                    Controls.Remove(this);
-                    MessageBox.Show("Пользователь успешно удален.");
-                }
+                    Image = SystemIcons.Shield.ToBitmap(),
+                    DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+                };
+                saveButton.Click += (s, e) => SaveChanges(source, adapter);
+                navigator.Items.Add(saveButton);
             }
         }
 
-        private void psuTab_Click(object sender, EventArgs e)
+        private void SaveChanges(BindingSource source, dynamic adapter)
         {
+            try
+            {
+                if (!Validate())
+                {
+                    MessageBox.Show("Исправьте ошибки перед сохранением!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                source.EndEdit();
+                adapter.Update(personalComputerConfiguratorDatabaseDataSet1);
+                MessageBox.Show("✅ Данные успешно сохранены!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
-        private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-    }  
+    }
 }

@@ -41,10 +41,12 @@ namespace PersonalComputerConfigurator.Models
         [StringLength(50)]
         public string Threads { get; set; }
 
-        [StringLength(50)]
-        public string Price { get; set; }
+        public int Price { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Configuration> Configuration { get; set; }
+
+        public string FullName => $"{Name} | {Socket} | {Tdp}W | {Frequency} GHz | Boost {Boost} GHz | {Cores}C/{Threads}T | {Price} руб.";
+
     }
 }

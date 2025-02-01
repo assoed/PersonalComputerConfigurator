@@ -45,8 +45,12 @@
             this.IdLabel = new System.Windows.Forms.Label();
             this.editPictureBox = new System.Windows.Forms.PictureBox();
             this.deletePictureBox = new System.Windows.Forms.PictureBox();
+            this.blockUserPictureBox = new System.Windows.Forms.PictureBox();
+            this.unblockUserPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deletePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.blockUserPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unblockUserPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // firstNameLabel
@@ -181,9 +185,9 @@
             // editPictureBox
             // 
             this.editPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("editPictureBox.Image")));
-            this.editPictureBox.Location = new System.Drawing.Point(464, 57);
+            this.editPictureBox.Location = new System.Drawing.Point(458, 3);
             this.editPictureBox.Name = "editPictureBox";
-            this.editPictureBox.Size = new System.Drawing.Size(42, 33);
+            this.editPictureBox.Size = new System.Drawing.Size(44, 40);
             this.editPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.editPictureBox.TabIndex = 84;
             this.editPictureBox.TabStop = false;
@@ -192,19 +196,43 @@
             // deletePictureBox
             // 
             this.deletePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("deletePictureBox.Image")));
-            this.deletePictureBox.Location = new System.Drawing.Point(519, 3);
+            this.deletePictureBox.Location = new System.Drawing.Point(508, 3);
             this.deletePictureBox.Name = "deletePictureBox";
-            this.deletePictureBox.Size = new System.Drawing.Size(28, 31);
+            this.deletePictureBox.Size = new System.Drawing.Size(39, 40);
             this.deletePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.deletePictureBox.TabIndex = 85;
             this.deletePictureBox.TabStop = false;
             this.deletePictureBox.Click += new System.EventHandler(this.deletePictureBox_Click);
+            // 
+            // blockUserPictureBox
+            // 
+            this.blockUserPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("blockUserPictureBox.Image")));
+            this.blockUserPictureBox.Location = new System.Drawing.Point(500, 49);
+            this.blockUserPictureBox.Name = "blockUserPictureBox";
+            this.blockUserPictureBox.Size = new System.Drawing.Size(47, 41);
+            this.blockUserPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.blockUserPictureBox.TabIndex = 86;
+            this.blockUserPictureBox.TabStop = false;
+            this.blockUserPictureBox.Click += new System.EventHandler(this.blockUserPictureBox_Click);
+            // 
+            // unblockUserPictureBox
+            // 
+            this.unblockUserPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("unblockUserPictureBox.Image")));
+            this.unblockUserPictureBox.Location = new System.Drawing.Point(500, 52);
+            this.unblockUserPictureBox.Name = "unblockUserPictureBox";
+            this.unblockUserPictureBox.Size = new System.Drawing.Size(47, 41);
+            this.unblockUserPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.unblockUserPictureBox.TabIndex = 87;
+            this.unblockUserPictureBox.TabStop = false;
+            this.unblockUserPictureBox.Click += new System.EventHandler(this.unblockUserPictureBox_Click);
             // 
             // UserEditorAdminControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
+            this.Controls.Add(this.unblockUserPictureBox);
+            this.Controls.Add(this.blockUserPictureBox);
             this.Controls.Add(this.deletePictureBox);
             this.Controls.Add(this.editPictureBox);
             this.Controls.Add(this.IdValueLabel);
@@ -224,8 +252,11 @@
             this.Margin = new System.Windows.Forms.Padding(50, 10, 50, 10);
             this.Name = "UserEditorAdminControl";
             this.Size = new System.Drawing.Size(550, 93);
+            this.Load += new System.EventHandler(this.UserEditorAdminControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.editPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deletePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.blockUserPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unblockUserPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -249,5 +280,7 @@
         private System.Windows.Forms.Label IdLabel;
         private System.Windows.Forms.PictureBox editPictureBox;
         private System.Windows.Forms.PictureBox deletePictureBox;
+        private System.Windows.Forms.PictureBox blockUserPictureBox;
+        private System.Windows.Forms.PictureBox unblockUserPictureBox;
     }
 }

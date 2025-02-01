@@ -15,8 +15,7 @@ namespace PersonalComputerConfigurator.Forms
 {
     public partial class MainPageUserForm : Form
     {
-        private ProfileBlockUserControl _profileBlock;
-
+     
         public MainPageUserForm()
         {
             InitializeComponent();
@@ -24,20 +23,21 @@ namespace PersonalComputerConfigurator.Forms
    
         private void MainPageUserForm_Load(object sender, EventArgs e)
         {
-            // Создаем один экземпляр ProfileBlockUserControl
-            _profileBlock = new ProfileBlockUserControl();
 
-            _profileBlock.Location = new Point(this.ClientSize.Width - _profileBlock.Width - 10, 10);
-            _profileBlock.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            var processors = Program.context.Processor.ToList();
 
+            // Преобразуем в список анонимных объектов
+            var processorList = processors.Select(p => new
+            {
+                ID = p.ID,
+                FullName = p.FullName  // Это свойство из модели Processor
+            }).ToList();
 
-            mainPageSplitContainer.Panel1.Controls.Add(_profileBlock);
+            processorComboBox.DataSource = processorList;
+            processorComboBox.DisplayMember = "FullName";
+            processorComboBox.ValueMember   = "ID";
 
-            lastNameTextBox.Text = UserSession.LastName;
-            nameTextBox.Text = UserSession.Name;
-            middleNameTextBox.Text = UserSession.MiddleName;
-            emailLabel.Text = UserSession.Email;
-            loginLabel.Text = UserSession.Login;
+            SetupProfileBlock();
         }
 
         private void deletePictureBox_Click(object sender, EventArgs e)
@@ -62,6 +62,72 @@ namespace PersonalComputerConfigurator.Forms
                 AuthorizationForm form = new AuthorizationForm();
                 form.ShowDialog();
             }
+        }
+
+        private void SetupProfileBlock()
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(profilePictureBox, "Перейти в профиль");
+            toolTip.SetToolTip(userFIOLabel, "Перейти в профиль");
+            userFIOLabel.Text = $"{UserSession.LastName} {UserSession.Name} {UserSession.MiddleName}";
+
+
+            lastNameTextBox.Text = UserSession.LastName;
+            nameTextBox.Text = UserSession.Name;
+            middleNameTextBox.Text = UserSession.MiddleName;
+            emailLabel.Text = UserSession.Email;
+            loginLabel.Text = UserSession.Login;
+        }
+
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            // Закрываем текущую форму (MainPageForm)
+            this.Hide();
+
+            // Показать форму авторизации
+            AuthorizationForm authorizationForm = new AuthorizationForm();
+            authorizationForm.Show();
+        }
+
+
+        private void profilePictureBox_Click(object sender, EventArgs e)
+        {
+            userTabControl.SelectedTab = userProfileTab;
+        }
+
+        private void saveProfileButton_Click(object sender, EventArgs e)
+        {
+
+            string lastName = lastNameTextBox.Text;
+            string firstName = nameTextBox.Text;
+            string middleName = middleNameTextBox.Text;
+
+            // Проверка на заполненность полей
+            if (string.IsNullOrWhiteSpace(lastName) ||
+                string.IsNullOrWhiteSpace(firstName))
+            {
+                MessageBox.Show("Все поля обязательны для заполнения.");
+                return;
+            }
+
+
+            var existingUser = Program.context.User.FirstOrDefault(u => u.ID == UserSession.Id);
+
+            // Обновляем данные пользователя
+            existingUser.Name = firstName;
+            existingUser.MiddleName = middleName;
+            existingUser.LastName = lastName;
+
+            // Сохраняем изменения в базе данных
+            Program.context.SaveChanges();
+
+            UserSession.Name = firstName;
+            UserSession.LastName = lastName;
+            UserSession.MiddleName = middleName;
+
+            userFIOLabel.Text = $"{UserSession.LastName} {UserSession.Name} {UserSession.MiddleName}";
+            MessageBox.Show("Данные пользователя успешно обновлены!");
         }
     }
 }
