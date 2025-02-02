@@ -1,10 +1,12 @@
-namespace PersonalComputerConfigurator.Models
+﻿namespace PersonalComputerConfigurator.Models
 {
+    using PersonalComputerConfigurator.Services;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Runtime.InteropServices;
 
     [Table("Cooler")]
     public partial class Cooler
@@ -35,10 +37,11 @@ namespace PersonalComputerConfigurator.Models
         [StringLength(50)]
         public string Material { get; set; }
 
-        [StringLength(50)]
-        public string Price { get; set; }
+        public int Price { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Configuration> Configuration { get; set; }
+
+        public string FullName => $"{Name} | {Socket} | {Type} | {Material} | {MoneyService.ToRubles(Price)}₽";
     }
 }

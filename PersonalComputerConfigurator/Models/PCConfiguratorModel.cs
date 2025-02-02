@@ -73,8 +73,7 @@ namespace PersonalComputerConfigurator.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Cooler>()
-                .Property(e => e.Price)
-                .IsUnicode(false);
+                .Property(e => e.Price);
 
             modelBuilder.Entity<GPU>()
                 .Property(e => e.Name)

@@ -5,6 +5,7 @@ namespace PersonalComputerConfigurator.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using PersonalComputerConfigurator.Services;
 
     [Table("Processor")]
     public partial class Processor
@@ -46,7 +47,6 @@ namespace PersonalComputerConfigurator.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Configuration> Configuration { get; set; }
 
-        public string FullName => $"{Name} | {Socket} | {Tdp}W | {Frequency} GHz | Boost {Boost} GHz | {Cores}C/{Threads}T | {Price} руб.";
-
+        public string FullName => $"{Name} | {Socket} | {Tdp}W | {Frequency} GHz | Boost {Boost} GHz | {Cores}C/{Threads}T | {MoneyService.ToRubles(Price)} руб.";
     }
 }

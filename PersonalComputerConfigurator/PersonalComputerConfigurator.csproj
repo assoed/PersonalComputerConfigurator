@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MoneyService.cs" />
     <Compile Include="Services\UserRightsSegregation.cs" />
     <Compile Include="Services\ComponentsDictionary.cs" />
     <Compile Include="Services\ComponentsUserControlsBuilder.cs" />

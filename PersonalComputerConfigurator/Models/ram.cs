@@ -1,10 +1,13 @@
-namespace PersonalComputerConfigurator.Models
+﻿namespace PersonalComputerConfigurator.Models
 {
+    using PersonalComputerConfigurator.Services;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
 
     [Table("RAM")]
     public partial class RAM
@@ -35,10 +38,12 @@ namespace PersonalComputerConfigurator.Models
         [StringLength(255)]
         public string Frequency { get; set; }
 
-        [StringLength(255)]
-        public string Price { get; set; }
+        public int Price { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Configuration> Configuration { get; set; }
+
+        public string FullName => $"{Name} | {Type} | {FormFactor} | {Frequency} | {Capacity} | {MoneyService.ToRubles(Price)}₽";
+
     }
 }
