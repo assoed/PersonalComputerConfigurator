@@ -45,8 +45,7 @@ namespace PersonalComputerConfigurator.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Case>()
-                .Property(e => e.Price)
-                .IsUnicode(false);
+                .Property(e => e.Price);
 
             modelBuilder.Entity<Cooler>()
                 .Property(e => e.Name)
@@ -100,8 +99,7 @@ namespace PersonalComputerConfigurator.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<GPU>()
-                .Property(e => e.Price)
-                .IsUnicode(false);
+                .Property(e => e.Price);
 
             modelBuilder.Entity<GPU>()
                 .Property(e => e.Tdp)
@@ -136,8 +134,7 @@ namespace PersonalComputerConfigurator.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<PSU>()
-                .Property(e => e.Price)
-                .IsUnicode(false);
+                .Property(e => e.Price);
 
             modelBuilder.Entity<SSD>()
                 .Property(e => e.Name)

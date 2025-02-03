@@ -24,6 +24,8 @@ namespace PersonalComputerConfigurator.Forms
         private void MainPageUserForm_Load(object sender, EventArgs e)
         {
 
+            ConnectComboBoxHandlers();
+
             var processors = Program.context.Processor.ToList();
 
             // Преобразуем в список анонимных объектов
@@ -93,27 +95,99 @@ namespace PersonalComputerConfigurator.Forms
             coolerComboBox.DisplayMember = "FullName";
             coolerComboBox.ValueMember = "ID";
 
+            var gpus = Program.context.GPU.ToList();
+            var gpuList = gpus.Select(g => new
+            {
+                g.ID,
+                g.FullName,
+                g.GpuFrequency,
+                g.GpuBoost,
+                g.MemorySize,
+                g.MemoryType,
+                g.Tdp,
+                g.Price
+            }).ToList();
 
-            if (processorComboBox.Items.Count > 0)
-                processorComboBox.SelectedIndex = 0;
+            gpuComboBox.DataSource = gpuList;
+            gpuComboBox.DisplayMember = "FullName";
+            gpuComboBox.ValueMember = "ID";
 
-            if (motherboardComboBox.Items.Count > 0)
-                motherboardComboBox.SelectedIndex = 0;
+            var cases = Program.context.Case.ToList();
+            var caseList = cases.Select(c => new
+            {
+                c.ID,
+                c.FullName,
+                c.FormFaktor,
+                c.Size,
+                c.Price
+            }).ToList();
 
-            if (ramComboBox.Items.Count > 0)
-                ramComboBox.SelectedIndex = 0;
+            caseComboBox.DataSource = caseList;
+            caseComboBox.DisplayMember = "FullName";
+            caseComboBox.ValueMember = "ID";
 
-            if (coolerComboBox.Items.Count > 0)
-                coolerComboBox.SelectedIndex = 0;
+            var psus = Program.context.PSU.ToList();
+            var psuList = psus.Select(p => new
+            {
+                p.ID,
+                p.FullName,
+                p.PowerSupply,
+                p.FormFactor,
+                p.Certificate,
+                p.Price
+            }).ToList();
 
-            // 🟢 ЯВНО ВЫЗЫВАЕМ ОБНОВЛЕНИЕ ЛЕЙБЛОВ
-            ProcessorComboBox_SelectedIndexChanged(processorComboBox, EventArgs.Empty);
-            MotherboardComboBox_SelectedIndexChanged(motherboardComboBox, EventArgs.Empty);
-            ramComboBox_SelectedIndexChanged(ramComboBox, EventArgs.Empty);
-            coolerComboBox_SelectedIndexChanged(coolerComboBox, EventArgs.Empty);
+            psuComboBox.DataSource = psuList;
+            psuComboBox.DisplayMember = "FullName";
+            psuComboBox.ValueMember = "ID";
+
+            var hdds = Program.context.HDD.ToList();
+            var hddList = hdds.Select(h => new
+            {
+                h.ID,
+                h.FullName,
+                h.Capacity,
+                h.Speed,
+                h.Price
+            }).ToList();
+
+            hddComboBox.DataSource = hddList;
+            hddComboBox.DisplayMember = "FullName";
+            hddComboBox.ValueMember = "ID";
+
+            var ssds = Program.context.SSD.ToList();
+            var ssdList = ssds.Select(s => new
+            {
+                s.ID,
+                s.FullName,
+                s.Capacity,
+                s.Reading,
+                s.Writing,
+                s.Price
+            }).ToList();
+
+            ssdComboBox.DataSource = ssdList;
+            ssdComboBox.DisplayMember = "FullName";
+            ssdComboBox.ValueMember = "ID";
+
+            ClearAllLabels();
 
             SetupProfileBlock();
         }
+
+        private void ConnectComboBoxHandlers()
+        {
+            gpuComboBox.SelectedIndexChanged += gpuComboBox_SelectedIndexChanged;
+            caseComboBox.SelectedIndexChanged += caseComboBox_SelectedIndexChanged;
+            psuComboBox.SelectedIndexChanged += psuComboBox_SelectedIndexChanged;
+            hddComboBox.SelectedIndexChanged += hddComboBox_SelectedIndexChanged;
+            ssdComboBox.SelectedIndexChanged += ssdComboBox_SelectedIndexChanged;
+            coolerComboBox.SelectedIndexChanged += coolerComboBox_SelectedIndexChanged;
+            processorComboBox.SelectedIndexChanged += ProcessorComboBox_SelectedIndexChanged;
+            ramComboBox.SelectedIndexChanged += ramComboBox_SelectedIndexChanged;
+            motherboardComboBox.SelectedIndexChanged += MotherboardComboBox_SelectedIndexChanged;
+        }
+
 
         private void coolerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -177,6 +251,68 @@ namespace PersonalComputerConfigurator.Forms
             motherboardRamTypeLabel.Text = $"ТИП ОПЕРАТИВНОЙ ПАМЯТИ: {selectedMotherboard.RamType}";
         }
 
+
+        private void gpuComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (gpuComboBox.SelectedItem == null) return;
+
+            var selectedGPU = (dynamic)gpuComboBox.SelectedItem;
+
+            gpuFrequencyLabel1.Text = $"Частота: {selectedGPU.GpuFrequency} МГц";
+            gpuBoostLabel1.Text = $"Boost: {selectedGPU.GpuBoost} МГц";
+            memorySizeLabel1.Text = $"Объем памяти: {selectedGPU.MemorySize} ГБ";
+            memoryTypeLabel1.Text = $"Тип памяти: {selectedGPU.MemoryType}";
+            tdpLabel1.Text = $"TDP: {selectedGPU.Tdp} Вт";
+            priceLabel1.Text = $"Цена: {MoneyService.ToRubles(selectedGPU.Price)} ₽";
+        }
+
+        private void caseComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (caseComboBox.SelectedItem == null) return;
+
+            var selectedCase = (dynamic)caseComboBox.SelectedItem;
+
+            formFaktorLabel1.Text = $"Форм-фактор: {selectedCase.FormFaktor}";
+            sizeLabel1.Text = $"Размер: {selectedCase.Size}";
+            priceLabel3.Text = $"Цена: {MoneyService.ToRubles(selectedCase.Price)} ₽";
+        }
+
+        private void psuComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (psuComboBox.SelectedItem == null) return;
+
+            var selectedPSU = (dynamic)psuComboBox.SelectedItem;
+
+            powerSupplyLabel1.Text = $"Мощность: {selectedPSU.PowerSupply} Вт";
+            formFactorLabel1.Text = $"Форм-фактор: {selectedPSU.FormFactor}";
+            certificateLabel1.Text = $"Сертификат: {selectedPSU.Certificate}";
+            priceLabel5.Text = $"Цена: {MoneyService.ToRubles(selectedPSU.Price)} ₽";
+        }
+
+        private void hddComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (hddComboBox.SelectedItem == null) return;
+
+            var selectedHDD = (dynamic)hddComboBox.SelectedItem;
+
+            capacityLabel1.Text = $"Объем: {selectedHDD.Capacity} ГБ";
+            speedLabel1.Text = $"Скорость: {selectedHDD.Speed} об/мин";
+            priceLabel7.Text = $"Цена: {MoneyService.ToRubles(selectedHDD.Price)} ₽";
+        }
+
+        private void ssdComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ssdComboBox.SelectedItem == null) return;
+
+            var selectedSSD = (dynamic)ssdComboBox.SelectedItem;
+
+            capacityLabel3.Text = $"Объем: {selectedSSD.Capacity} ГБ";
+            readingLabel1.Text = $"Чтение: {selectedSSD.Reading} МБ/с";
+            writingLabel1.Text = $"Запись: {selectedSSD.Writing} МБ/с";
+            priceLabel9.Text = $"Цена: {MoneyService.ToRubles(selectedSSD.Price)} ₽";
+        }
+
+
         private void deletePictureBox_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Вы уверены, что хотите удалить свой профиль?", "Подтверждение", MessageBoxButtons.YesNo);
@@ -219,10 +355,8 @@ namespace PersonalComputerConfigurator.Forms
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            // Закрываем текущую форму (MainPageForm)
             this.Hide();
 
-            // Показать форму авторизации
             AuthorizationForm authorizationForm = new AuthorizationForm();
             authorizationForm.Show();
         }
@@ -240,7 +374,6 @@ namespace PersonalComputerConfigurator.Forms
             string firstName = nameTextBox.Text;
             string middleName = middleNameTextBox.Text;
 
-            // Проверка на заполненность полей
             if (string.IsNullOrWhiteSpace(lastName) ||
                 string.IsNullOrWhiteSpace(firstName))
             {
@@ -251,12 +384,10 @@ namespace PersonalComputerConfigurator.Forms
 
             var existingUser = Program.context.User.FirstOrDefault(u => u.ID == UserSession.Id);
 
-            // Обновляем данные пользователя
             existingUser.Name = firstName;
             existingUser.MiddleName = middleName;
             existingUser.LastName = lastName;
 
-            // Сохраняем изменения в базе данных
             Program.context.SaveChanges();
 
             UserSession.Name = firstName;
@@ -267,14 +398,100 @@ namespace PersonalComputerConfigurator.Forms
             MessageBox.Show("Данные пользователя успешно обновлены!");
         }
 
-        private void processorTDPLabel_Click(object sender, EventArgs e)
+        private void SaveConfiguration(object sender, EventArgs e)
         {
+            var newConfiguration = new Configuration
+            {
+                UserID = UserSession.Id,
+                CaseID = (int)caseComboBox.SelectedValue,
+                CoolerID = (int)coolerComboBox.SelectedValue,
+                GpuID = (int)gpuComboBox.SelectedValue,
+                HddID = (int)hddComboBox.SelectedValue,
+                MotherboardID = (int)motherboardComboBox.SelectedValue,
+                ProcessorID = (int)processorComboBox.SelectedValue,
+                PsuID = (int)psuComboBox.SelectedValue,
+                SsdID = (int)ssdComboBox.SelectedValue,
+                RamID = (int)ramComboBox.SelectedValue
+            };
 
+            Program.context.Configuration.Add(newConfiguration);
+            Program.context.SaveChanges();
+
+            MessageBox.Show("Конфигурация успешно сохранена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ClearAllLabels();
         }
 
-        private void processorThreadsLabel_Click(object sender, EventArgs e)
+        private void ClearAllLabels()
         {
+            // Очистка процессора
+            processorSocketLabel.Text = "";
+            processorTDPLabel.Text = "";
+            processorFrequencyLabel.Text = "";
+            processorBoostLabel.Text = "";
+            processorCoresLabel.Text = "";
+            processorThreadsLabel.Text = "";
+            processorPriceLabel.Text = "";
 
+            // Очистка материнской платы
+            motherboardSocketLabel.Text = "";
+            motherboardChipsetLabel.Text = "";
+            motherboardFormFactorLabel.Text = "";
+            motherboardPriceLabel.Text = "";
+            motherboardRamTypeLabel.Text = "";
+
+            // Очистка оперативной памяти
+            ramCapacityLabel.Text = "";
+            ramTypeLabel.Text = "";
+            ramFrequencyLabel.Text = "";
+            ramFormFactorLabel.Text = "";
+            ramPriceLabel.Text = "";
+
+            // Очистка кулера
+            coolerSocketLabel.Text = "";
+            coolerPowerLabel.Text = "";
+            coolerMaterialLabel.Text = "";
+            coolerTypeLabel.Text = "";
+            coolerPriceLabel.Text = "";
+
+            // Очистка видеокарты
+            gpuFrequencyLabel1.Text = "";
+            gpuBoostLabel1.Text = "";
+            memorySizeLabel1.Text = "";
+            memoryTypeLabel1.Text = "";
+            tdpLabel1.Text = "";
+            priceLabel1.Text = "";
+
+            // Очистка корпуса
+            formFaktorLabel1.Text = "";
+            sizeLabel1.Text = "";
+            priceLabel3.Text = "";
+
+            // Очистка блока питания
+            powerSupplyLabel1.Text = "";
+            formFactorLabel1.Text = "";
+            certificateLabel1.Text = "";
+            priceLabel5.Text = "";
+
+            // Очистка жесткого диска
+            capacityLabel1.Text = "";
+            speedLabel1.Text = "";
+            priceLabel7.Text = "";
+
+            // Очистка SSD
+            capacityLabel3.Text = "";
+            readingLabel1.Text = "";
+            writingLabel1.Text = "";
+            priceLabel9.Text = "";
+
+            processorComboBox.SelectedIndex = -1;
+            motherboardComboBox.SelectedIndex = -1;
+            ramComboBox.SelectedIndex = -1;
+            coolerComboBox.SelectedIndex = -1;
+            gpuComboBox.SelectedIndex = -1;
+            caseComboBox.SelectedIndex = -1;
+            psuComboBox.SelectedIndex = -1;
+            hddComboBox.SelectedIndex = -1;
+            ssdComboBox.SelectedIndex = -1;
         }
     }
 }

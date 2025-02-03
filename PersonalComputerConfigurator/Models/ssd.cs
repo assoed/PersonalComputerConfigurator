@@ -1,5 +1,6 @@
-namespace PersonalComputerConfigurator.Models
+﻿namespace PersonalComputerConfigurator.Models
 {
+    using PersonalComputerConfigurator.Services;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -34,5 +35,7 @@ namespace PersonalComputerConfigurator.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Configuration> Configuration { get; set; }
+
+        public string FullName => $"{Name} | {Capacity} ГБ | Чтение: {Reading} МБ/с | Запись: {Writing} МБ/с | {MoneyService.ToRubles(Price)}₽";
     }
 }

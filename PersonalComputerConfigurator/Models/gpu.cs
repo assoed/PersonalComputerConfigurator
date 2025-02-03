@@ -5,6 +5,7 @@ namespace PersonalComputerConfigurator.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Security.Policy;
 
     [Table("GPU")]
     public partial class GPU
@@ -36,13 +37,14 @@ namespace PersonalComputerConfigurator.Models
         [StringLength(50)]
         public string MemoryType { get; set; }
 
-        [StringLength(50)]
-        public string Price { get; set; }
+        public int Price { get; set; }
 
         [StringLength(50)]
         public string Tdp { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Configuration> Configuration { get; set; }
+
+        public string FullName => $"{Name} | {GpuFrequency} Ã√ˆ | Boost: {GpuBoost} Ã√ˆ | {MemorySize} √¡ {MemoryType} | {Price}";
     }
 }

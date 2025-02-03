@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -64,6 +65,24 @@ namespace PersonalComputerConfigurator.Forms
             {
                 MessageBox.Show("Все поля обязательны для заполнения.");
                 return; 
+            }
+
+            if (!Regex.IsMatch(password, @"^(?=.*[A-Z])(?=.*\d).{8,}$"))
+            {
+                MessageBox.Show("Пароль должен содержать хотя бы одну заглавную букву, одну цифру и быть не короче 8 символов.");
+                return;
+            }
+
+            if (Program.context.User.Any(u => u.Login == login))
+            {
+                MessageBox.Show("Пользователь с таким логином уже существует. Выберите другой логин.");
+                return;
+            }
+
+            if (Program.context.User.Any(u => u.Email == email))
+            {
+                MessageBox.Show("Пользователь с таким email уже существует. Выберите другой email.");
+                return;
             }
 
             Program.context.User.Add(newUser);

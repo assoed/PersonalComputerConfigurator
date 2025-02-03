@@ -1,5 +1,6 @@
 namespace PersonalComputerConfigurator.Models
 {
+    using PersonalComputerConfigurator.Services;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -32,10 +33,12 @@ namespace PersonalComputerConfigurator.Models
         [StringLength(50)]
         public string Certificate { get; set; }
 
-        [StringLength(50)]
-        public string Price { get; set; }
+        public int Price { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Configuration> Configuration { get; set; }
+
+        public string FullName => $"{Name} | {PowerSupply} Âò | {FormFactor} | {Certificate} | {MoneyService.ToRubles(Price)}";
+
     }
 }
