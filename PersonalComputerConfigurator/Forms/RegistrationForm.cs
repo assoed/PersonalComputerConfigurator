@@ -85,6 +85,12 @@ namespace PersonalComputerConfigurator.Forms
                 return;
             }
 
+            if (!Regex.IsMatch(email, @"^[^\s@]+@[^\s@]+\.[^\s@]+$"))
+            {
+                MessageBox.Show("Введите корректный email.");
+                return;
+            }
+
             Program.context.User.Add(newUser);
             Program.context.SaveChanges();
     
