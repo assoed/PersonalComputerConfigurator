@@ -197,9 +197,22 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Release\PersonalComputerConfigurator.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Docs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Release\EntityFramework.dll" />
+    <Content Include="Release\EntityFramework.SqlServer.dll" />
+    <Content Include="Release\EntityFramework.SqlServer.xml" />
+    <Content Include="Release\EntityFramework.xml" />
+    <Content Include="Release\PersonalComputerConfigurator.exe" />
+    <Content Include="Release\PersonalComputerConfigurator.pdb" />
+    <Content Include="Release\ru\EntityFramework.resources.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
