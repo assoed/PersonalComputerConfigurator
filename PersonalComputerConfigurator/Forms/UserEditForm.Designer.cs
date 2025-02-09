@@ -51,6 +51,11 @@
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.userRoleBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.userRoleComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.userRoleBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
@@ -217,11 +222,66 @@
             this.userRoleComboBox.TabIndex = 36;
             this.userRoleComboBox.ValueMember = "id";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
+            this.label2.Location = new System.Drawing.Point(141, 88);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(135, 12);
+            this.label2.TabIndex = 37;
+            this.label2.Text = " Поле должно быть не пустым";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
+            this.label1.Location = new System.Drawing.Point(141, 131);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(135, 12);
+            this.label1.TabIndex = 38;
+            this.label1.Text = " Поле должно быть не пустым";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
+            this.label3.Location = new System.Drawing.Point(141, 174);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(135, 12);
+            this.label3.TabIndex = 39;
+            this.label3.Text = " Поле должно быть не пустым";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
+            this.label4.Location = new System.Drawing.Point(141, 213);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(144, 12);
+            this.label4.TabIndex = 40;
+            this.label4.Text = "Логин должен быть уникальным";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
+            this.label5.Location = new System.Drawing.Point(141, 251);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(186, 12);
+            this.label5.TabIndex = 41;
+            this.label5.Text = "Формат почты example@example.example";
+            // 
             // UserEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 426);
+            this.ClientSize = new System.Drawing.Size(782, 326);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.userRoleComboBox);
             this.Controls.Add(this.РОЛЬ);
             this.Controls.Add(this.saveUserButton);
@@ -271,5 +331,10 @@
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.BindingSource userRoleBindingSource1;
         private System.Windows.Forms.ComboBox userRoleComboBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

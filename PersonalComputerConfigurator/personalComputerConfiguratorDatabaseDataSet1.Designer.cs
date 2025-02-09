@@ -30,6 +30,8 @@ namespace PersonalComputerConfigurator {
         
         private CoolerDataTable tableCooler;
         
+        private DDRTypeDataTable tableDDRType;
+        
         private GPUDataTable tableGPU;
         
         private HDDDataTable tableHDD;
@@ -70,6 +72,8 @@ namespace PersonalComputerConfigurator {
         
         private global::System.Data.DataRelation relationFK_user_userRole;
         
+        private global::System.Data.DataRelation relationFK_RAM_DDRType;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -106,6 +110,9 @@ namespace PersonalComputerConfigurator {
                 }
                 if ((ds.Tables["Cooler"] != null)) {
                     base.Tables.Add(new CoolerDataTable(ds.Tables["Cooler"]));
+                }
+                if ((ds.Tables["DDRType"] != null)) {
+                    base.Tables.Add(new DDRTypeDataTable(ds.Tables["DDRType"]));
                 }
                 if ((ds.Tables["GPU"] != null)) {
                     base.Tables.Add(new GPUDataTable(ds.Tables["GPU"]));
@@ -179,6 +186,16 @@ namespace PersonalComputerConfigurator {
         public CoolerDataTable Cooler {
             get {
                 return this.tableCooler;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DDRTypeDataTable DDRType {
+            get {
+                return this.tableDDRType;
             }
         }
         
@@ -348,6 +365,9 @@ namespace PersonalComputerConfigurator {
                 if ((ds.Tables["Cooler"] != null)) {
                     base.Tables.Add(new CoolerDataTable(ds.Tables["Cooler"]));
                 }
+                if ((ds.Tables["DDRType"] != null)) {
+                    base.Tables.Add(new DDRTypeDataTable(ds.Tables["DDRType"]));
+                }
                 if ((ds.Tables["GPU"] != null)) {
                     base.Tables.Add(new GPUDataTable(ds.Tables["GPU"]));
                 }
@@ -426,6 +446,12 @@ namespace PersonalComputerConfigurator {
                     this.tableCooler.InitVars();
                 }
             }
+            this.tableDDRType = ((DDRTypeDataTable)(base.Tables["DDRType"]));
+            if ((initTable == true)) {
+                if ((this.tableDDRType != null)) {
+                    this.tableDDRType.InitVars();
+                }
+            }
             this.tableGPU = ((GPUDataTable)(base.Tables["GPU"]));
             if ((initTable == true)) {
                 if ((this.tableGPU != null)) {
@@ -491,6 +517,7 @@ namespace PersonalComputerConfigurator {
             this.relationFK_configurations_ram = this.Relations["FK_configurations_ram"];
             this.relationFK_configurations_user = this.Relations["FK_configurations_user"];
             this.relationFK_user_userRole = this.Relations["FK_user_userRole"];
+            this.relationFK_RAM_DDRType = this.Relations["FK_RAM_DDRType"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -507,6 +534,8 @@ namespace PersonalComputerConfigurator {
             base.Tables.Add(this.tableConfiguration);
             this.tableCooler = new CoolerDataTable();
             base.Tables.Add(this.tableCooler);
+            this.tableDDRType = new DDRTypeDataTable();
+            base.Tables.Add(this.tableDDRType);
             this.tableGPU = new GPUDataTable();
             base.Tables.Add(this.tableGPU);
             this.tableHDD = new HDDDataTable();
@@ -569,6 +598,10 @@ namespace PersonalComputerConfigurator {
                         this.tableUserRole.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableUser.RoleColumn}, false);
             this.Relations.Add(this.relationFK_user_userRole);
+            this.relationFK_RAM_DDRType = new global::System.Data.DataRelation("FK_RAM_DDRType", new global::System.Data.DataColumn[] {
+                        this.tableDDRType.DdrIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableRAM.TypeColumn}, false);
+            this.Relations.Add(this.relationFK_RAM_DDRType);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -586,6 +619,12 @@ namespace PersonalComputerConfigurator {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeCooler() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeDDRType() {
             return false;
         }
         
@@ -706,6 +745,9 @@ namespace PersonalComputerConfigurator {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void CoolerRowChangeEventHandler(object sender, CoolerRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void DDRTypeRowChangeEventHandler(object sender, DDRTypeRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void GPURowChangeEventHandler(object sender, GPURowChangeEvent e);
@@ -1101,6 +1143,12 @@ namespace PersonalComputerConfigurator {
             
             private global::System.Data.DataColumn columnUserID;
             
+            private global::System.Data.DataColumn columnCreatedAt;
+            
+            private global::System.Data.DataColumn columnUpdatedAt;
+            
+            private global::System.Data.DataColumn columnConfigPrice;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public ConfigurationDataTable() {
@@ -1232,6 +1280,30 @@ namespace PersonalComputerConfigurator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CreatedAtColumn {
+                get {
+                    return this.columnCreatedAt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn UpdatedAtColumn {
+                get {
+                    return this.columnUpdatedAt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ConfigPriceColumn {
+                get {
+                    return this.columnConfigPrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1267,7 +1339,7 @@ namespace PersonalComputerConfigurator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public ConfigurationRow AddConfigurationRow(int Name, CaseRow parentCaseRowByFK_configurations_cases, CoolerRow parentCoolerRowByFK_configurations_coolers, GPURow parentGPURowByFK_configurations_gpu, HDDRow parentHDDRowByFK_configurations_hdd, MotherboardRow parentMotherboardRowByFK_configurations_motherboards, ProcessorRow parentProcessorRowByFK_configurations_processors, PSURow parentPSURowByFK_configurations_psu, SSDRow parentSSDRowByFK_Configuration_SSD, RAMRow parentRAMRowByFK_configurations_ram, UserRow parentUserRowByFK_configurations_user) {
+            public ConfigurationRow AddConfigurationRow(string Name, CaseRow parentCaseRowByFK_configurations_cases, CoolerRow parentCoolerRowByFK_configurations_coolers, GPURow parentGPURowByFK_configurations_gpu, HDDRow parentHDDRowByFK_configurations_hdd, MotherboardRow parentMotherboardRowByFK_configurations_motherboards, ProcessorRow parentProcessorRowByFK_configurations_processors, PSURow parentPSURowByFK_configurations_psu, SSDRow parentSSDRowByFK_Configuration_SSD, RAMRow parentRAMRowByFK_configurations_ram, UserRow parentUserRowByFK_configurations_user, System.DateTime CreatedAt, System.DateTime UpdatedAt, int ConfigPrice) {
                 ConfigurationRow rowConfigurationRow = ((ConfigurationRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1281,7 +1353,10 @@ namespace PersonalComputerConfigurator {
                         null,
                         null,
                         null,
-                        null};
+                        null,
+                        CreatedAt,
+                        UpdatedAt,
+                        ConfigPrice};
                 if ((parentCaseRowByFK_configurations_cases != null)) {
                     columnValuesArray[2] = parentCaseRowByFK_configurations_cases[0];
                 }
@@ -1353,6 +1428,9 @@ namespace PersonalComputerConfigurator {
                 this.columnSsdID = base.Columns["SsdID"];
                 this.columnRamID = base.Columns["RamID"];
                 this.columnUserID = base.Columns["UserID"];
+                this.columnCreatedAt = base.Columns["CreatedAt"];
+                this.columnUpdatedAt = base.Columns["UpdatedAt"];
+                this.columnConfigPrice = base.Columns["ConfigPrice"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1360,7 +1438,7 @@ namespace PersonalComputerConfigurator {
             private void InitClass() {
                 this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID);
-                this.columnName = new global::System.Data.DataColumn("Name", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnName);
                 this.columnCaseID = new global::System.Data.DataColumn("CaseID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCaseID);
@@ -1382,6 +1460,12 @@ namespace PersonalComputerConfigurator {
                 base.Columns.Add(this.columnRamID);
                 this.columnUserID = new global::System.Data.DataColumn("UserID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUserID);
+                this.columnCreatedAt = new global::System.Data.DataColumn("CreatedAt", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatedAt);
+                this.columnUpdatedAt = new global::System.Data.DataColumn("UpdatedAt", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUpdatedAt);
+                this.columnConfigPrice = new global::System.Data.DataColumn("ConfigPrice", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnConfigPrice);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -1390,6 +1474,7 @@ namespace PersonalComputerConfigurator {
                 this.columnID.AllowDBNull = false;
                 this.columnID.ReadOnly = true;
                 this.columnID.Unique = true;
+                this.columnName.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1887,6 +1972,279 @@ namespace PersonalComputerConfigurator {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DDRTypeDataTable : global::System.Data.TypedTableBase<DDRTypeRow> {
+            
+            private global::System.Data.DataColumn columnDdrID;
+            
+            private global::System.Data.DataColumn columnDdrTypeName;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DDRTypeDataTable() {
+                this.TableName = "DDRType";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DDRTypeDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected DDRTypeDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DdrIDColumn {
+                get {
+                    return this.columnDdrID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DdrTypeNameColumn {
+                get {
+                    return this.columnDdrTypeName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DDRTypeRow this[int index] {
+                get {
+                    return ((DDRTypeRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DDRTypeRowChangeEventHandler DDRTypeRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DDRTypeRowChangeEventHandler DDRTypeRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DDRTypeRowChangeEventHandler DDRTypeRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DDRTypeRowChangeEventHandler DDRTypeRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddDDRTypeRow(DDRTypeRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DDRTypeRow AddDDRTypeRow(int DdrID, string DdrTypeName) {
+                DDRTypeRow rowDDRTypeRow = ((DDRTypeRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        DdrID,
+                        DdrTypeName};
+                rowDDRTypeRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDDRTypeRow);
+                return rowDDRTypeRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DDRTypeRow FindByDdrID(int DdrID) {
+                return ((DDRTypeRow)(this.Rows.Find(new object[] {
+                            DdrID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                DDRTypeDataTable cln = ((DDRTypeDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DDRTypeDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnDdrID = base.Columns["DdrID"];
+                this.columnDdrTypeName = base.Columns["DdrTypeName"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnDdrID = new global::System.Data.DataColumn("DdrID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDdrID);
+                this.columnDdrTypeName = new global::System.Data.DataColumn("DdrTypeName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDdrTypeName);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnDdrID}, true));
+                this.columnDdrID.AllowDBNull = false;
+                this.columnDdrID.Unique = true;
+                this.columnDdrTypeName.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DDRTypeRow NewDDRTypeRow() {
+                return ((DDRTypeRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DDRTypeRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(DDRTypeRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DDRTypeRowChanged != null)) {
+                    this.DDRTypeRowChanged(this, new DDRTypeRowChangeEvent(((DDRTypeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DDRTypeRowChanging != null)) {
+                    this.DDRTypeRowChanging(this, new DDRTypeRowChangeEvent(((DDRTypeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DDRTypeRowDeleted != null)) {
+                    this.DDRTypeRowDeleted(this, new DDRTypeRowChangeEvent(((DDRTypeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DDRTypeRowDeleting != null)) {
+                    this.DDRTypeRowDeleting(this, new DDRTypeRowChangeEvent(((DDRTypeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveDDRTypeRow(DDRTypeRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                personalComputerConfiguratorDatabaseDataSet1 ds = new personalComputerConfiguratorDatabaseDataSet1();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DDRTypeDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class GPUDataTable : global::System.Data.TypedTableBase<GPURow> {
             
             private global::System.Data.DataColumn columnID;
@@ -1906,6 +2264,10 @@ namespace PersonalComputerConfigurator {
             private global::System.Data.DataColumn columnPrice;
             
             private global::System.Data.DataColumn columnTdp;
+            
+            private global::System.Data.DataColumn columnCreatedAt;
+            
+            private global::System.Data.DataColumn columnUpdatedAt;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -2014,6 +2376,22 @@ namespace PersonalComputerConfigurator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CreatedAtColumn {
+                get {
+                    return this.columnCreatedAt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn UpdatedAtColumn {
+                get {
+                    return this.columnUpdatedAt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2049,10 +2427,10 @@ namespace PersonalComputerConfigurator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public GPURow AddGPURow(int ID, string Name, string Description, string GpuFrequency, string GpuBoost, string MemorySize, string MemoryType, int Price, string Tdp) {
+            public GPURow AddGPURow(string Name, string Description, string GpuFrequency, string GpuBoost, string MemorySize, string MemoryType, int Price, string Tdp, System.DateTime CreatedAt, System.DateTime UpdatedAt) {
                 GPURow rowGPURow = ((GPURow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        ID,
+                        null,
                         Name,
                         Description,
                         GpuFrequency,
@@ -2060,7 +2438,9 @@ namespace PersonalComputerConfigurator {
                         MemorySize,
                         MemoryType,
                         Price,
-                        Tdp};
+                        Tdp,
+                        CreatedAt,
+                        UpdatedAt};
                 rowGPURow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowGPURow);
                 return rowGPURow;
@@ -2099,6 +2479,8 @@ namespace PersonalComputerConfigurator {
                 this.columnMemoryType = base.Columns["MemoryType"];
                 this.columnPrice = base.Columns["Price"];
                 this.columnTdp = base.Columns["Tdp"];
+                this.columnCreatedAt = base.Columns["CreatedAt"];
+                this.columnUpdatedAt = base.Columns["UpdatedAt"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2122,9 +2504,17 @@ namespace PersonalComputerConfigurator {
                 base.Columns.Add(this.columnPrice);
                 this.columnTdp = new global::System.Data.DataColumn("Tdp", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTdp);
+                this.columnCreatedAt = new global::System.Data.DataColumn("CreatedAt", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatedAt);
+                this.columnUpdatedAt = new global::System.Data.DataColumn("UpdatedAt", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUpdatedAt);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
+                this.columnID.AutoIncrement = true;
+                this.columnID.AutoIncrementSeed = -1;
+                this.columnID.AutoIncrementStep = -1;
                 this.columnID.AllowDBNull = false;
+                this.columnID.ReadOnly = true;
                 this.columnID.Unique = true;
                 this.columnName.MaxLength = 255;
                 this.columnDescription.MaxLength = 255;
@@ -2750,7 +3140,7 @@ namespace PersonalComputerConfigurator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MotherboardRow AddMotherboardRow(string Name, string Description, string Socket, string RamType, string Chipset, string FormFactor, int Price) {
+            public MotherboardRow AddMotherboardRow(string Name, string Description, string Socket, int RamType, string Chipset, string FormFactor, int Price) {
                 MotherboardRow rowMotherboardRow = ((MotherboardRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2811,7 +3201,7 @@ namespace PersonalComputerConfigurator {
                 base.Columns.Add(this.columnDescription);
                 this.columnSocket = new global::System.Data.DataColumn("Socket", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSocket);
-                this.columnRamType = new global::System.Data.DataColumn("RamType", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnRamType = new global::System.Data.DataColumn("RamType", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRamType);
                 this.columnChipset = new global::System.Data.DataColumn("Chipset", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnChipset);
@@ -2830,7 +3220,7 @@ namespace PersonalComputerConfigurator {
                 this.columnName.MaxLength = 255;
                 this.columnDescription.MaxLength = 255;
                 this.columnSocket.MaxLength = 255;
-                this.columnRamType.MaxLength = 255;
+                this.columnRamType.AllowDBNull = false;
                 this.columnChipset.MaxLength = 50;
                 this.columnFormFactor.MaxLength = 255;
             }
@@ -3863,17 +4253,20 @@ namespace PersonalComputerConfigurator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public RAMRow AddRAMRow(string Name, string Description, string Type, string FormFactor, string Capacity, string Frequency, int Price) {
+            public RAMRow AddRAMRow(string Name, string Description, DDRTypeRow parentDDRTypeRowByFK_RAM_DDRType, string FormFactor, string Capacity, string Frequency, int Price) {
                 RAMRow rowRAMRow = ((RAMRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         Name,
                         Description,
-                        Type,
+                        null,
                         FormFactor,
                         Capacity,
                         Frequency,
                         Price};
+                if ((parentDDRTypeRowByFK_RAM_DDRType != null)) {
+                    columnValuesArray[3] = parentDDRTypeRowByFK_RAM_DDRType[0];
+                }
                 rowRAMRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRAMRow);
                 return rowRAMRow;
@@ -3922,7 +4315,7 @@ namespace PersonalComputerConfigurator {
                 base.Columns.Add(this.columnName);
                 this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescription);
-                this.columnType = new global::System.Data.DataColumn("Type", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnType = new global::System.Data.DataColumn("Type", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnType);
                 this.columnFormFactor = new global::System.Data.DataColumn("FormFactor", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFormFactor);
@@ -3942,7 +4335,6 @@ namespace PersonalComputerConfigurator {
                 this.columnID.Unique = true;
                 this.columnName.MaxLength = 255;
                 this.columnDescription.MaxLength = 255;
-                this.columnType.MaxLength = 255;
                 this.columnFormFactor.MaxLength = 255;
                 this.columnCapacity.MaxLength = 255;
                 this.columnFrequency.MaxLength = 255;
@@ -5281,10 +5673,10 @@ namespace PersonalComputerConfigurator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int Name {
+            public string Name {
                 get {
                     try {
-                        return ((int)(this[this.tableConfiguration.NameColumn]));
+                        return ((string)(this[this.tableConfiguration.NameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("Значение для столбца \'Name\' в таблице \'Configuration\' равно DBNull.", e);
@@ -5452,6 +5844,54 @@ namespace PersonalComputerConfigurator {
                 }
                 set {
                     this[this.tableConfiguration.UserIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime CreatedAt {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableConfiguration.CreatedAtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'CreatedAt\' в таблице \'Configuration\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableConfiguration.CreatedAtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime UpdatedAt {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableConfiguration.UpdatedAtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'UpdatedAt\' в таблице \'Configuration\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableConfiguration.UpdatedAtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int ConfigPrice {
+                get {
+                    try {
+                        return ((int)(this[this.tableConfiguration.ConfigPriceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'ConfigPrice\' в таблице \'Configuration\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableConfiguration.ConfigPriceColumn] = value;
                 }
             }
             
@@ -5696,6 +6136,42 @@ namespace PersonalComputerConfigurator {
             public void SetUserIDNull() {
                 this[this.tableConfiguration.UserIDColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCreatedAtNull() {
+                return this.IsNull(this.tableConfiguration.CreatedAtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCreatedAtNull() {
+                this[this.tableConfiguration.CreatedAtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsUpdatedAtNull() {
+                return this.IsNull(this.tableConfiguration.UpdatedAtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetUpdatedAtNull() {
+                this[this.tableConfiguration.UpdatedAtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsConfigPriceNull() {
+                return this.IsNull(this.tableConfiguration.ConfigPriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetConfigPriceNull() {
+                this[this.tableConfiguration.ConfigPriceColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -5934,6 +6410,71 @@ namespace PersonalComputerConfigurator {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
+        public partial class DDRTypeRow : global::System.Data.DataRow {
+            
+            private DDRTypeDataTable tableDDRType;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DDRTypeRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDDRType = ((DDRTypeDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int DdrID {
+                get {
+                    return ((int)(this[this.tableDDRType.DdrIDColumn]));
+                }
+                set {
+                    this[this.tableDDRType.DdrIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DdrTypeName {
+                get {
+                    try {
+                        return ((string)(this[this.tableDDRType.DdrTypeNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'DdrTypeName\' в таблице \'DDRType\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDDRType.DdrTypeNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDdrTypeNameNull() {
+                return this.IsNull(this.tableDDRType.DdrTypeNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDdrTypeNameNull() {
+                this[this.tableDDRType.DdrTypeNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public RAMRow[] GetRAMRows() {
+                if ((this.Table.ChildRelations["FK_RAM_DDRType"] == null)) {
+                    return new RAMRow[0];
+                }
+                else {
+                    return ((RAMRow[])(base.GetChildRows(this.Table.ChildRelations["FK_RAM_DDRType"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
         public partial class GPURow : global::System.Data.DataRow {
             
             private GPUDataTable tableGPU;
@@ -6086,6 +6627,38 @@ namespace PersonalComputerConfigurator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime CreatedAt {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableGPU.CreatedAtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'CreatedAt\' в таблице \'GPU\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableGPU.CreatedAtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime UpdatedAt {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableGPU.UpdatedAtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'UpdatedAt\' в таблице \'GPU\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableGPU.UpdatedAtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsNameNull() {
                 return this.IsNull(this.tableGPU.NameColumn);
             }
@@ -6178,6 +6751,30 @@ namespace PersonalComputerConfigurator {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetTdpNull() {
                 this[this.tableGPU.TdpColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCreatedAtNull() {
+                return this.IsNull(this.tableGPU.CreatedAtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCreatedAtNull() {
+                this[this.tableGPU.CreatedAtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsUpdatedAtNull() {
+                return this.IsNull(this.tableGPU.UpdatedAtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetUpdatedAtNull() {
+                this[this.tableGPU.UpdatedAtColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6444,14 +7041,9 @@ namespace PersonalComputerConfigurator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string RamType {
+            public int RamType {
                 get {
-                    try {
-                        return ((string)(this[this.tableMotherboard.RamTypeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'RamType\' в таблице \'Motherboard\' равно DBNull.", e);
-                    }
+                    return ((int)(this[this.tableMotherboard.RamTypeColumn]));
                 }
                 set {
                     this[this.tableMotherboard.RamTypeColumn] = value;
@@ -6540,18 +7132,6 @@ namespace PersonalComputerConfigurator {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetSocketNull() {
                 this[this.tableMotherboard.SocketColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsRamTypeNull() {
-                return this.IsNull(this.tableMotherboard.RamTypeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetRamTypeNull() {
-                this[this.tableMotherboard.RamTypeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7155,10 +7735,10 @@ namespace PersonalComputerConfigurator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Type {
+            public int Type {
                 get {
                     try {
-                        return ((string)(this[this.tableRAM.TypeColumn]));
+                        return ((int)(this[this.tableRAM.TypeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("Значение для столбца \'Type\' в таблице \'RAM\' равно DBNull.", e);
@@ -7230,6 +7810,17 @@ namespace PersonalComputerConfigurator {
                 }
                 set {
                     this[this.tableRAM.PriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DDRTypeRow DDRTypeRow {
+                get {
+                    return ((DDRTypeRow)(this.GetParentRow(this.Table.ParentRelations["FK_RAM_DDRType"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_RAM_DDRType"]);
                 }
             }
             
@@ -7959,6 +8550,40 @@ namespace PersonalComputerConfigurator {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public CoolerRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class DDRTypeRowChangeEvent : global::System.EventArgs {
+            
+            private DDRTypeRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DDRTypeRowChangeEvent(DDRTypeRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DDRTypeRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -8879,14 +9504,17 @@ SELECT ID, Name, Description, FormFaktor, Size, Price FROM [Case] WHERE (ID = @I
             tableMapping.ColumnMappings.Add("SsdID", "SsdID");
             tableMapping.ColumnMappings.Add("RamID", "RamID");
             tableMapping.ColumnMappings.Add("UserID", "UserID");
+            tableMapping.ColumnMappings.Add("CreatedAt", "CreatedAt");
+            tableMapping.ColumnMappings.Add("UpdatedAt", "UpdatedAt");
+            tableMapping.ColumnMappings.Add("ConfigPrice", "ConfigPrice");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Configuration] WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_CaseID = 1 AND [CaseID] IS NULL) OR ([CaseID] = @Original_CaseID)) AND ((@IsNull_CoolerID = 1 AND [CoolerID] IS NULL) OR ([CoolerID] = @Original_CoolerID)) AND ((@IsNull_GpuID = 1 AND [GpuID] IS NULL) OR ([GpuID] = @Original_GpuID)) AND ((@IsNull_HddID = 1 AND [HddID] IS NULL) OR ([HddID] = @Original_HddID)) AND ((@IsNull_MotherboardID = 1 AND [MotherboardID] IS NULL) OR ([MotherboardID] = @Original_MotherboardID)) AND ((@IsNull_ProcessorID = 1 AND [ProcessorID] IS NULL) OR ([ProcessorID] = @Original_ProcessorID)) AND ((@IsNull_PsuID = 1 AND [PsuID] IS NULL) OR ([PsuID] = @Original_PsuID)) AND ((@IsNull_SsdID = 1 AND [SsdID] IS NULL) OR ([SsdID] = @Original_SsdID)) AND ((@IsNull_RamID = 1 AND [RamID] IS NULL) OR ([RamID] = @Original_RamID)) AND ((@IsNull_UserID = 1 AND [UserID] IS NULL) OR ([UserID] = @Original_UserID)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Configuration] WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_CaseID = 1 AND [CaseID] IS NULL) OR ([CaseID] = @Original_CaseID)) AND ((@IsNull_CoolerID = 1 AND [CoolerID] IS NULL) OR ([CoolerID] = @Original_CoolerID)) AND ((@IsNull_GpuID = 1 AND [GpuID] IS NULL) OR ([GpuID] = @Original_GpuID)) AND ((@IsNull_HddID = 1 AND [HddID] IS NULL) OR ([HddID] = @Original_HddID)) AND ((@IsNull_MotherboardID = 1 AND [MotherboardID] IS NULL) OR ([MotherboardID] = @Original_MotherboardID)) AND ((@IsNull_ProcessorID = 1 AND [ProcessorID] IS NULL) OR ([ProcessorID] = @Original_ProcessorID)) AND ((@IsNull_PsuID = 1 AND [PsuID] IS NULL) OR ([PsuID] = @Original_PsuID)) AND ((@IsNull_SsdID = 1 AND [SsdID] IS NULL) OR ([SsdID] = @Original_SsdID)) AND ((@IsNull_RamID = 1 AND [RamID] IS NULL) OR ([RamID] = @Original_RamID)) AND ((@IsNull_UserID = 1 AND [UserID] IS NULL) OR ([UserID] = @Original_UserID)) AND ((@IsNull_CreatedAt = 1 AND [CreatedAt] IS NULL) OR ([CreatedAt] = @Original_CreatedAt)) AND ((@IsNull_UpdatedAt = 1 AND [UpdatedAt] IS NULL) OR ([UpdatedAt] = @Original_UpdatedAt)) AND ((@IsNull_ConfigPrice = 1 AND [ConfigPrice] IS NULL) OR ([ConfigPrice] = @Original_ConfigPrice)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CaseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CaseID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CaseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CaseID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CoolerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CoolerID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -8907,12 +9535,18 @@ SELECT ID, Name, Description, FormFaktor, Size, Price FROM [Case] WHERE (ID = @I
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RamID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CreatedAt", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CreatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UpdatedAt", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UpdatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ConfigPrice", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ConfigPrice", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ConfigPrice", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ConfigPrice", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Configuration] ([Name], [CaseID], [CoolerID], [GpuID], [HddID], [MotherboardID], [ProcessorID], [PsuID], [SsdID], [RamID], [UserID]) VALUES (@Name, @CaseID, @CoolerID, @GpuID, @HddID, @MotherboardID, @ProcessorID, @PsuID, @SsdID, @RamID, @UserID);
-SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, PsuID, SsdID, RamID, UserID FROM Configuration WHERE (ID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Configuration] ([Name], [CaseID], [CoolerID], [GpuID], [HddID], [MotherboardID], [ProcessorID], [PsuID], [SsdID], [RamID], [UserID], [CreatedAt], [UpdatedAt], [ConfigPrice]) VALUES (@Name, @CaseID, @CoolerID, @GpuID, @HddID, @MotherboardID, @ProcessorID, @PsuID, @SsdID, @RamID, @UserID, @CreatedAt, @UpdatedAt, @ConfigPrice);
+SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, PsuID, SsdID, RamID, UserID, CreatedAt, UpdatedAt, ConfigPrice FROM Configuration WHERE (ID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CaseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CaseID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CoolerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CoolerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GpuID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GpuID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -8923,12 +9557,36 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SsdID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SsdID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RamID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ConfigPrice", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ConfigPrice", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Configuration] SET [Name] = @Name, [CaseID] = @CaseID, [CoolerID] = @CoolerID, [GpuID] = @GpuID, [HddID] = @HddID, [MotherboardID] = @MotherboardID, [ProcessorID] = @ProcessorID, [PsuID] = @PsuID, [SsdID] = @SsdID, [RamID] = @RamID, [UserID] = @UserID WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_CaseID = 1 AND [CaseID] IS NULL) OR ([CaseID] = @Original_CaseID)) AND ((@IsNull_CoolerID = 1 AND [CoolerID] IS NULL) OR ([CoolerID] = @Original_CoolerID)) AND ((@IsNull_GpuID = 1 AND [GpuID] IS NULL) OR ([GpuID] = @Original_GpuID)) AND ((@IsNull_HddID = 1 AND [HddID] IS NULL) OR ([HddID] = @Original_HddID)) AND ((@IsNull_MotherboardID = 1 AND [MotherboardID] IS NULL) OR ([MotherboardID] = @Original_MotherboardID)) AND ((@IsNull_ProcessorID = 1 AND [ProcessorID] IS NULL) OR ([ProcessorID] = @Original_ProcessorID)) AND ((@IsNull_PsuID = 1 AND [PsuID] IS NULL) OR ([PsuID] = @Original_PsuID)) AND ((@IsNull_SsdID = 1 AND [SsdID] IS NULL) OR ([SsdID] = @Original_SsdID)) AND ((@IsNull_RamID = 1 AND [RamID] IS NULL) OR ([RamID] = @Original_RamID)) AND ((@IsNull_UserID = 1 AND [UserID] IS NULL) OR ([UserID] = @Original_UserID)));
-SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, PsuID, SsdID, RamID, UserID FROM Configuration WHERE (ID = @ID)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Configuration] SET [Name] = @Name, [CaseID] = @CaseID, [CoolerID] =" +
+                " @CoolerID, [GpuID] = @GpuID, [HddID] = @HddID, [MotherboardID] = @MotherboardID" +
+                ", [ProcessorID] = @ProcessorID, [PsuID] = @PsuID, [SsdID] = @SsdID, [RamID] = @R" +
+                "amID, [UserID] = @UserID, [CreatedAt] = @CreatedAt, [UpdatedAt] = @UpdatedAt, [C" +
+                "onfigPrice] = @ConfigPrice WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 A" +
+                "ND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_CaseID = 1 AND [C" +
+                "aseID] IS NULL) OR ([CaseID] = @Original_CaseID)) AND ((@IsNull_CoolerID = 1 AND" +
+                " [CoolerID] IS NULL) OR ([CoolerID] = @Original_CoolerID)) AND ((@IsNull_GpuID =" +
+                " 1 AND [GpuID] IS NULL) OR ([GpuID] = @Original_GpuID)) AND ((@IsNull_HddID = 1 " +
+                "AND [HddID] IS NULL) OR ([HddID] = @Original_HddID)) AND ((@IsNull_MotherboardID" +
+                " = 1 AND [MotherboardID] IS NULL) OR ([MotherboardID] = @Original_MotherboardID)" +
+                ") AND ((@IsNull_ProcessorID = 1 AND [ProcessorID] IS NULL) OR ([ProcessorID] = @" +
+                "Original_ProcessorID)) AND ((@IsNull_PsuID = 1 AND [PsuID] IS NULL) OR ([PsuID] " +
+                "= @Original_PsuID)) AND ((@IsNull_SsdID = 1 AND [SsdID] IS NULL) OR ([SsdID] = @" +
+                "Original_SsdID)) AND ((@IsNull_RamID = 1 AND [RamID] IS NULL) OR ([RamID] = @Ori" +
+                "ginal_RamID)) AND ((@IsNull_UserID = 1 AND [UserID] IS NULL) OR ([UserID] = @Ori" +
+                "ginal_UserID)) AND ((@IsNull_CreatedAt = 1 AND [CreatedAt] IS NULL) OR ([Created" +
+                "At] = @Original_CreatedAt)) AND ((@IsNull_UpdatedAt = 1 AND [UpdatedAt] IS NULL)" +
+                " OR ([UpdatedAt] = @Original_UpdatedAt)) AND ((@IsNull_ConfigPrice = 1 AND [Conf" +
+                "igPrice] IS NULL) OR ([ConfigPrice] = @Original_ConfigPrice)));\r\nSELECT ID, Name" +
+                ", CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, PsuID, SsdID, RamI" +
+                "D, UserID, CreatedAt, UpdatedAt, ConfigPrice FROM Configuration WHERE (ID = @ID)" +
+                "";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CaseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CaseID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CoolerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CoolerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GpuID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GpuID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -8939,9 +9597,12 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SsdID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SsdID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RamID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ConfigPrice", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ConfigPrice", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CaseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CaseID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CaseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CaseID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CoolerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CoolerID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -8962,6 +9623,12 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RamID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CreatedAt", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CreatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UpdatedAt", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UpdatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ConfigPrice", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ConfigPrice", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ConfigPrice", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ConfigPrice", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -8979,7 +9646,8 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, PsuI" +
-                "D, SsdID, RamID, UserID FROM dbo.Configuration";
+                "D, SsdID, RamID, UserID, CreatedAt, UpdatedAt, ConfigPrice FROM dbo.Configuratio" +
+                "n";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -9040,15 +9708,15 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, global::System.Nullable<int> Original_Name, global::System.Nullable<int> Original_CaseID, global::System.Nullable<int> Original_CoolerID, global::System.Nullable<int> Original_GpuID, global::System.Nullable<int> Original_HddID, global::System.Nullable<int> Original_MotherboardID, global::System.Nullable<int> Original_ProcessorID, global::System.Nullable<int> Original_PsuID, global::System.Nullable<int> Original_SsdID, global::System.Nullable<int> Original_RamID, global::System.Nullable<int> Original_UserID) {
+        public virtual int Delete(int Original_ID, string Original_Name, global::System.Nullable<int> Original_CaseID, global::System.Nullable<int> Original_CoolerID, global::System.Nullable<int> Original_GpuID, global::System.Nullable<int> Original_HddID, global::System.Nullable<int> Original_MotherboardID, global::System.Nullable<int> Original_ProcessorID, global::System.Nullable<int> Original_PsuID, global::System.Nullable<int> Original_SsdID, global::System.Nullable<int> Original_RamID, global::System.Nullable<int> Original_UserID, global::System.Nullable<global::System.DateTime> Original_CreatedAt, global::System.Nullable<global::System.DateTime> Original_UpdatedAt, global::System.Nullable<int> Original_ConfigPrice) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_Name.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_Name.Value));
-            }
-            else {
+            if ((Original_Name == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_Name));
             }
             if ((Original_CaseID.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
@@ -9130,6 +9798,30 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
                 this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
+            if ((Original_CreatedAt.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[24].Value = ((System.DateTime)(Original_CreatedAt.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            if ((Original_UpdatedAt.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[26].Value = ((System.DateTime)(Original_UpdatedAt.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ConfigPrice.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[28].Value = ((int)(Original_ConfigPrice.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -9150,12 +9842,12 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> Name, global::System.Nullable<int> CaseID, global::System.Nullable<int> CoolerID, global::System.Nullable<int> GpuID, global::System.Nullable<int> HddID, global::System.Nullable<int> MotherboardID, global::System.Nullable<int> ProcessorID, global::System.Nullable<int> PsuID, global::System.Nullable<int> SsdID, global::System.Nullable<int> RamID, global::System.Nullable<int> UserID) {
-            if ((Name.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Name.Value));
+        public virtual int Insert(string Name, global::System.Nullable<int> CaseID, global::System.Nullable<int> CoolerID, global::System.Nullable<int> GpuID, global::System.Nullable<int> HddID, global::System.Nullable<int> MotherboardID, global::System.Nullable<int> ProcessorID, global::System.Nullable<int> PsuID, global::System.Nullable<int> SsdID, global::System.Nullable<int> RamID, global::System.Nullable<int> UserID, global::System.Nullable<global::System.DateTime> CreatedAt, global::System.Nullable<global::System.DateTime> UpdatedAt, global::System.Nullable<int> ConfigPrice) {
+            if ((Name == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Name));
             }
             if ((CaseID.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((int)(CaseID.Value));
@@ -9217,6 +9909,24 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
             else {
                 this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
+            if ((CreatedAt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((System.DateTime)(CreatedAt.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((UpdatedAt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((System.DateTime)(UpdatedAt.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((ConfigPrice.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[13].Value = ((int)(ConfigPrice.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -9238,7 +9948,7 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
-                    global::System.Nullable<int> Name, 
+                    string Name, 
                     global::System.Nullable<int> CaseID, 
                     global::System.Nullable<int> CoolerID, 
                     global::System.Nullable<int> GpuID, 
@@ -9249,8 +9959,11 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
                     global::System.Nullable<int> SsdID, 
                     global::System.Nullable<int> RamID, 
                     global::System.Nullable<int> UserID, 
+                    global::System.Nullable<global::System.DateTime> CreatedAt, 
+                    global::System.Nullable<global::System.DateTime> UpdatedAt, 
+                    global::System.Nullable<int> ConfigPrice, 
                     int Original_ID, 
-                    global::System.Nullable<int> Original_Name, 
+                    string Original_Name, 
                     global::System.Nullable<int> Original_CaseID, 
                     global::System.Nullable<int> Original_CoolerID, 
                     global::System.Nullable<int> Original_GpuID, 
@@ -9261,12 +9974,15 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
                     global::System.Nullable<int> Original_SsdID, 
                     global::System.Nullable<int> Original_RamID, 
                     global::System.Nullable<int> Original_UserID, 
+                    global::System.Nullable<global::System.DateTime> Original_CreatedAt, 
+                    global::System.Nullable<global::System.DateTime> Original_UpdatedAt, 
+                    global::System.Nullable<int> Original_ConfigPrice, 
                     int ID) {
-            if ((Name.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Name.Value));
+            if ((Name == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(Name));
             }
             if ((CaseID.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(CaseID.Value));
@@ -9328,96 +10044,138 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
             else {
                 this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_ID));
-            if ((Original_Name.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_Name.Value));
+            if ((CreatedAt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(CreatedAt.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((UpdatedAt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((System.DateTime)(UpdatedAt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((ConfigPrice.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(ConfigPrice.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
-            if ((Original_CaseID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_CaseID.Value));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_ID));
+            if ((Original_Name == null)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_Name));
+            }
+            if ((Original_CaseID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_CaseID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             if ((Original_CoolerID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_CoolerID.Value));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_CoolerID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
             if ((Original_GpuID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_GpuID.Value));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((int)(Original_GpuID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
             if ((Original_HddID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_HddID.Value));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_HddID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
             if ((Original_MotherboardID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((int)(Original_MotherboardID.Value));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_MotherboardID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
             }
             if ((Original_ProcessorID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((int)(Original_ProcessorID.Value));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((int)(Original_ProcessorID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
             }
             if ((Original_PsuID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(Original_PsuID.Value));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(Original_PsuID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
             }
             if ((Original_SsdID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(Original_SsdID.Value));
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((int)(Original_SsdID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
             }
             if ((Original_RamID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((int)(Original_RamID.Value));
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((int)(Original_RamID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
             }
             if ((Original_UserID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((int)(Original_UserID.Value));
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((int)(Original_UserID.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[34].Value = ((int)(ID));
+            if ((Original_CreatedAt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((System.DateTime)(Original_CreatedAt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
+            }
+            if ((Original_UpdatedAt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((System.DateTime)(Original_UpdatedAt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[40].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ConfigPrice.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((int)(Original_ConfigPrice.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[42].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[43].Value = ((int)(ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -9439,7 +10197,7 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
-                    global::System.Nullable<int> Name, 
+                    string Name, 
                     global::System.Nullable<int> CaseID, 
                     global::System.Nullable<int> CoolerID, 
                     global::System.Nullable<int> GpuID, 
@@ -9450,8 +10208,11 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
                     global::System.Nullable<int> SsdID, 
                     global::System.Nullable<int> RamID, 
                     global::System.Nullable<int> UserID, 
+                    global::System.Nullable<global::System.DateTime> CreatedAt, 
+                    global::System.Nullable<global::System.DateTime> UpdatedAt, 
+                    global::System.Nullable<int> ConfigPrice, 
                     int Original_ID, 
-                    global::System.Nullable<int> Original_Name, 
+                    string Original_Name, 
                     global::System.Nullable<int> Original_CaseID, 
                     global::System.Nullable<int> Original_CoolerID, 
                     global::System.Nullable<int> Original_GpuID, 
@@ -9461,8 +10222,11 @@ SELECT ID, Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, Psu
                     global::System.Nullable<int> Original_PsuID, 
                     global::System.Nullable<int> Original_SsdID, 
                     global::System.Nullable<int> Original_RamID, 
-                    global::System.Nullable<int> Original_UserID) {
-            return this.Update(Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, PsuID, SsdID, RamID, UserID, Original_ID, Original_Name, Original_CaseID, Original_CoolerID, Original_GpuID, Original_HddID, Original_MotherboardID, Original_ProcessorID, Original_PsuID, Original_SsdID, Original_RamID, Original_UserID, Original_ID);
+                    global::System.Nullable<int> Original_UserID, 
+                    global::System.Nullable<global::System.DateTime> Original_CreatedAt, 
+                    global::System.Nullable<global::System.DateTime> Original_UpdatedAt, 
+                    global::System.Nullable<int> Original_ConfigPrice) {
+            return this.Update(Name, CaseID, CoolerID, GpuID, HddID, MotherboardID, ProcessorID, PsuID, SsdID, RamID, UserID, CreatedAt, UpdatedAt, ConfigPrice, Original_ID, Original_Name, Original_CaseID, Original_CoolerID, Original_GpuID, Original_HddID, Original_MotherboardID, Original_ProcessorID, Original_PsuID, Original_SsdID, Original_RamID, Original_UserID, Original_CreatedAt, Original_UpdatedAt, Original_ConfigPrice, Original_ID);
         }
     }
     
@@ -10024,6 +10788,332 @@ SELECT ID, Name, Description, Socket, Power, Type, Material, Price FROM Cooler W
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class DDRTypeTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public DDRTypeTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "DDRType";
+            tableMapping.ColumnMappings.Add("DdrID", "DdrID");
+            tableMapping.ColumnMappings.Add("DdrTypeName", "DdrTypeName");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[DDRType] WHERE (([DdrID] = @Original_DdrID) AND ((@IsNull_DdrT" +
+                "ypeName = 1 AND [DdrTypeName] IS NULL) OR ([DdrTypeName] = @Original_DdrTypeName" +
+                ")))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DdrID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DdrID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DdrTypeName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DdrTypeName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DdrTypeName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DdrTypeName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[DDRType] ([DdrID], [DdrTypeName]) VALUES (@DdrID, @DdrTypeName" +
+                ");\r\nSELECT DdrID, DdrTypeName FROM DDRType WHERE (DdrID = @DdrID)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DdrID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DdrID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DdrTypeName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DdrTypeName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DDRType] SET [DdrID] = @DdrID, [DdrTypeName] = @DdrTypeName WHERE (([DdrID] = @Original_DdrID) AND ((@IsNull_DdrTypeName = 1 AND [DdrTypeName] IS NULL) OR ([DdrTypeName] = @Original_DdrTypeName)));
+SELECT DdrID, DdrTypeName FROM DDRType WHERE (DdrID = @DdrID)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DdrID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DdrID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DdrTypeName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DdrTypeName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DdrID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DdrID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DdrTypeName", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DdrTypeName", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DdrTypeName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DdrTypeName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::PersonalComputerConfigurator.Properties.Settings.Default.personalComputerConfiguratorDatabaseConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT DdrID, DdrTypeName FROM dbo.DDRType";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(personalComputerConfiguratorDatabaseDataSet1.DDRTypeDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual personalComputerConfiguratorDatabaseDataSet1.DDRTypeDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            personalComputerConfiguratorDatabaseDataSet1.DDRTypeDataTable dataTable = new personalComputerConfiguratorDatabaseDataSet1.DDRTypeDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(personalComputerConfiguratorDatabaseDataSet1.DDRTypeDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(personalComputerConfiguratorDatabaseDataSet1 dataSet) {
+            return this.Adapter.Update(dataSet, "DDRType");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_DdrID, string Original_DdrTypeName) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_DdrID));
+            if ((Original_DdrTypeName == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_DdrTypeName));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int DdrID, string DdrTypeName) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(DdrID));
+            if ((DdrTypeName == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(DdrTypeName));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int DdrID, string DdrTypeName, int Original_DdrID, string Original_DdrTypeName) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(DdrID));
+            if ((DdrTypeName == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(DdrTypeName));
+            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_DdrID));
+            if ((Original_DdrTypeName == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_DdrTypeName));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string DdrTypeName, int Original_DdrID, string Original_DdrTypeName) {
+            return this.Update(Original_DdrID, DdrTypeName, Original_DdrID, Original_DdrTypeName);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class GPUTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -10145,10 +11235,12 @@ SELECT ID, Name, Description, Socket, Power, Type, Material, Price FROM Cooler W
             tableMapping.ColumnMappings.Add("MemoryType", "MemoryType");
             tableMapping.ColumnMappings.Add("Price", "Price");
             tableMapping.ColumnMappings.Add("Tdp", "Tdp");
+            tableMapping.ColumnMappings.Add("CreatedAt", "CreatedAt");
+            tableMapping.ColumnMappings.Add("UpdatedAt", "UpdatedAt");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[GPU] WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_GpuFrequency = 1 AND [GpuFrequency] IS NULL) OR ([GpuFrequency] = @Original_GpuFrequency)) AND ((@IsNull_GpuBoost = 1 AND [GpuBoost] IS NULL) OR ([GpuBoost] = @Original_GpuBoost)) AND ((@IsNull_MemorySize = 1 AND [MemorySize] IS NULL) OR ([MemorySize] = @Original_MemorySize)) AND ((@IsNull_MemoryType = 1 AND [MemoryType] IS NULL) OR ([MemoryType] = @Original_MemoryType)) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)) AND ((@IsNull_Tdp = 1 AND [Tdp] IS NULL) OR ([Tdp] = @Original_Tdp)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[GPU] WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_GpuFrequency = 1 AND [GpuFrequency] IS NULL) OR ([GpuFrequency] = @Original_GpuFrequency)) AND ((@IsNull_GpuBoost = 1 AND [GpuBoost] IS NULL) OR ([GpuBoost] = @Original_GpuBoost)) AND ((@IsNull_MemorySize = 1 AND [MemorySize] IS NULL) OR ([MemorySize] = @Original_MemorySize)) AND ((@IsNull_MemoryType = 1 AND [MemoryType] IS NULL) OR ([MemoryType] = @Original_MemoryType)) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)) AND ((@IsNull_Tdp = 1 AND [Tdp] IS NULL) OR ([Tdp] = @Original_Tdp)) AND ((@IsNull_CreatedAt = 1 AND [CreatedAt] IS NULL) OR ([CreatedAt] = @Original_CreatedAt)) AND ((@IsNull_UpdatedAt = 1 AND [UpdatedAt] IS NULL) OR ([UpdatedAt] = @Original_UpdatedAt)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -10167,12 +11259,15 @@ SELECT ID, Name, Description, Socket, Power, Type, Material, Price FROM Cooler W
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Price", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Tdp", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Tdp", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Tdp", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Tdp", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CreatedAt", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CreatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UpdatedAt", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UpdatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[GPU] ([ID], [Name], [Description], [GpuFrequency], [GpuBoost], [MemorySize], [MemoryType], [Price], [Tdp]) VALUES (@ID, @Name, @Description, @GpuFrequency, @GpuBoost, @MemorySize, @MemoryType, @Price, @Tdp);
-SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Price, Tdp FROM GPU WHERE (ID = @ID)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[GPU] ([Name], [Description], [GpuFrequency], [GpuBoost], [MemorySize], [MemoryType], [Price], [Tdp], [CreatedAt], [UpdatedAt]) VALUES (@Name, @Description, @GpuFrequency, @GpuBoost, @MemorySize, @MemoryType, @Price, @Tdp, @CreatedAt, @UpdatedAt);
+SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Price, Tdp, CreatedAt, UpdatedAt FROM GPU WHERE (ID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GpuFrequency", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GpuFrequency", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -10181,12 +11276,13 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MemoryType", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MemoryType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Tdp", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Tdp", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[GPU] SET [ID] = @ID, [Name] = @Name, [Description] = @Description, [GpuFrequency] = @GpuFrequency, [GpuBoost] = @GpuBoost, [MemorySize] = @MemorySize, [MemoryType] = @MemoryType, [Price] = @Price, [Tdp] = @Tdp WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_GpuFrequency = 1 AND [GpuFrequency] IS NULL) OR ([GpuFrequency] = @Original_GpuFrequency)) AND ((@IsNull_GpuBoost = 1 AND [GpuBoost] IS NULL) OR ([GpuBoost] = @Original_GpuBoost)) AND ((@IsNull_MemorySize = 1 AND [MemorySize] IS NULL) OR ([MemorySize] = @Original_MemorySize)) AND ((@IsNull_MemoryType = 1 AND [MemoryType] IS NULL) OR ([MemoryType] = @Original_MemoryType)) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)) AND ((@IsNull_Tdp = 1 AND [Tdp] IS NULL) OR ([Tdp] = @Original_Tdp)));
-SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Price, Tdp FROM GPU WHERE (ID = @ID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[GPU] SET [Name] = @Name, [Description] = @Description, [GpuFrequency] = @GpuFrequency, [GpuBoost] = @GpuBoost, [MemorySize] = @MemorySize, [MemoryType] = @MemoryType, [Price] = @Price, [Tdp] = @Tdp, [CreatedAt] = @CreatedAt, [UpdatedAt] = @UpdatedAt WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_GpuFrequency = 1 AND [GpuFrequency] IS NULL) OR ([GpuFrequency] = @Original_GpuFrequency)) AND ((@IsNull_GpuBoost = 1 AND [GpuBoost] IS NULL) OR ([GpuBoost] = @Original_GpuBoost)) AND ((@IsNull_MemorySize = 1 AND [MemorySize] IS NULL) OR ([MemorySize] = @Original_MemorySize)) AND ((@IsNull_MemoryType = 1 AND [MemoryType] IS NULL) OR ([MemoryType] = @Original_MemoryType)) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)) AND ((@IsNull_Tdp = 1 AND [Tdp] IS NULL) OR ([Tdp] = @Original_Tdp)) AND ((@IsNull_CreatedAt = 1 AND [CreatedAt] IS NULL) OR ([CreatedAt] = @Original_CreatedAt)) AND ((@IsNull_UpdatedAt = 1 AND [UpdatedAt] IS NULL) OR ([UpdatedAt] = @Original_UpdatedAt)));
+SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Price, Tdp, CreatedAt, UpdatedAt FROM GPU WHERE (ID = @ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GpuFrequency", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GpuFrequency", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -10195,6 +11291,8 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MemoryType", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MemoryType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Tdp", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Tdp", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -10212,6 +11310,11 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Price", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Tdp", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Tdp", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Tdp", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Tdp", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CreatedAt", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CreatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedAt", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UpdatedAt", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UpdatedAt", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedAt", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10228,7 +11331,7 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pri" +
-                "ce, Tdp FROM dbo.GPU";
+                "ce, Tdp, CreatedAt, UpdatedAt FROM dbo.GPU";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -10289,7 +11392,7 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_Name, string Original_Description, string Original_GpuFrequency, string Original_GpuBoost, string Original_MemorySize, string Original_MemoryType, global::System.Nullable<int> Original_Price, string Original_Tdp) {
+        public virtual int Delete(int Original_ID, string Original_Name, string Original_Description, string Original_GpuFrequency, string Original_GpuBoost, string Original_MemorySize, string Original_MemoryType, global::System.Nullable<int> Original_Price, string Original_Tdp, global::System.Nullable<global::System.DateTime> Original_CreatedAt, global::System.Nullable<global::System.DateTime> Original_UpdatedAt) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((Original_Name == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -10355,6 +11458,22 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
                 this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[16].Value = ((string)(Original_Tdp));
             }
+            if ((Original_CreatedAt.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((System.DateTime)(Original_CreatedAt.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            if ((Original_UpdatedAt.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((System.DateTime)(Original_UpdatedAt.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -10375,55 +11494,66 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int ID, string Name, string Description, string GpuFrequency, string GpuBoost, string MemorySize, string MemoryType, global::System.Nullable<int> Price, string Tdp) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ID));
+        public virtual int Insert(string Name, string Description, string GpuFrequency, string GpuBoost, string MemorySize, string MemoryType, global::System.Nullable<int> Price, string Tdp, global::System.Nullable<global::System.DateTime> CreatedAt, global::System.Nullable<global::System.DateTime> UpdatedAt) {
             if ((Name == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Name));
+            }
+            if ((Description == null)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Name));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Description));
             }
-            if ((Description == null)) {
+            if ((GpuFrequency == null)) {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Description));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(GpuFrequency));
             }
-            if ((GpuFrequency == null)) {
+            if ((GpuBoost == null)) {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(GpuFrequency));
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(GpuBoost));
             }
-            if ((GpuBoost == null)) {
+            if ((MemorySize == null)) {
                 this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(GpuBoost));
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(MemorySize));
             }
-            if ((MemorySize == null)) {
+            if ((MemoryType == null)) {
                 this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(MemorySize));
-            }
-            if ((MemoryType == null)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(MemoryType));
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(MemoryType));
             }
             if ((Price.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(Price.Value));
+                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(Price.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             if ((Tdp == null)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(Tdp));
+                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(Tdp));
+            }
+            if ((CreatedAt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((System.DateTime)(CreatedAt.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((UpdatedAt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((System.DateTime)(UpdatedAt.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -10446,7 +11576,6 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
-                    int ID, 
                     string Name, 
                     string Description, 
                     string GpuFrequency, 
@@ -10455,6 +11584,8 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
                     string MemoryType, 
                     global::System.Nullable<int> Price, 
                     string Tdp, 
+                    global::System.Nullable<global::System.DateTime> CreatedAt, 
+                    global::System.Nullable<global::System.DateTime> UpdatedAt, 
                     int Original_ID, 
                     string Original_Name, 
                     string Original_Description, 
@@ -10463,121 +11594,152 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
                     string Original_MemorySize, 
                     string Original_MemoryType, 
                     global::System.Nullable<int> Original_Price, 
-                    string Original_Tdp) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+                    string Original_Tdp, 
+                    global::System.Nullable<global::System.DateTime> Original_CreatedAt, 
+                    global::System.Nullable<global::System.DateTime> Original_UpdatedAt, 
+                    int ID) {
             if ((Name == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(Name));
+            }
+            if ((Description == null)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Name));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Description));
             }
-            if ((Description == null)) {
+            if ((GpuFrequency == null)) {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Description));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(GpuFrequency));
             }
-            if ((GpuFrequency == null)) {
+            if ((GpuBoost == null)) {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(GpuFrequency));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(GpuBoost));
             }
-            if ((GpuBoost == null)) {
+            if ((MemorySize == null)) {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(GpuBoost));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(MemorySize));
             }
-            if ((MemorySize == null)) {
+            if ((MemoryType == null)) {
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(MemorySize));
-            }
-            if ((MemoryType == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(MemoryType));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(MemoryType));
             }
             if ((Price.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Price.Value));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Price.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             if ((Tdp == null)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Tdp));
+            }
+            if ((CreatedAt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(CreatedAt.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Tdp));
+            if ((UpdatedAt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(UpdatedAt.Value));
             }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_ID));
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_ID));
             if ((Original_Name == null)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_Name));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_Name));
             }
             if ((Original_Description == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_Description));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_Description));
             }
             if ((Original_GpuFrequency == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_GpuFrequency));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_GpuFrequency));
             }
             if ((Original_GpuBoost == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_GpuBoost));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_GpuBoost));
             }
             if ((Original_MemorySize == null)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_MemorySize));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(Original_MemorySize));
             }
             if ((Original_MemoryType == null)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((string)(Original_MemoryType));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(Original_MemoryType));
             }
             if ((Original_Price.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((int)(Original_Price.Value));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_Price.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
             if ((Original_Tdp == null)) {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((string)(Original_Tdp));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((string)(Original_Tdp));
             }
+            if ((Original_CreatedAt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((System.DateTime)(Original_CreatedAt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            if ((Original_UpdatedAt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((System.DateTime)(Original_UpdatedAt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[31].Value = ((int)(ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -10607,6 +11769,8 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
                     string MemoryType, 
                     global::System.Nullable<int> Price, 
                     string Tdp, 
+                    global::System.Nullable<global::System.DateTime> CreatedAt, 
+                    global::System.Nullable<global::System.DateTime> UpdatedAt, 
                     int Original_ID, 
                     string Original_Name, 
                     string Original_Description, 
@@ -10615,8 +11779,10 @@ SELECT ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Pr
                     string Original_MemorySize, 
                     string Original_MemoryType, 
                     global::System.Nullable<int> Original_Price, 
-                    string Original_Tdp) {
-            return this.Update(Original_ID, Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Price, Tdp, Original_ID, Original_Name, Original_Description, Original_GpuFrequency, Original_GpuBoost, Original_MemorySize, Original_MemoryType, Original_Price, Original_Tdp);
+                    string Original_Tdp, 
+                    global::System.Nullable<global::System.DateTime> Original_CreatedAt, 
+                    global::System.Nullable<global::System.DateTime> Original_UpdatedAt) {
+            return this.Update(Name, Description, GpuFrequency, GpuBoost, MemorySize, MemoryType, Price, Tdp, CreatedAt, UpdatedAt, Original_ID, Original_Name, Original_Description, Original_GpuFrequency, Original_GpuBoost, Original_MemorySize, Original_MemoryType, Original_Price, Original_Tdp, Original_CreatedAt, Original_UpdatedAt, Original_ID);
         }
     }
     
@@ -11215,7 +12381,7 @@ SELECT ID, Name, Description, Capacity, Speed, Price FROM HDD WHERE (ID = @ID)";
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Motherboard] WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_Socket = 1 AND [Socket] IS NULL) OR ([Socket] = @Original_Socket)) AND ((@IsNull_RamType = 1 AND [RamType] IS NULL) OR ([RamType] = @Original_RamType)) AND ((@IsNull_Chipset = 1 AND [Chipset] IS NULL) OR ([Chipset] = @Original_Chipset)) AND ((@IsNull_FormFactor = 1 AND [FormFactor] IS NULL) OR ([FormFactor] = @Original_FormFactor)) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Motherboard] WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_Socket = 1 AND [Socket] IS NULL) OR ([Socket] = @Original_Socket)) AND ([RamType] = @Original_RamType) AND ((@IsNull_Chipset = 1 AND [Chipset] IS NULL) OR ([Chipset] = @Original_Chipset)) AND ((@IsNull_FormFactor = 1 AND [FormFactor] IS NULL) OR ([FormFactor] = @Original_FormFactor)) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Name", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -11224,8 +12390,7 @@ SELECT ID, Name, Description, Capacity, Speed, Price FROM HDD WHERE (ID = @ID)";
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Socket", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Socket", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Socket", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Socket", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RamType", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamType", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RamType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RamType", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Chipset", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Chipset", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Chipset", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Chipset", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FormFactor", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FormFactor", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -11240,19 +12405,19 @@ SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM M
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Socket", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Socket", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RamType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RamType", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Chipset", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Chipset", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FormFactor", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FormFactor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Motherboard] SET [Name] = @Name, [Description] = @Description, [Socket] = @Socket, [RamType] = @RamType, [Chipset] = @Chipset, [FormFactor] = @FormFactor, [Price] = @Price WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_Socket = 1 AND [Socket] IS NULL) OR ([Socket] = @Original_Socket)) AND ((@IsNull_RamType = 1 AND [RamType] IS NULL) OR ([RamType] = @Original_RamType)) AND ((@IsNull_Chipset = 1 AND [Chipset] IS NULL) OR ([Chipset] = @Original_Chipset)) AND ((@IsNull_FormFactor = 1 AND [FormFactor] IS NULL) OR ([FormFactor] = @Original_FormFactor)) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Motherboard] SET [Name] = @Name, [Description] = @Description, [Socket] = @Socket, [RamType] = @RamType, [Chipset] = @Chipset, [FormFactor] = @FormFactor, [Price] = @Price WHERE (([ID] = @Original_ID) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ((@IsNull_Socket = 1 AND [Socket] IS NULL) OR ([Socket] = @Original_Socket)) AND ([RamType] = @Original_RamType) AND ((@IsNull_Chipset = 1 AND [Chipset] IS NULL) OR ([Chipset] = @Original_Chipset)) AND ((@IsNull_FormFactor = 1 AND [FormFactor] IS NULL) OR ([FormFactor] = @Original_FormFactor)) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)));
 SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM Motherboard WHERE (ID = @ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Socket", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Socket", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RamType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RamType", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Chipset", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Chipset", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FormFactor", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FormFactor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Price", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -11263,8 +12428,7 @@ SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM M
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Socket", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Socket", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Socket", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Socket", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RamType", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamType", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RamType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RamType", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RamType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Chipset", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Chipset", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Chipset", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Chipset", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FormFactor", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FormFactor", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -11349,7 +12513,7 @@ SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM M
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_Name, string Original_Description, string Original_Socket, string Original_RamType, string Original_Chipset, string Original_FormFactor, global::System.Nullable<int> Original_Price) {
+        public virtual int Delete(int Original_ID, string Original_Name, string Original_Description, string Original_Socket, int Original_RamType, string Original_Chipset, string Original_FormFactor, global::System.Nullable<int> Original_Price) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((Original_Name == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -11375,37 +12539,30 @@ SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM M
                 this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_Socket));
             }
-            if ((Original_RamType == null)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_RamType));
-            }
+            this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_RamType));
             if ((Original_Chipset == null)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((string)(Original_Chipset));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((string)(Original_Chipset));
             }
             if ((Original_FormFactor == null)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((string)(Original_FormFactor));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((string)(Original_FormFactor));
             }
             if ((Original_Price.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((int)(Original_Price.Value));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((int)(Original_Price.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -11427,7 +12584,7 @@ SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM M
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Name, string Description, string Socket, string RamType, string Chipset, string FormFactor, global::System.Nullable<int> Price) {
+        public virtual int Insert(string Name, string Description, string Socket, int RamType, string Chipset, string FormFactor, global::System.Nullable<int> Price) {
             if ((Name == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -11446,12 +12603,7 @@ SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM M
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Socket));
             }
-            if ((RamType == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(RamType));
-            }
+            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(RamType));
             if ((Chipset == null)) {
                 this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
@@ -11494,7 +12646,7 @@ SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM M
                     string Name, 
                     string Description, 
                     string Socket, 
-                    string RamType, 
+                    int RamType, 
                     string Chipset, 
                     string FormFactor, 
                     global::System.Nullable<int> Price, 
@@ -11502,7 +12654,7 @@ SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM M
                     string Original_Name, 
                     string Original_Description, 
                     string Original_Socket, 
-                    string Original_RamType, 
+                    int Original_RamType, 
                     string Original_Chipset, 
                     string Original_FormFactor, 
                     global::System.Nullable<int> Original_Price, 
@@ -11525,12 +12677,7 @@ SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM M
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Socket));
             }
-            if ((RamType == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(RamType));
-            }
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(RamType));
             if ((Chipset == null)) {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
@@ -11574,39 +12721,32 @@ SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM M
                 this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_Socket));
             }
-            if ((Original_RamType == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_RamType));
-            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_RamType));
             if ((Original_Chipset == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_Chipset));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_Chipset));
             }
             if ((Original_FormFactor == null)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_FormFactor));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_FormFactor));
             }
             if ((Original_Price.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_Price.Value));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_Price.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[22].Value = ((int)(ID));
+            this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -11627,7 +12767,7 @@ SELECT ID, Name, Description, Socket, RamType, Chipset, FormFactor, Price FROM M
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Name, string Description, string Socket, string RamType, string Chipset, string FormFactor, global::System.Nullable<int> Price, int Original_ID, string Original_Name, string Original_Description, string Original_Socket, string Original_RamType, string Original_Chipset, string Original_FormFactor, global::System.Nullable<int> Original_Price) {
+        public virtual int Update(string Name, string Description, string Socket, int RamType, string Chipset, string FormFactor, global::System.Nullable<int> Price, int Original_ID, string Original_Name, string Original_Description, string Original_Socket, int Original_RamType, string Original_Chipset, string Original_FormFactor, global::System.Nullable<int> Original_Price) {
             return this.Update(Name, Description, Socket, RamType, Chipset, FormFactor, Price, Original_ID, Original_Name, Original_Description, Original_Socket, Original_RamType, Original_Chipset, Original_FormFactor, Original_Price, Original_ID);
         }
     }
@@ -12912,7 +14052,7 @@ SELECT ID, Name, Description, PowerSupply, FormFactor, Certificate, Price FROM P
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Description", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Type", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FormFactor", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FormFactor", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FormFactor", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FormFactor", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Capacity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -12928,7 +14068,7 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FormFactor", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FormFactor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacity", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Frequency", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Frequency", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -12940,7 +14080,7 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FormFactor", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FormFactor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacity", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Frequency", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Frequency", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -12951,7 +14091,7 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Description", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Type", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Type", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FormFactor", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FormFactor", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FormFactor", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FormFactor", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Capacity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -13038,7 +14178,7 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_Name, string Original_Description, string Original_Type, string Original_FormFactor, string Original_Capacity, string Original_Frequency, global::System.Nullable<int> Original_Price) {
+        public virtual int Delete(int Original_ID, string Original_Name, string Original_Description, global::System.Nullable<int> Original_Type, string Original_FormFactor, string Original_Capacity, string Original_Frequency, global::System.Nullable<int> Original_Price) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((Original_Name == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -13056,13 +14196,13 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_Description));
             }
-            if ((Original_Type == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            if ((Original_Type.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_Type.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_Type));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             if ((Original_FormFactor == null)) {
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
@@ -13116,7 +14256,7 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Name, string Description, string Type, string FormFactor, string Capacity, string Frequency, global::System.Nullable<int> Price) {
+        public virtual int Insert(string Name, string Description, global::System.Nullable<int> Type, string FormFactor, string Capacity, string Frequency, global::System.Nullable<int> Price) {
             if ((Name == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -13129,11 +14269,11 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Description));
             }
-            if ((Type == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            if ((Type.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(Type.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Type));
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             if ((FormFactor == null)) {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
@@ -13182,7 +14322,7 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
         public virtual int Update(
                     string Name, 
                     string Description, 
-                    string Type, 
+                    global::System.Nullable<int> Type, 
                     string FormFactor, 
                     string Capacity, 
                     string Frequency, 
@@ -13190,7 +14330,7 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
                     int Original_ID, 
                     string Original_Name, 
                     string Original_Description, 
-                    string Original_Type, 
+                    global::System.Nullable<int> Original_Type, 
                     string Original_FormFactor, 
                     string Original_Capacity, 
                     string Original_Frequency, 
@@ -13208,11 +14348,11 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Description));
             }
-            if ((Type == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            if ((Type.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Type.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Type));
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             if ((FormFactor == null)) {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
@@ -13255,13 +14395,13 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
                 this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_Description));
             }
-            if ((Original_Type == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            if ((Original_Type.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_Type.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_Type));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
             if ((Original_FormFactor == null)) {
                 this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
@@ -13316,7 +14456,7 @@ SELECT ID, Name, Description, Type, FormFactor, Capacity, Frequency, Price FROM 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Name, string Description, string Type, string FormFactor, string Capacity, string Frequency, global::System.Nullable<int> Price, int Original_ID, string Original_Name, string Original_Description, string Original_Type, string Original_FormFactor, string Original_Capacity, string Original_Frequency, global::System.Nullable<int> Original_Price) {
+        public virtual int Update(string Name, string Description, global::System.Nullable<int> Type, string FormFactor, string Capacity, string Frequency, global::System.Nullable<int> Price, int Original_ID, string Original_Name, string Original_Description, global::System.Nullable<int> Original_Type, string Original_FormFactor, string Original_Capacity, string Original_Frequency, global::System.Nullable<int> Original_Price) {
             return this.Update(Name, Description, Type, FormFactor, Capacity, Frequency, Price, Original_ID, Original_Name, Original_Description, Original_Type, Original_FormFactor, Original_Capacity, Original_Frequency, Original_Price, Original_ID);
         }
     }
@@ -14743,6 +15883,8 @@ SELECT ID, Name, MiddleName, LastName, Password, Role, Email, Login, IsBlocked F
         
         private CoolerTableAdapter _coolerTableAdapter;
         
+        private DDRTypeTableAdapter _dDRTypeTableAdapter;
+        
         private GPUTableAdapter _gPUTableAdapter;
         
         private HDDTableAdapter _hDDTableAdapter;
@@ -14815,6 +15957,20 @@ SELECT ID, Name, MiddleName, LastName, Password, Role, Email, Login, IsBlocked F
             }
             set {
                 this._coolerTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public DDRTypeTableAdapter DDRTypeTableAdapter {
+            get {
+                return this._dDRTypeTableAdapter;
+            }
+            set {
+                this._dDRTypeTableAdapter = value;
             }
         }
         
@@ -14975,6 +16131,10 @@ SELECT ID, Name, MiddleName, LastName, Password, Role, Email, Login, IsBlocked F
                             && (this._coolerTableAdapter.Connection != null))) {
                     return this._coolerTableAdapter.Connection;
                 }
+                if (((this._dDRTypeTableAdapter != null) 
+                            && (this._dDRTypeTableAdapter.Connection != null))) {
+                    return this._dDRTypeTableAdapter.Connection;
+                }
                 if (((this._gPUTableAdapter != null) 
                             && (this._gPUTableAdapter.Connection != null))) {
                     return this._gPUTableAdapter.Connection;
@@ -15033,6 +16193,9 @@ SELECT ID, Name, MiddleName, LastName, Password, Role, Email, Login, IsBlocked F
                 if ((this._coolerTableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._dDRTypeTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 if ((this._gPUTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -15077,6 +16240,15 @@ SELECT ID, Name, MiddleName, LastName, Password, Role, Email, Login, IsBlocked F
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._userRoleTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._dDRTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DDRType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._dDRTypeTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -15194,6 +16366,14 @@ SELECT ID, Name, MiddleName, LastName, Password, Role, Email, Login, IsBlocked F
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._userRoleTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._dDRTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DDRType.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._dDRTypeTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -15383,6 +16563,14 @@ SELECT ID, Name, MiddleName, LastName, Password, Role, Email, Login, IsBlocked F
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._dDRTypeTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DDRType.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._dDRTypeTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._userRoleTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.UserRole.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -15442,6 +16630,11 @@ SELECT ID, Name, MiddleName, LastName, Password, Role, Email, Login, IsBlocked F
             }
             if (((this._coolerTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._coolerTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
+                        "r, должны использовать одинаковую строку подключения.");
+            }
+            if (((this._dDRTypeTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._dDRTypeTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
                         "r, должны использовать одинаковую строку подключения.");
             }
@@ -15547,6 +16740,15 @@ SELECT ID, Name, MiddleName, LastName, Password, Role, Email, Login, IsBlocked F
                     if (this._coolerTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._coolerTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._coolerTableAdapter.Adapter);
+                    }
+                }
+                if ((this._dDRTypeTableAdapter != null)) {
+                    revertConnections.Add(this._dDRTypeTableAdapter, this._dDRTypeTableAdapter.Connection);
+                    this._dDRTypeTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._dDRTypeTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._dDRTypeTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._dDRTypeTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._dDRTypeTableAdapter.Adapter);
                     }
                 }
                 if ((this._gPUTableAdapter != null)) {
@@ -15699,6 +16901,10 @@ SELECT ID, Name, MiddleName, LastName, Password, Role, Email, Login, IsBlocked F
                 if ((this._coolerTableAdapter != null)) {
                     this._coolerTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._coolerTableAdapter]));
                     this._coolerTableAdapter.Transaction = null;
+                }
+                if ((this._dDRTypeTableAdapter != null)) {
+                    this._dDRTypeTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._dDRTypeTableAdapter]));
+                    this._dDRTypeTableAdapter.Transaction = null;
                 }
                 if ((this._gPUTableAdapter != null)) {
                     this._gPUTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._gPUTableAdapter]));

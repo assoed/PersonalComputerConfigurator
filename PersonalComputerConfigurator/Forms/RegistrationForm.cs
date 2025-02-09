@@ -11,16 +11,18 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Mail;
 
 namespace PersonalComputerConfigurator.Forms
 {
     public partial class RegistrationForm : Form
     {
+        public event Action UserUpdated;
+
         public RegistrationForm()
         {
             InitializeComponent();
         }
-
 
         private void registrationButton_Click(object sender, EventArgs e)
         {
@@ -43,7 +45,7 @@ namespace PersonalComputerConfigurator.Forms
                 Name = firstName,
                 MiddleName = middleName,
                 LastName = lastName,
-                Password = PasswordHashService.hashPassword(password),
+                Password = PasswordHashService.HashPassword(password),
                 Login = login,
                 Email = email,
                 Role = roleId,
@@ -85,13 +87,8 @@ namespace PersonalComputerConfigurator.Forms
                 return;
             }
 
-            if (!Regex.IsMatch(email, @"^[^\s@]+@[^\s@]+\.[^\s@]+$"))
-            {
-                MessageBox.Show("Введите корректный email.");
-                return;
-            }
 
-            if (!Regex.IsMatch(email, @"^[^\s@]+@[^\s@]+\.[^\s@]+$"))
+            if (!isEmailValid(email))
             {
                 MessageBox.Show("Введите корректный email.");
                 return;
@@ -101,6 +98,8 @@ namespace PersonalComputerConfigurator.Forms
             Program.context.SaveChanges();
     
             MessageBox.Show("Регистрация прошла успешно!");
+
+            UserUpdated?.Invoke();
 
             this.Close();
         }
@@ -130,6 +129,16 @@ namespace PersonalComputerConfigurator.Forms
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private bool isEmailValid(string email)
+        {
+            try
+            {
+                var addr = new MailAddress(email);
+                return true;
+            }
+            catch { return false; }
         }
     }
 }

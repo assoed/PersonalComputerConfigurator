@@ -52,9 +52,11 @@ namespace PersonalComputerConfigurator.Forms
                 return;
             }
 
-            if (user.Password != PasswordHashService.hashPassword(password))
+            if (!PasswordHashService.VerifyPassword(password, user.Password))
             {
-                MessageBox.Show("Неверный пароль.");
+                MessageBox.Show("Неверный логин и пароль.");
+/*                loginTextBox.Clear();
+                passwordTextBox.Clear();*/
                 return;
             }
 
@@ -88,6 +90,16 @@ namespace PersonalComputerConfigurator.Forms
             }
 
             mainForm.Show();
+        }
+
+        private void AuthorizationForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) // Проверяем, нажата ли клавиша Enter
+            {
+                e.SuppressKeyPress = true; // Отключаем стандартное поведение Enter
+                loginButtton_Click(sender, e);
+
+            }
         }
     }
 

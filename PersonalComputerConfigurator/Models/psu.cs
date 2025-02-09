@@ -1,6 +1,6 @@
 namespace PersonalComputerConfigurator.Models
 {
-    using PersonalComputerConfigurator.Services;
+    using PersonalComputerConfigurator.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ namespace PersonalComputerConfigurator.Models
     using System.Data.Entity.Spatial;
 
     [Table("PSU")]
-    public partial class PSU
+    public partial class PSU : IComponentWithPrice
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PSU()
@@ -37,8 +37,5 @@ namespace PersonalComputerConfigurator.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Configuration> Configuration { get; set; }
-
-        public string FullName => $"{Name} | {PowerSupply} Âò | {FormFactor} | {Certificate} | {MoneyService.ToRubles(Price)}";
-
     }
 }

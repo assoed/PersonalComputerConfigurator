@@ -11,7 +11,7 @@ namespace PersonalComputerConfigurator
 {
     internal static class Program
     {
-        public static PCConfiguratorModel context = new PCConfiguratorModel();
+        public static Model1 context = new Model1();
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>

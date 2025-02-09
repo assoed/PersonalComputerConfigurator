@@ -133,7 +133,7 @@ public class EditFormBuilder
 
      
 
-        using (var context = new PCConfiguratorModel())
+        using (var context = new Model1())
         {
             var dbSet = context.Set(_targetObject.GetType());
             var keyProperty = _targetObject.GetType().GetProperty("id");

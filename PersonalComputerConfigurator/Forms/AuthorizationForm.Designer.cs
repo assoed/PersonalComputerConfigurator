@@ -60,6 +60,7 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(257, 20);
             this.passwordTextBox.TabIndex = 2;
+            this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AuthorizationForm_KeyDown);
             // 
             // createNewAccButton
             // 

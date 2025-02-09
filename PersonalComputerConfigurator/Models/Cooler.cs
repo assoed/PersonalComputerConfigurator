@@ -1,15 +1,14 @@
-﻿namespace PersonalComputerConfigurator.Models
+namespace PersonalComputerConfigurator.Models
 {
-    using PersonalComputerConfigurator.Services;
+    using PersonalComputerConfigurator.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using System.Runtime.InteropServices;
 
     [Table("Cooler")]
-    public partial class Cooler
+    public partial class Cooler : IComponentWithPrice
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cooler()
@@ -41,7 +40,5 @@
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Configuration> Configuration { get; set; }
-
-        public string FullName => $"{Name} | {Socket} | {Type} | {Material} | {MoneyService.ToRubles(Price)}₽";
     }
 }

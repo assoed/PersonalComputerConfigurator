@@ -9,14 +9,32 @@ namespace PersonalComputerConfigurator.Services
 {
     internal class MoneyService
     {
-        public static int ToCents(int sum)
+        /// <summary>
+        /// Преобразует сумму из рублей в копейки.
+        /// </summary>
+        public static int ToCents(double rubles)
         {
-            return sum * 100;
+            return (int)(rubles * 100);
         }
 
-        public static int ToRubles(int sum)
+        /// <summary>
+        /// Преобразует сумму из копеек в строку с рублями, форматируя до 2 знаков после запятой.
+        /// </summary>
+        public static string ToRubles(int cents)
         {
-            return sum / 100;
+            return (cents / 100.0).ToString("F2");
+        }
+
+        /// <summary>
+        /// Преобразует сумму из строки с рублями обратно в копейки.
+        /// </summary>
+        public static int FromRublesToCents(string rublesString)
+        {
+            if (double.TryParse(rublesString, out double rubles))
+            {
+                return (int)(rubles * 100);
+            }
+            throw new FormatException("Некорректный формат суммы в рублях.");
         }
     }
 }

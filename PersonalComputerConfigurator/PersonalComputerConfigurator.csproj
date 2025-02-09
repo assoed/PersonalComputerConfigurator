@@ -14,7 +14,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -56,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\Constants.cs" />
+    <Compile Include="CustomControls\ConfigurationUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ConfigurationUserControl.Designer.cs">
+      <DependentUpon>ConfigurationUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\UserEditorAdminControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -67,6 +73,12 @@
     </Compile>
     <Compile Include="Forms\AuthorizationForm.Designer.cs">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EditConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditConfigForm.Designer.cs">
+      <DependentUpon>EditConfigForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserEditForm.cs">
       <SubType>Form</SubType>
@@ -98,18 +110,20 @@
     <Compile Include="Forms\RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IComponentWithPrice.cs" />
     <Compile Include="Models\Case.cs" />
     <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\ConfigurationWarning.cs" />
     <Compile Include="Models\Cooler.cs" />
+    <Compile Include="Models\DDRType.cs" />
     <Compile Include="Models\GPU.cs" />
     <Compile Include="Models\HDD.cs" />
-    <Compile Include="Models\PCConfiguratorModel.cs" />
+    <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\Motherboard.cs" />
     <Compile Include="Models\Processor.cs" />
     <Compile Include="Models\PSU.cs" />
     <Compile Include="Models\RAM.cs" />
     <Compile Include="Models\SSD.cs" />
-    <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="personalComputerConfiguratorDatabaseDataSet.Designer.cs">
@@ -135,11 +149,17 @@
     <Compile Include="Services\EditFormBuilder.cs" />
     <Compile Include="Services\UserSessionService.cs" />
     <Compile Include="Services\PasswordHashService.cs" />
+    <EmbeddedResource Include="CustomControls\ConfigurationUserControl.resx">
+      <DependentUpon>ConfigurationUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\UserEditorAdminControl.resx">
       <DependentUpon>UserEditorAdminControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditConfigForm.resx">
+      <DependentUpon>EditConfigForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserEditForm.resx">
       <DependentUpon>UserEditForm.cs</DependentUpon>

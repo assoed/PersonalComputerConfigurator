@@ -1,4 +1,4 @@
-﻿using PersonalComputerConfigurator.CustomControls;
+﻿using PersonalComputerConfigurator.Interfaces;
 using PersonalComputerConfigurator.Models;
 using PersonalComputerConfigurator.Services;
 using System;
@@ -10,24 +10,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PersonalComputerConfigurator.Interfaces;
-using System.Data.Entity;
 
 namespace PersonalComputerConfigurator.Forms
 {
-    public partial class MainPageUserForm : Form
+    public partial class EditConfigForm : Form
     {
+        private Configuration _configuration;
 
-        public MainPageUserForm()
+        public event EventHandler ConfigurationUpdated;
+
+        public EditConfigForm(Configuration configuration)
         {
             InitializeComponent();
+            _configuration = configuration;
         }
 
-        private void MainPageUserForm_Load(object sender, EventArgs e)
+        private void EditConfigForm_Load(object sender, EventArgs e)
         {
-            this.Shown += (s, args) => UpdateWarnings();
             ConnectComboBoxHandlers();
-            warningPictureBox.Visible = false;
+
+            configPriceLabel.Text = $"Общая цена: {MoneyService.ToRubles(Convert.ToInt32(_configuration.ConfigPrice))}₽";
+            configNameTextBox.Text = _configuration.Name;
 
             var processors = Program.context.Processor.ToList();
 
@@ -37,6 +40,7 @@ namespace PersonalComputerConfigurator.Forms
             processorComboBox.DisplayMember = "Name"; // Свойство, которое будет использоваться по умолчанию
             processorComboBox.ValueMember = "ID";
             processorComboBox.FormattingEnabled = true;
+            processorComboBox.SelectedValue = _configuration.ProcessorID;
 
             // Назначение обработчика события Format
             processorComboBox.Format += (s, args) =>
@@ -54,6 +58,7 @@ namespace PersonalComputerConfigurator.Forms
             motherboardComboBox.DisplayMember = "FullName";
             motherboardComboBox.ValueMember = "ID";
             motherboardComboBox.FormattingEnabled = true;
+            motherboardComboBox.SelectedValue = _configuration.MotherboardID;
 
             // Форматирование отображения в ComboBox
             motherboardComboBox.Format += (s, args) =>
@@ -70,6 +75,7 @@ namespace PersonalComputerConfigurator.Forms
             ramComboBox.DisplayMember = "Name"; // Используется по умолчанию
             ramComboBox.ValueMember = "ID";
             ramComboBox.FormattingEnabled = true;
+            ramComboBox.SelectedValue = _configuration.RamID;
 
             // Форматирование отображения в ComboBox
             ramComboBox.Format += (s, args) =>
@@ -87,6 +93,7 @@ namespace PersonalComputerConfigurator.Forms
             coolerComboBox.DisplayMember = "Name"; // Используется по умолчанию
             coolerComboBox.ValueMember = "ID";
             coolerComboBox.FormattingEnabled = true;
+            coolerComboBox.SelectedValue = _configuration.CoolerID;
 
             // Форматирование отображения в ComboBox
             coolerComboBox.Format += (s, args) =>
@@ -103,6 +110,7 @@ namespace PersonalComputerConfigurator.Forms
             gpuComboBox.DisplayMember = "Name"; // Используется по умолчанию
             gpuComboBox.ValueMember = "ID";
             gpuComboBox.FormattingEnabled = true;
+            gpuComboBox.SelectedValue = _configuration.GpuID;
 
             // Форматирование отображения в ComboBox
             gpuComboBox.Format += (s, args) =>
@@ -119,6 +127,7 @@ namespace PersonalComputerConfigurator.Forms
             caseComboBox.DisplayMember = "Name"; // Используется по умолчанию
             caseComboBox.ValueMember = "ID";
             caseComboBox.FormattingEnabled = true;
+            caseComboBox.SelectedValue = _configuration.CaseID;
 
             // Форматирование отображения в ComboBox
             caseComboBox.Format += (s, args) =>
@@ -135,6 +144,7 @@ namespace PersonalComputerConfigurator.Forms
             psuComboBox.DisplayMember = "Name"; // Используется по умолчанию
             psuComboBox.ValueMember = "ID";
             psuComboBox.FormattingEnabled = true;
+            psuComboBox.SelectedValue = _configuration.PsuID;
 
             // Форматирование отображения в ComboBox
             psuComboBox.Format += (s, args) =>
@@ -151,6 +161,7 @@ namespace PersonalComputerConfigurator.Forms
             hddComboBox.DisplayMember = "Name"; // Используется по умолчанию
             hddComboBox.ValueMember = "ID";
             hddComboBox.FormattingEnabled = true;
+            hddComboBox.SelectedValue = _configuration.HddID;
 
             // Форматирование отображения в ComboBox
             hddComboBox.Format += (s, args) =>
@@ -167,6 +178,7 @@ namespace PersonalComputerConfigurator.Forms
             ssdComboBox.DisplayMember = "Name"; // Используется по умолчанию
             ssdComboBox.ValueMember = "ID";
             ssdComboBox.FormattingEnabled = true;
+            ssdComboBox.SelectedValue = _configuration.SsdID;
 
             // Форматирование отображения в ComboBox
             ssdComboBox.Format += (s, args) =>
@@ -176,11 +188,6 @@ namespace PersonalComputerConfigurator.Forms
                     args.Value = $"{ssd.Name} | {ssd.Capacity} ГБ | Чтение: {ssd.Reading} МБ/с | Запись: {ssd.Writing} МБ/с | {MoneyService.ToRubles(Convert.ToInt32(ssd.Price))}₽";
                 }
             };
-
-
-            ClearAllLabels();
-            ShowConfigurations();
-            SetupProfileBlock();
         }
 
         private void ConnectComboBoxHandlers()
@@ -195,7 +202,6 @@ namespace PersonalComputerConfigurator.Forms
             ramComboBox.SelectedIndexChanged += ramComboBox_SelectedIndexChanged;
             motherboardComboBox.SelectedIndexChanged += MotherboardComboBox_SelectedIndexChanged;
         }
-
 
         private void coolerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -247,7 +253,6 @@ namespace PersonalComputerConfigurator.Forms
             ramFormFactorLabel.Text = $"ФОРМ ФАКТОР: {selectedRam.FormFactor}";
             ramPriceLabel.Text = $"Цена: {MoneyService.ToRubles(selectedRam.Price)} ₽";
 
-            UpdateWarnings();
             UpdateTotalPrice();
         }
 
@@ -265,7 +270,6 @@ namespace PersonalComputerConfigurator.Forms
             motherboardPriceLabel.Text = $"ЦЕНА: {MoneyService.ToRubles(selectedMotherboard.Price)} ₽";
             motherboardRamTypeLabel.Text = $"ТИП ОПЕРАТИВНОЙ ПАМЯТИ: {selectedMotherboard.RamType}";
 
-            UpdateWarnings();
             UpdateTotalPrice();
         }
 
@@ -340,233 +344,32 @@ namespace PersonalComputerConfigurator.Forms
             UpdateTotalPrice();
         }
 
-        private void deletePictureBox_Click(object sender, EventArgs e)
+        private void saveConfigPictureBox_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Вы уверены, что хотите удалить свой профиль?", "Подтверждение", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                // Удаляем процессор из базы данных
-                var userToDelete = Program.context.User.FirstOrDefault(p => p.ID == UserSession.Id);
-                if (userToDelete != null)
-                {
-                    Program.context.User.Remove(userToDelete);
-                    Program.context.SaveChanges();
+            Configuration existingConfiguration = Program.context.Configuration.FirstOrDefault(c => c.ID == _configuration.ID);
 
-                    Controls.Remove(this);
-                    MessageBox.Show("Ваш профиль удален. Вы будете перенаправлены на страницу аутентификации");
-                }
-
-                UserSession.logOut();
-                this.Close();
-
-                AuthorizationForm form = new AuthorizationForm();
-                form.ShowDialog();
-            }
-        }
-
-        private void SetupProfileBlock()
-        {
-            ToolTip toolTip = new ToolTip();
-            toolTip.SetToolTip(profilePictureBox, "Перейти в профиль");
-            toolTip.SetToolTip(userFIOLabel, "Перейти в профиль");
-            userFIOLabel.Text = $"{UserSession.LastName} {UserSession.Name} {UserSession.MiddleName}";
-
-
-            lastNameTextBox.Text = UserSession.LastName;
-            nameTextBox.Text = UserSession.Name;
-            middleNameTextBox.Text = UserSession.MiddleName;
-            emailLabel.Text = UserSession.Email;
-            loginLabel.Text = UserSession.Login;
-        }
-
-
-        private void logoutButton_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-
-            AuthorizationForm authorizationForm = new AuthorizationForm();
-            authorizationForm.Show();
-        }
-
-
-        private void profilePictureBox_Click(object sender, EventArgs e)
-        {
-            userTabControl.SelectedTab = userProfileTab;
-        }
-
-        private void saveProfileButton_Click(object sender, EventArgs e)
-        {
-
-            string lastName = lastNameTextBox.Text;
-            string firstName = nameTextBox.Text;
-            string middleName = middleNameTextBox.Text;
-
-            if (string.IsNullOrWhiteSpace(lastName) ||
-                string.IsNullOrWhiteSpace(firstName))
-            {
-                MessageBox.Show("Все поля обязательны для заполнения.");
-                return;
-            }
-
-
-            var existingUser = Program.context.User.FirstOrDefault(u => u.ID == UserSession.Id);
-
-            existingUser.Name = firstName;
-            existingUser.MiddleName = middleName;
-            existingUser.LastName = lastName;
+            existingConfiguration.UserID = UserSession.Id;
+            existingConfiguration.CaseID = (int)caseComboBox.SelectedValue;
+            existingConfiguration.CoolerID = (int)coolerComboBox.SelectedValue;
+            existingConfiguration.GpuID = (int)gpuComboBox.SelectedValue;
+            existingConfiguration.HddID = (int)hddComboBox.SelectedValue;
+            existingConfiguration.MotherboardID = (int)motherboardComboBox.SelectedValue;
+            existingConfiguration.ProcessorID = (int)processorComboBox.SelectedValue;
+            existingConfiguration.PsuID = (int)psuComboBox.SelectedValue;
+            existingConfiguration.SsdID = (int)ssdComboBox.SelectedValue;
+            existingConfiguration.RamID = (int)ramComboBox.SelectedValue;
+            existingConfiguration.Name = configNameTextBox.Text;
+            existingConfiguration.ConfigPrice = CalculateTotalPrice();
+            existingConfiguration.UpdatedAt = DateTime.Now;
 
             Program.context.SaveChanges();
 
-            UserSession.Name = firstName;
-            UserSession.LastName = lastName;
-            UserSession.MiddleName = middleName;
+            MessageBox.Show("Конфигурация успешно сохранена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ConfigurationUpdated?.Invoke(this, EventArgs.Empty);
 
-            userFIOLabel.Text = $"{UserSession.LastName} {UserSession.Name} {UserSession.MiddleName}";
-            MessageBox.Show("Данные пользователя успешно обновлены!");
+            this.Close();
         }
 
-        private void SaveConfiguration(object sender, EventArgs e)
-        {
-            var newConfiguration = new Configuration
-            {
-                UserID = UserSession.Id,
-                CaseID = (int)caseComboBox.SelectedValue,
-                CoolerID = (int)coolerComboBox.SelectedValue,
-                GpuID = (int)gpuComboBox.SelectedValue,
-                HddID = (int)hddComboBox.SelectedValue,
-                MotherboardID = (int)motherboardComboBox.SelectedValue,
-                ProcessorID = (int)processorComboBox.SelectedValue,
-                PsuID = (int)psuComboBox.SelectedValue,
-                SsdID = (int)ssdComboBox.SelectedValue,
-                RamID = (int)ramComboBox.SelectedValue,
-                Name = configNameTextBox.Text,
-                ConfigPrice = CalculateTotalPrice(),
-                CreatedAt = DateTime.Now,
-            };
-
-            Program.context.Configuration.Add(newConfiguration);
-            Program.context.SaveChanges();
-
-            // Очистка старых предупреждений
-            var oldWarnings = Program.context.ConfigurationWarning.Where(w => w.ConfigID == newConfiguration.ID);
-            Program.context.ConfigurationWarning.RemoveRange(oldWarnings);
-
-            List<ConfigurationWarning> warnings = new List<ConfigurationWarning>();
-
-            // Проверка совместимости RAM и материнской платы (DDR Type)
-            var motherboard = Program.context.Motherboard.Find(newConfiguration.MotherboardID);
-            var ram = Program.context.RAM.Find(newConfiguration.RamID);
-
-            if (motherboard != null && ram != null && motherboard.RamType != ram.Type)
-            {
-                warnings.Add(new ConfigurationWarning
-                {
-                    ConfigID = newConfiguration.ID,
-                    WarningText = $"ОЗУ ({ram.Type}) несовместимо с материнской платой ({motherboard.RamType})!"
-                });
-            }
-
-            // Добавление предупреждений в базу данных
-            if (warnings.Any())
-            {
-                Program.context.ConfigurationWarning.AddRange(warnings);
-                Program.context.SaveChanges();
-            }
-
-            MessageBox.Show("Конфигурация сохранена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            ShowConfigurations();
-        }
-
-
-        private void ClearAllLabels()
-        {
-            // Очистка процессора
-            processorSocketLabel.Text = "";
-            processorTDPLabel.Text = "";
-            processorFrequencyLabel.Text = "";
-            processorBoostLabel.Text = "";
-            processorCoresLabel.Text = "";
-            processorThreadsLabel.Text = "";
-            processorPriceLabel.Text = "";
-
-            // Очистка материнской платы
-            motherboardSocketLabel.Text = "";
-            motherboardChipsetLabel.Text = "";
-            motherboardFormFactorLabel.Text = "";
-            motherboardPriceLabel.Text = "";
-            motherboardRamTypeLabel.Text = "";
-
-            // Очистка оперативной памяти
-            ramCapacityLabel.Text = "";
-            ramTypeLabel.Text = "";
-            ramFrequencyLabel.Text = "";
-            ramFormFactorLabel.Text = "";
-            ramPriceLabel.Text = "";
-
-            // Очистка кулера
-            coolerSocketLabel.Text = "";
-            coolerPowerLabel.Text = "";
-            coolerMaterialLabel.Text = "";
-            coolerTypeLabel.Text = "";
-            coolerPriceLabel.Text = "";
-
-            // Очистка видеокарты
-            gpuFrequencyLabel1.Text = "";
-            gpuBoostLabel1.Text = "";
-            memorySizeLabel1.Text = "";
-            memoryTypeLabel1.Text = "";
-            tdpLabel1.Text = "";
-            priceLabel1.Text = "";
-
-            // Очистка корпуса
-            formFaktorLabel1.Text = "";
-            sizeLabel1.Text = "";
-            priceLabel3.Text = "";
-
-            // Очистка блока питания
-            powerSupplyLabel1.Text = "";
-            formFactorLabel1.Text = "";
-            certificateLabel1.Text = "";
-            priceLabel5.Text = "";
-
-            // Очистка жесткого диска
-            capacityLabel1.Text = "";
-            speedLabel1.Text = "";
-            priceLabel7.Text = "";
-
-            // Очистка SSD
-            capacityLabel3.Text = "";
-            readingLabel1.Text = "";
-            writingLabel1.Text = "";
-            priceLabel9.Text = "";
-
-            processorComboBox.SelectedIndex = -1;
-            motherboardComboBox.SelectedIndex = -1;
-            ramComboBox.SelectedIndex = -1;
-            coolerComboBox.SelectedIndex = -1;
-            gpuComboBox.SelectedIndex = -1;
-            caseComboBox.SelectedIndex = -1;
-            psuComboBox.SelectedIndex = -1;
-            hddComboBox.SelectedIndex = -1;
-            ssdComboBox.SelectedIndex = -1;
-
-            configPriceLabel.Text = "Общая цена: 0₽";
-        }
-        public void ShowConfigurations()
-        {
-            configurationsFlowLayoutPanel.Controls.Clear();
-
-            // Загружаем сборки пользователя и подгружаем связанные предупреждения
-            List<Configuration> configs = Program.context.Configuration.ToList();
-
-            foreach (Configuration config in configs)
-            {
-                var userControl = new ConfigurationUserControl(config);
-                userControl.SetMainForm(this);
-
-                configurationsFlowLayoutPanel.Controls.Add(userControl);
-            }
-        }
 
         private int CalculateTotalPrice()
         {
@@ -601,45 +404,32 @@ namespace PersonalComputerConfigurator.Forms
             configPriceLabel.Text = $"Общая цена: {MoneyService.ToRubles(CalculateTotalPrice())}₽";
         }
 
-        private void UpdateWarnings()
+        private void deletePictureBox_Click(object sender, EventArgs e)
         {
-            List<string> warnings = new List<string>();
+            // Проверяем, существует ли конфигурация
+            Configuration existingConfiguration = Program.context.Configuration.FirstOrDefault(c => c.ID == _configuration.ID);
 
-            var motherboardId = motherboardComboBox.SelectedValue as int?;
-            var ramId = ramComboBox.SelectedValue as int?;
-
-            if (motherboardId == null || ramId == null)
+            if (existingConfiguration != null)
             {
-                warningPictureBox.Visible = false;
-                return; // Выходим из метода, если данные не загружены
-            }
+                DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить эту сборку?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            var motherboard = Program.context.Motherboard.Find(motherboardId);
-            var ram = Program.context.RAM.Find(ramId);
-
-            // Проверка совместимости RAM и Материнской платы
-            if (motherboard != null && ram != null && motherboard.RamType != ram.Type)
-            {
-                warnings.Add($"ОЗУ ({ram.Type}) несовместимо с материнской платой ({motherboard.RamType})!");
-            }
-
-            // Если есть предупреждения, показываем значок и настраиваем всплывающую подсказку
-            if (warnings.Any())
-            {
-                warningPictureBox.Visible = true;
-                ToolTip toolTip = new ToolTip
+                if (result == DialogResult.Yes)
                 {
-                    AutoPopDelay = 5000,
-                    InitialDelay = 500,
-                    ReshowDelay = 400
-                };
-                toolTip.SetToolTip(warningPictureBox, "⚠ Внимание! \n" + string.Join("\n", warnings));
+                    // Удаляем конфигурацию из базы данных
+                    Program.context.Configuration.Remove(existingConfiguration);
+                    Program.context.SaveChanges();
+
+                    MessageBox.Show("Конфигурация успешно удалена!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    ConfigurationUpdated?.Invoke(this, EventArgs.Empty); // Если есть обработчик события обновления
+
+                    this.Close(); // Закрываем форму
+                }
             }
             else
             {
-                warningPictureBox.Visible = false;
+                MessageBox.Show("Конфигурация не найдена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
     }
 }

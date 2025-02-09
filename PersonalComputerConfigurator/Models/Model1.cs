@@ -5,16 +5,18 @@ using System.Linq;
 
 namespace PersonalComputerConfigurator.Models
 {
-    public partial class PCConfiguratorModel : DbContext
+    public partial class Model1 : DbContext
     {
-        public PCConfiguratorModel()
-            : base("name=PersonalComputerConfiguratorModel")
+        public Model1()
+            : base("name=Model11")
         {
         }
 
         public virtual DbSet<Case> Case { get; set; }
         public virtual DbSet<Configuration> Configuration { get; set; }
+        public virtual DbSet<ConfigurationWarning> ConfigurationWarning { get; set; }
         public virtual DbSet<Cooler> Cooler { get; set; }
+        public virtual DbSet<DDRType> DDRType { get; set; }
         public virtual DbSet<GPU> GPU { get; set; }
         public virtual DbSet<HDD> HDD { get; set; }
         public virtual DbSet<Motherboard> Motherboard { get; set; }
@@ -22,7 +24,6 @@ namespace PersonalComputerConfigurator.Models
         public virtual DbSet<PSU> PSU { get; set; }
         public virtual DbSet<RAM> RAM { get; set; }
         public virtual DbSet<SSD> SSD { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
 
@@ -44,8 +45,11 @@ namespace PersonalComputerConfigurator.Models
                 .Property(e => e.Size)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Case>()
-                .Property(e => e.Price);
+            modelBuilder.Entity<Configuration>()
+                .HasMany(e => e.ConfigurationWarning)
+                .WithRequired(e => e.Configuration)
+                .HasForeignKey(e => e.ConfigID)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Cooler>()
                 .Property(e => e.Name)
@@ -71,8 +75,16 @@ namespace PersonalComputerConfigurator.Models
                 .Property(e => e.Material)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Cooler>()
-                .Property(e => e.Price);
+            modelBuilder.Entity<DDRType>()
+                .HasMany(e => e.Motherboard)
+                .WithRequired(e => e.DDRType)
+                .HasForeignKey(e => e.RamType)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<DDRType>()
+                .HasMany(e => e.RAM)
+                .WithOptional(e => e.DDRType)
+                .HasForeignKey(e => e.Type);
 
             modelBuilder.Entity<GPU>()
                 .Property(e => e.Name)
@@ -99,9 +111,6 @@ namespace PersonalComputerConfigurator.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<GPU>()
-                .Property(e => e.Price);
-
-            modelBuilder.Entity<GPU>()
                 .Property(e => e.Tdp)
                 .IsUnicode(false);
 
@@ -112,7 +121,7 @@ namespace PersonalComputerConfigurator.Models
             modelBuilder.Entity<HDD>()
                 .Property(e => e.Description)
                 .IsUnicode(false);
-      
+
             modelBuilder.Entity<PSU>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
@@ -132,9 +141,6 @@ namespace PersonalComputerConfigurator.Models
             modelBuilder.Entity<PSU>()
                 .Property(e => e.Certificate)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<PSU>()
-                .Property(e => e.Price);
 
             modelBuilder.Entity<SSD>()
                 .Property(e => e.Name)

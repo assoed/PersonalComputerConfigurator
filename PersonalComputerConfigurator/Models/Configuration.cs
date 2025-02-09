@@ -9,9 +9,16 @@ namespace PersonalComputerConfigurator.Models
     [Table("Configuration")]
     public partial class Configuration
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Configuration()
+        {
+            ConfigurationWarning = new HashSet<ConfigurationWarning>();
+        }
+
         public int ID { get; set; }
 
-        public int? Name { get; set; }
+        [StringLength(50)]
+        public string Name { get; set; }
 
         public int? CaseID { get; set; }
 
@@ -33,6 +40,12 @@ namespace PersonalComputerConfigurator.Models
 
         public int? UserID { get; set; }
 
+        public DateTime? CreatedAt { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
+
+        public int? ConfigPrice { get; set; }
+
         public virtual Case Case { get; set; }
 
         public virtual SSD SSD { get; set; }
@@ -52,5 +65,8 @@ namespace PersonalComputerConfigurator.Models
         public virtual RAM RAM { get; set; }
 
         public virtual User User { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ConfigurationWarning> ConfigurationWarning { get; set; }
     }
 }

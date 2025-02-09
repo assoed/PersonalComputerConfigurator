@@ -17,6 +17,8 @@ namespace PersonalComputerConfigurator.CustomControls
     {
         private User _user;
 
+        public event Action UserUpdated;
+
         public UserEditorAdminControl(User users)
         {
             InitializeComponent();
@@ -77,12 +79,15 @@ namespace PersonalComputerConfigurator.CustomControls
                     Controls.Remove(this);
                     MessageBox.Show("Пользователь успешно удален.");
                 }
+
+                UserUpdated?.Invoke();
             }
         }
 
         private void editPictureBox_Click(object sender, EventArgs e)
         {
             UserEditForm userEditForm = new UserEditForm(_user.ID);
+            userEditForm.UserUpdated += () => UserUpdated?.Invoke();
             userEditForm.ShowDialog();
         }
 
@@ -99,6 +104,8 @@ namespace PersonalComputerConfigurator.CustomControls
                     Program.context.SaveChanges();
                     MessageBox.Show("Пользователь успешно заблокирован.");
                 }
+
+                UserUpdated?.Invoke();
             }
         }
 
@@ -135,6 +142,8 @@ namespace PersonalComputerConfigurator.CustomControls
                     Program.context.SaveChanges();
                     MessageBox.Show("Пользователь успешно разблокирован.");
                 }
+
+                UserUpdated?.Invoke();
             }
         }
     }

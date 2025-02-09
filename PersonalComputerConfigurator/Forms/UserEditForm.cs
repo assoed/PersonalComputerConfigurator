@@ -15,6 +15,7 @@ namespace PersonalComputerConfigurator.Forms
 {
     public partial class UserEditForm : Form
     {
+        public event Action UserUpdated;
         private int _userId;
         public UserEditForm(int userId)
         {
@@ -86,6 +87,7 @@ namespace PersonalComputerConfigurator.Forms
             Program.context.SaveChanges();
 
             MessageBox.Show("Данные пользователя успешно обновлены!");
+            UserUpdated?.Invoke();
 
             this.Close();
         }
