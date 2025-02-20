@@ -277,7 +277,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="computer_30842.ico" />
-    <Content Include="Docs\script2.sql" />
+    <Content Include="Docs\scriptSokolov.sql" />
     <Content Include="Release\EntityFramework.dll" />
     <Content Include="Release\EntityFramework.SqlServer.dll" />
     <Content Include="Release\EntityFramework.SqlServer.xml" />
@@ -286,6 +286,7 @@
     <Content Include="Release\PersonalComputerConfigurator.pdb" />
     <Content Include="Release\ru\EntityFramework.resources.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
