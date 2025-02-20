@@ -6,30 +6,41 @@ namespace PersonalComputerConfigurator.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("user")]
-    public partial class user
+    [Table("User")]
+    public partial class User
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            Configuration = new HashSet<Configuration>();
+        }
+
+        public int ID { get; set; }
 
         [StringLength(50)]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [StringLength(50)]
-        public string middleName { get; set; }
+        public string MiddleName { get; set; }
 
         [StringLength(50)]
-        public string lastName { get; set; }
+        public string LastName { get; set; }
 
-        public string password { get; set; }
+        public string Password { get; set; }
 
-        public int? role { get; set; }
-
-        [StringLength(50)]
-        public string email { get; set; }
+        public int? Role { get; set; }
 
         [StringLength(50)]
-        public string login { get; set; }
+        public string Email { get; set; }
 
-        public virtual userRole userRole { get; set; }
+        [StringLength(50)]
+        public string Login { get; set; }
+
+        public int? IsBlocked { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Configuration> Configuration { get; set; }
+
+        public virtual UserRole UserRole { get; set; }
     }
 }

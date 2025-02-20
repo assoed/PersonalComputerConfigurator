@@ -1,35 +1,45 @@
 namespace PersonalComputerConfigurator.Models
 {
+    using PersonalComputerConfigurator.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ram")]
-    public partial class ram
+    [Table("RAM")]
+    public partial class RAM : IComponentWithPrice
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public RAM()
+        {
+            Configuration = new HashSet<Configuration>();
+        }
+
+        public int ID { get; set; }
 
         [StringLength(255)]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [StringLength(255)]
-        public string description { get; set; }
+        public string Description { get; set; }
+
+        public int? Type { get; set; }
 
         [StringLength(255)]
-        public string type { get; set; }
+        public string FormFactor { get; set; }
 
         [StringLength(255)]
-        public string formFactor { get; set; }
+        public string Capacity { get; set; }
 
         [StringLength(255)]
-        public string capacity { get; set; }
+        public string Frequency { get; set; }
 
-        [StringLength(255)]
-        public string frequency { get; set; }
+        public int Price { get; set; }
 
-        [MaxLength(50)]
-        public string price { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Configuration> Configuration { get; set; }
+
+        public virtual DDRType DDRType { get; set; }
     }
 }

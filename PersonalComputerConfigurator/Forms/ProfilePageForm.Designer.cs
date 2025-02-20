@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfilePageForm));
             this.emailTextLabel = new System.Windows.Forms.Label();
             this.loginTextLabel = new System.Windows.Forms.Label();
             this.lastNameLabel = new System.Windows.Forms.Label();
@@ -164,8 +165,9 @@
             this.Controls.Add(this.lastNameTextBox);
             this.Controls.Add(this.middleNameTextBox);
             this.Controls.Add(this.nameTextBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ProfilePageForm";
-            this.Text = "ProfilePageForm";
+            this.Text = "КОНФИГУРАТОР ПК";
             this.Load += new System.EventHandler(this.ProfilePageForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

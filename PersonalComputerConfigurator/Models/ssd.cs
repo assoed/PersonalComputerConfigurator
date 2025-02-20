@@ -1,27 +1,39 @@
 namespace PersonalComputerConfigurator.Models
 {
+    using PersonalComputerConfigurator.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ssd")]
-    public partial class ssd
+    [Table("SSD")]
+    public partial class SSD : IComponentWithPrice
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SSD()
+        {
+            Configuration = new HashSet<Configuration>();
+        }
+
+        public int ID { get; set; }
 
         [StringLength(50)]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [StringLength(255)]
-        public string description { get; set; }
+        public string Description { get; set; }
 
         [StringLength(10)]
-        public string capacity { get; set; }
+        public string Capacity { get; set; }
 
-        public int? reading { get; set; }
+        public int? Reading { get; set; }
 
-        public int? writing { get; set; }
+        public int? Writing { get; set; }
+
+        public int Price { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Configuration> Configuration { get; set; }
     }
 }

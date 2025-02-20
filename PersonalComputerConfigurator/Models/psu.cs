@@ -1,32 +1,41 @@
 namespace PersonalComputerConfigurator.Models
 {
+    using PersonalComputerConfigurator.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("psu")]
-    public partial class psu
+    [Table("PSU")]
+    public partial class PSU : IComponentWithPrice
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PSU()
+        {
+            Configuration = new HashSet<Configuration>();
+        }
+
+        public int ID { get; set; }
 
         [StringLength(50)]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [StringLength(50)]
-        public string description { get; set; }
+        public string Description { get; set; }
 
         [StringLength(50)]
-        public string powerSupply { get; set; }
+        public string PowerSupply { get; set; }
 
         [StringLength(50)]
-        public string formFactor { get; set; }
+        public string FormFactor { get; set; }
 
         [StringLength(50)]
-        public string certificate { get; set; }
+        public string Certificate { get; set; }
 
-        [StringLength(50)]
-        public string price { get; set; }
+        public int Price { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Configuration> Configuration { get; set; }
     }
 }
