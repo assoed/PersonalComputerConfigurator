@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrationForm));
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.middleNameTextBox = new System.Windows.Forms.TextBox();
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
@@ -50,9 +51,9 @@
             this.userRoleLabel = new System.Windows.Forms.Label();
             this.personalComputerConfiguratorDatabaseDataSet = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.userTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.userTableAdapter();
+            this.UserTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.UserTableAdapter();
             this.userRoleBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.userRoleTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.userRoleTableAdapter();
+            this.UserRoleTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.UserRoleTableAdapter();
             this.userRoleComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -229,18 +230,18 @@
             this.userBindingSource.DataMember = "user";
             this.userBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
-            // userTableAdapter
+            // UserTableAdapter
             // 
-            this.userTableAdapter.ClearBeforeFill = true;
+            this.UserTableAdapter.ClearBeforeFill = true;
             // 
             // userRoleBindingSource
             // 
             this.userRoleBindingSource.DataMember = "userRole";
             this.userRoleBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
-            // userRoleTableAdapter
+            // UserRoleTableAdapter
             // 
-            this.userRoleTableAdapter.ClearBeforeFill = true;
+            this.UserRoleTableAdapter.ClearBeforeFill = true;
             // 
             // userRoleComboBox
             // 
@@ -249,7 +250,7 @@
             this.userRoleComboBox.FormattingEnabled = true;
             this.userRoleComboBox.Location = new System.Drawing.Point(580, 65);
             this.userRoleComboBox.Name = "userRoleComboBox";
-            this.userRoleComboBox.Size = new System.Drawing.Size(121, 21);
+            this.userRoleComboBox.Size = new System.Drawing.Size(148, 21);
             this.userRoleComboBox.TabIndex = 18;
             this.userRoleComboBox.ValueMember = "id";
             // 
@@ -353,8 +354,9 @@
             this.Controls.Add(this.lastNameTextBox);
             this.Controls.Add(this.middleNameTextBox);
             this.Controls.Add(this.nameTextBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RegistrationForm";
-            this.Text = "RegistrationForm";
+            this.Text = "КОНФИГУРАТОР ПК";
             this.Load += new System.EventHandler(this.RegistrationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
@@ -387,9 +389,9 @@
         private System.Windows.Forms.Label userRoleLabel;
         private personalComputerConfiguratorDatabaseDataSet personalComputerConfiguratorDatabaseDataSet;
         private System.Windows.Forms.BindingSource userBindingSource;
-        private personalComputerConfiguratorDatabaseDataSetTableAdapters.userTableAdapter userTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.UserTableAdapter UserTableAdapter;
         private System.Windows.Forms.BindingSource userRoleBindingSource;
-        private personalComputerConfiguratorDatabaseDataSetTableAdapters.userRoleTableAdapter userRoleTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.UserRoleTableAdapter UserRoleTableAdapter;
         private System.Windows.Forms.ComboBox userRoleComboBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

@@ -2,7 +2,7 @@
 using PersonalComputerConfigurator.Models;
 using PersonalComputerConfigurator.Services;
 using PersonalComputerConfigurator.Constants;
-using PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters;
+using PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,6 +10,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using PersonalComputerConfigurator.Interfaces;
+using System.Data;
+using System.Data.Entity;
 
 namespace PersonalComputerConfigurator.Forms
 {
@@ -25,7 +27,6 @@ namespace PersonalComputerConfigurator.Forms
         public MainPageForm()
         {
             InitializeComponent();
-
             // Инициализация словаря биндингов
             _bindings = new Dictionary<string, (BindingNavigator, BindingSource, dynamic)>
             {
@@ -39,6 +40,8 @@ namespace PersonalComputerConfigurator.Forms
                 { "Case", (caseBindingNavigator = new BindingNavigator(true), caseBindingSource, caseTableAdapter) },
                 { "Motherboard", (motherboardBindingNavigator = new BindingNavigator(true), motherboardBindingSource, motherboardTableAdapter) }
             };
+
+            CustomizeBindingNavigators();
         }
 
         private void MainPageForm_Load(object sender, EventArgs e)
@@ -371,7 +374,7 @@ namespace PersonalComputerConfigurator.Forms
 
         private void ClearAllLabels()
         {
-
+            configNameTextBox.Text = "";
             // Очистка всех Label
             processorSocketLabel.Text = "";
             processorTDPLabel.Text = "";
@@ -541,18 +544,18 @@ namespace PersonalComputerConfigurator.Forms
 
         private void LoadData()
         {
-            motherboardTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.Motherboard);
-            pSUTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.PSU);
-            gPUTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.GPU);
-            sSDTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.SSD);
-            hDDTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.HDD);
-            caseTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.Case);
-            coolerTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.Cooler);
-            rAMTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.RAM);
-            processorTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.Processor);
+            motherboardTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet.Motherboard);
+            pSUTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet.PSU);
+            gPUTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet.GPU);
+            sSDTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet.SSD);
+            hDDTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet.HDD);
+            caseTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet.Case);
+            coolerTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet.Cooler);
+            rAMTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet.RAM);
+            processorTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet.Processor);
             DDRTypeTableAdapter dDRTypeTableAdapter = new DDRTypeTableAdapter();
 
-            dDRTypeTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet1.DDRType);
+            dDRTypeTableAdapter.Fill(personalComputerConfiguratorDatabaseDataSet.DDRType);
         }
 
         private void BindDataGrids()
@@ -583,7 +586,7 @@ namespace PersonalComputerConfigurator.Forms
                 Name = "Type",
                 HeaderText = "Тип памяти",
                 DataPropertyName = "Type",
-                DataSource = personalComputerConfiguratorDatabaseDataSet1.DDRType, // Источник данных
+                DataSource = personalComputerConfiguratorDatabaseDataSet.DDRType, // Источник данных
                 DisplayMember = "DdrTypeName", // Отображаемые названия (DDR3, DDR4...)
                 ValueMember = "DdrID", // Хранимые значения (1, 2, 3...)
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
@@ -617,7 +620,7 @@ namespace PersonalComputerConfigurator.Forms
                 Name = "RamType",
                 HeaderText = "Тип оперативной памяти",
                 DataPropertyName = "RamType",
-                DataSource = personalComputerConfiguratorDatabaseDataSet1.DDRType,
+                DataSource = personalComputerConfiguratorDatabaseDataSet.DDRType,
                 DisplayMember = "DdrTypeName",
                 ValueMember = "DdrID",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
@@ -810,6 +813,11 @@ namespace PersonalComputerConfigurator.Forms
 
         }
 
+        private void cleanConfigPictureBox_Click(object sender, EventArgs e)
+        {
+            ClearAllLabels();
+        }
+
         private void logoutButton_Click(object sender, EventArgs e)
         {
             // Закрываем текущую форму (MainPageForm)
@@ -878,7 +886,7 @@ namespace PersonalComputerConfigurator.Forms
                 }
 
                 source.EndEdit();
-                adapter.Update(personalComputerConfiguratorDatabaseDataSet1);
+                adapter.Update(personalComputerConfiguratorDatabaseDataSet);
                 MessageBox.Show("✅ Данные успешно сохранены!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -950,6 +958,86 @@ namespace PersonalComputerConfigurator.Forms
             MessageBox.Show("Конфигурация сохранена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             ClearAllLabels();
             ShowConfigurations();
+        }
+
+        private bool IsComponentUsed(string componentType, int componentID)
+        {
+            // Очистка кэша EF вручную
+            Program.context.ChangeTracker.Entries().ToList().ForEach(e => e.State = EntityState.Detached);
+
+            switch (componentType)
+            {
+                case "Processor":
+                    return Program.context.Configuration.Any(c => c.ProcessorID == componentID);
+                case "GPU":
+                    return Program.context.Configuration.Any(c => c.GpuID == componentID);
+                case "RAM":
+                    return Program.context.Configuration.Any(c => c.RamID == componentID);
+                case "Motherboard":
+                    return Program.context.Configuration.Any(c => c.MotherboardID == componentID);
+                case "PSU":
+                    return Program.context.Configuration.Any(c => c.PsuID == componentID);
+                case "Cooler":
+                    return Program.context.Configuration.Any(c => c.CoolerID == componentID);
+                case "HDD":
+                    return Program.context.Configuration.Any(c => c.HddID == componentID);
+                case "SSD":
+                    return Program.context.Configuration.Any(c => c.SsdID == componentID);
+                case "Case":
+                    return Program.context.Configuration.Any(c => c.CaseID == componentID);
+                default:
+                    return false;
+            }
+        }
+
+        private void BindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+            if (sender is ToolStripButton button)
+            {
+                // Определяем `BindingNavigator`, из которого пришел вызов
+                var binding = _bindings.FirstOrDefault(b => b.Value.navigator.Items.Contains(button));
+                if (binding.Value.source == null) return;
+
+                // Проверяем, есть ли текущий элемент
+                if (binding.Value.source.Current is DataRowView currentRow)
+                {
+                    int componentID = (int)currentRow["ID"];
+                    string componentType = binding.Key; // "Processor", "GPU", и т. д.
+
+                    // Проверяем, используется ли комплектующее в сборках
+                    if (IsComponentUsed(componentType, componentID))
+                    {
+                        MessageBox.Show($"❌ Этот {componentType} используется в сборках и не может быть удалён!",
+                                        "Ошибка удаления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return; // Остановка метода — удаление не продолжается
+                    }
+
+                    // Запрос подтверждения удаления
+                    DialogResult result = MessageBox.Show($"Вы уверены, что хотите удалить {componentType}?",
+                                                          "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        binding.Value.source.RemoveCurrent(); // Удаление
+                        binding.Value.adapter.Update(personalComputerConfiguratorDatabaseDataSet); // Сохранение
+                        MessageBox.Show($"{componentType} успешно удалён!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
+
+        private void CustomizeBindingNavigators()
+        {
+            foreach (var binding in _bindings)
+            {
+                foreach (ToolStripItem item in binding.Value.navigator.Items)
+                {
+                    if (item is ToolStripButton button && button.Name == "bindingNavigatorDeleteItem")
+                    {
+                        button.Click -= BindingNavigatorDeleteItem_Click; // Удаляем старый обработчик
+                        button.Click += BindingNavigatorDeleteItem_Click; // Добавляем новый
+                    }
+                }
+            }
         }
     }
 }

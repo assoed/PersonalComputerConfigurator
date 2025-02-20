@@ -54,6 +54,8 @@
             this.UsersUserConfigurationsTab = new System.Windows.Forms.TabPage();
             this.configurationsFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ConfiguratorTab = new System.Windows.Forms.TabPage();
+            this.cleanConfigPictureBox = new System.Windows.Forms.PictureBox();
+            this.warningPictureBox = new System.Windows.Forms.PictureBox();
             this.configPriceLabel = new System.Windows.Forms.Label();
             this.configName = new System.Windows.Forms.Label();
             this.configNameTextBox = new System.Windows.Forms.TextBox();
@@ -62,13 +64,13 @@
             this.psuGroupBox = new System.Windows.Forms.GroupBox();
             this.powerSupplyLabel1 = new System.Windows.Forms.Label();
             this.pSUBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.personalComputerConfiguratorDatabaseDataSet1 = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1();
+            this.personalComputerConfiguratorDatabaseDataSet = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet();
             this.formFactorLabel1 = new System.Windows.Forms.Label();
             this.certificateLabel1 = new System.Windows.Forms.Label();
             this.priceLabel5 = new System.Windows.Forms.Label();
             this.psuComboBox = new System.Windows.Forms.ComboBox();
             this.processorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.personalComputerConfiguratorDatabaseDataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.personalComputerConfiguratorDatabaseDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.hddGroupBox = new System.Windows.Forms.GroupBox();
             this.capacityLabel1 = new System.Windows.Forms.Label();
             this.hDDBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -127,14 +129,13 @@
             this.processorSocketLabel = new System.Windows.Forms.Label();
             this.processorPriceLabel = new System.Windows.Forms.Label();
             this.processorComboBox = new System.Windows.Forms.ComboBox();
-            this.processorTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.ProcessorTableAdapter();
-            this.gPUTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.GPUTableAdapter();
-            this.tableAdapterManager = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.TableAdapterManager();
-            this.caseTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.CaseTableAdapter();
-            this.hDDTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.HDDTableAdapter();
-            this.pSUTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.PSUTableAdapter();
-            this.sSDTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.SSDTableAdapter();
-            this.warningPictureBox = new System.Windows.Forms.PictureBox();
+            this.processorTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.ProcessorTableAdapter();
+            this.gPUTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.GPUTableAdapter();
+            this.tableAdapterManager = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.TableAdapterManager();
+            this.caseTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.CaseTableAdapter();
+            this.hDDTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.HDDTableAdapter();
+            this.pSUTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.PSUTableAdapter();
+            this.sSDTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.SSDTableAdapter();
             tdpLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainPageSplitContainer)).BeginInit();
             this.mainPageSplitContainer.Panel1.SuspendLayout();
@@ -146,12 +147,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.deletePictureBox)).BeginInit();
             this.UsersUserConfigurationsTab.SuspendLayout();
             this.ConfiguratorTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cleanConfigPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warningPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveConfigPictureBox)).BeginInit();
             this.psuGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pSUBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.processorBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSetBindingSource)).BeginInit();
             this.hddGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hDDBindingSource)).BeginInit();
             this.ssdGroupBox.SuspendLayout();
@@ -164,7 +167,6 @@
             this.ramGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.warningPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tdpLabel
@@ -415,6 +417,7 @@
             // ConfiguratorTab
             // 
             this.ConfiguratorTab.AutoScroll = true;
+            this.ConfiguratorTab.Controls.Add(this.cleanConfigPictureBox);
             this.ConfiguratorTab.Controls.Add(this.warningPictureBox);
             this.ConfiguratorTab.Controls.Add(this.configPriceLabel);
             this.ConfiguratorTab.Controls.Add(this.configName);
@@ -437,6 +440,28 @@
             this.ConfiguratorTab.TabIndex = 2;
             this.ConfiguratorTab.Text = "СОБРАТЬ ПК";
             this.ConfiguratorTab.UseVisualStyleBackColor = true;
+            // 
+            // cleanConfigPictureBox
+            // 
+            this.cleanConfigPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cleanConfigPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("cleanConfigPictureBox.Image")));
+            this.cleanConfigPictureBox.Location = new System.Drawing.Point(1264, 18);
+            this.cleanConfigPictureBox.Name = "cleanConfigPictureBox";
+            this.cleanConfigPictureBox.Size = new System.Drawing.Size(43, 46);
+            this.cleanConfigPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.cleanConfigPictureBox.TabIndex = 103;
+            this.cleanConfigPictureBox.TabStop = false;
+            this.cleanConfigPictureBox.Click += new System.EventHandler(this.cleanConfigPictureBox_Click);
+            // 
+            // warningPictureBox
+            // 
+            this.warningPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("warningPictureBox.Image")));
+            this.warningPictureBox.Location = new System.Drawing.Point(1002, 21);
+            this.warningPictureBox.Name = "warningPictureBox";
+            this.warningPictureBox.Size = new System.Drawing.Size(50, 40);
+            this.warningPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.warningPictureBox.TabIndex = 14;
+            this.warningPictureBox.TabStop = false;
             // 
             // configPriceLabel
             // 
@@ -466,7 +491,7 @@
             // saveConfigButton
             // 
             this.saveConfigButton.AutoSize = true;
-            this.saveConfigButton.Location = new System.Drawing.Point(1109, 36);
+            this.saveConfigButton.Location = new System.Drawing.Point(1072, 36);
             this.saveConfigButton.Name = "saveConfigButton";
             this.saveConfigButton.Size = new System.Drawing.Size(120, 13);
             this.saveConfigButton.TabIndex = 10;
@@ -475,7 +500,7 @@
             // saveConfigPictureBox
             // 
             this.saveConfigPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("saveConfigPictureBox.Image")));
-            this.saveConfigPictureBox.Location = new System.Drawing.Point(1235, 21);
+            this.saveConfigPictureBox.Location = new System.Drawing.Point(1198, 21);
             this.saveConfigPictureBox.Name = "saveConfigPictureBox";
             this.saveConfigPictureBox.Size = new System.Drawing.Size(46, 43);
             this.saveConfigPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -510,12 +535,12 @@
             // pSUBindingSource
             // 
             this.pSUBindingSource.DataMember = "PSU";
-            this.pSUBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.pSUBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
-            // personalComputerConfiguratorDatabaseDataSet1
+            // personalComputerConfiguratorDatabaseDataSet
             // 
-            this.personalComputerConfiguratorDatabaseDataSet1.DataSetName = "personalComputerConfiguratorDatabaseDataSet1";
-            this.personalComputerConfiguratorDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.personalComputerConfiguratorDatabaseDataSet.DataSetName = "personalComputerConfiguratorDatabaseDataSet";
+            this.personalComputerConfiguratorDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // formFactorLabel1
             // 
@@ -561,12 +586,12 @@
             // processorBindingSource
             // 
             this.processorBindingSource.DataMember = "Processor";
-            this.processorBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1BindingSource;
+            this.processorBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSetBindingSource;
             // 
-            // personalComputerConfiguratorDatabaseDataSet1BindingSource
+            // personalComputerConfiguratorDatabaseDataSetBindingSource
             // 
-            this.personalComputerConfiguratorDatabaseDataSet1BindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
-            this.personalComputerConfiguratorDatabaseDataSet1BindingSource.Position = 0;
+            this.personalComputerConfiguratorDatabaseDataSetBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
+            this.personalComputerConfiguratorDatabaseDataSetBindingSource.Position = 0;
             // 
             // hddGroupBox
             // 
@@ -593,7 +618,7 @@
             // hDDBindingSource
             // 
             this.hDDBindingSource.DataMember = "HDD";
-            this.hDDBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.hDDBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // speedLabel1
             // 
@@ -651,7 +676,7 @@
             // sSDBindingSource
             // 
             this.sSDBindingSource.DataMember = "SSD";
-            this.sSDBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.sSDBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // readingLabel1
             // 
@@ -720,7 +745,7 @@
             // caseBindingSource
             // 
             this.caseBindingSource.DataMember = "Case";
-            this.caseBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.caseBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // sizeLabel1
             // 
@@ -794,7 +819,7 @@
             // gPUBindingSource
             // 
             this.gPUBindingSource.DataMember = "GPU";
-            this.gPUBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.gPUBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // gpuBoostLabel1
             // 
@@ -1171,7 +1196,7 @@
             this.tableAdapterManager.PSUTableAdapter = this.pSUTableAdapter;
             this.tableAdapterManager.RAMTableAdapter = null;
             this.tableAdapterManager.SSDTableAdapter = this.sSDTableAdapter;
-            this.tableAdapterManager.UpdateOrder = PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UpdateOrder = PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             this.tableAdapterManager.UserRoleTableAdapter = null;
             this.tableAdapterManager.UserTableAdapter = null;
             // 
@@ -1191,22 +1216,13 @@
             // 
             this.sSDTableAdapter.ClearBeforeFill = true;
             // 
-            // warningPictureBox
-            // 
-            this.warningPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("warningPictureBox.Image")));
-            this.warningPictureBox.Location = new System.Drawing.Point(1002, 21);
-            this.warningPictureBox.Name = "warningPictureBox";
-            this.warningPictureBox.Size = new System.Drawing.Size(36, 40);
-            this.warningPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.warningPictureBox.TabIndex = 14;
-            this.warningPictureBox.TabStop = false;
-            // 
             // MainPageUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1325, 776);
             this.Controls.Add(this.mainPageSplitContainer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainPageUserForm";
             this.Text = "КОНФИГУРАТОР ПК";
             this.Load += new System.EventHandler(this.MainPageUserForm_Load);
@@ -1223,13 +1239,15 @@
             this.UsersUserConfigurationsTab.ResumeLayout(false);
             this.ConfiguratorTab.ResumeLayout(false);
             this.ConfiguratorTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cleanConfigPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warningPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveConfigPictureBox)).EndInit();
             this.psuGroupBox.ResumeLayout(false);
             this.psuGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pSUBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.processorBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSetBindingSource)).EndInit();
             this.hddGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.hDDBindingSource)).EndInit();
             this.ssdGroupBox.ResumeLayout(false);
@@ -1249,7 +1267,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.warningPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1279,10 +1296,10 @@
         private System.Windows.Forms.Label userFIOLabel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox processorComboBox;
-        private System.Windows.Forms.BindingSource personalComputerConfiguratorDatabaseDataSet1BindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1 personalComputerConfiguratorDatabaseDataSet1;
+        private System.Windows.Forms.BindingSource personalComputerConfiguratorDatabaseDataSetBindingSource;
+        private personalComputerConfiguratorDatabaseDataSet personalComputerConfiguratorDatabaseDataSet;
         private System.Windows.Forms.BindingSource processorBindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.ProcessorTableAdapter processorTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.ProcessorTableAdapter processorTableAdapter;
         private System.Windows.Forms.Label processorSocketLabel;
         private System.Windows.Forms.Label processorPriceLabel;
         private System.Windows.Forms.GroupBox psuGroupBox;
@@ -1321,8 +1338,8 @@
         private System.Windows.Forms.Label coolerPowerLabel;
         private System.Windows.Forms.Label coolerMaterialLabel;
         private System.Windows.Forms.BindingSource gPUBindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.GPUTableAdapter gPUTableAdapter;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.TableAdapterManager tableAdapterManager;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.GPUTableAdapter gPUTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.Label gpuFrequencyLabel1;
         private System.Windows.Forms.Label gpuBoostLabel1;
         private System.Windows.Forms.Label memorySizeLabel1;
@@ -1330,23 +1347,23 @@
         private System.Windows.Forms.Label priceLabel1;
         private System.Windows.Forms.Label tdpLabel1;
         private System.Windows.Forms.ComboBox gpuComboBox;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.CaseTableAdapter caseTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.CaseTableAdapter caseTableAdapter;
         private System.Windows.Forms.BindingSource caseBindingSource;
         private System.Windows.Forms.Label formFaktorLabel1;
         private System.Windows.Forms.Label sizeLabel1;
         private System.Windows.Forms.Label priceLabel3;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.PSUTableAdapter pSUTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.PSUTableAdapter pSUTableAdapter;
         private System.Windows.Forms.BindingSource pSUBindingSource;
         private System.Windows.Forms.Label powerSupplyLabel1;
         private System.Windows.Forms.Label formFactorLabel1;
         private System.Windows.Forms.Label certificateLabel1;
         private System.Windows.Forms.Label priceLabel5;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.HDDTableAdapter hDDTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.HDDTableAdapter hDDTableAdapter;
         private System.Windows.Forms.BindingSource hDDBindingSource;
         private System.Windows.Forms.Label capacityLabel1;
         private System.Windows.Forms.Label speedLabel1;
         private System.Windows.Forms.Label priceLabel7;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.SSDTableAdapter sSDTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.SSDTableAdapter sSDTableAdapter;
         private System.Windows.Forms.BindingSource sSDBindingSource;
         private System.Windows.Forms.Label capacityLabel3;
         private System.Windows.Forms.Label readingLabel1;
@@ -1359,5 +1376,6 @@
         private System.Windows.Forms.Label configPriceLabel;
         private System.Windows.Forms.FlowLayoutPanel configurationsFlowLayoutPanel;
         private System.Windows.Forms.PictureBox warningPictureBox;
+        private System.Windows.Forms.PictureBox cleanConfigPictureBox;
     }
 }

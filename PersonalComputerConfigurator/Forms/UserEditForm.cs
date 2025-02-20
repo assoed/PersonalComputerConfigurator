@@ -9,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using System.Globalization;
+
 
 
 namespace PersonalComputerConfigurator.Forms
@@ -39,7 +42,7 @@ namespace PersonalComputerConfigurator.Forms
 
         private void UserEditForm_Load(object sender, EventArgs e)
         {
-            this.userRoleTableAdapter.FillBy(this.personalComputerConfiguratorDatabaseDataSet.userRole);
+            this.UserRoleTableAdapter.Fill(this.personalComputerConfiguratorDatabaseDataSet.UserRole);
             SetTextBoxValues(_userId);
         }
 
@@ -69,6 +72,12 @@ namespace PersonalComputerConfigurator.Forms
             }
 
 
+            if (!isEmailValid(email))
+            {
+                MessageBox.Show("Введите корректный email.");
+                return;
+            }
+
             var existingUser = Program.context.User.FirstOrDefault(u => u.ID == _userId);
     
             if (existingUser == null)
@@ -77,11 +86,19 @@ namespace PersonalComputerConfigurator.Forms
                 return;
             }
 
+            if (Program.context.User.Any(u => u.Login == login))
+            {
+                MessageBox.Show("Пользователь с таким логином уже существует. Выберите другой логин.");
+                return;
+            }
+
             // Обновляем данные пользователя
             existingUser.Name = firstName;
             existingUser.MiddleName = middleName;
             existingUser.LastName = lastName;
             existingUser.Role = roleId;
+            existingUser.Email = email;
+            existingUser.Login = login;
 
             // Сохраняем изменения в базе данных
             Program.context.SaveChanges();
@@ -90,6 +107,21 @@ namespace PersonalComputerConfigurator.Forms
             UserUpdated?.Invoke();
 
             this.Close();
+        }
+
+        private bool isEmailValid(string email)
+        {
+            email = Regex.Replace(email, @"(@.+)$", match =>
+            {
+                var idn = new IdnMapping();
+                string domainName = idn.GetAscii(match.Groups[2].Value);
+                return match.Groups[1].Value + domainName;
+            }, RegexOptions.None, TimeSpan.FromMilliseconds(200));
+
+            // Check if the email matches the regex pattern
+            return Regex.IsMatch(email,
+                @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+                RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
         }
     }
 }

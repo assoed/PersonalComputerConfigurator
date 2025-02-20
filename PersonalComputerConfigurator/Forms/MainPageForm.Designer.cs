@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPageForm));
             System.Windows.Forms.Label tdpLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPageForm));
             this.adminTabControl = new System.Windows.Forms.TabControl();
             this.userConfigurationsTab = new System.Windows.Forms.TabPage();
             this.configurationsFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -64,7 +64,7 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.processorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.personalComputerConfiguratorDatabaseDataSet1 = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1();
+            this.personalComputerConfiguratorDatabaseDataSet = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet();
             this.ramTab = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.ramSearchTextBox = new System.Windows.Forms.TextBox();
@@ -167,21 +167,8 @@
             this.userEditorSplitContainer = new System.Windows.Forms.SplitContainer();
             this.addNewUserPictureBox = new System.Windows.Forms.PictureBox();
             this.usersEdtiorFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainPageSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.logoutButton = new System.Windows.Forms.Button();
-            this.profilePictureBox = new System.Windows.Forms.PictureBox();
-            this.userFIOLabel = new System.Windows.Forms.Label();
-            this.processorTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.ProcessorTableAdapter();
-            this.tableAdapterManager = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.TableAdapterManager();
-            this.rAMTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.RAMTableAdapter();
-            this.coolerTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.CoolerTableAdapter();
-            this.caseTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.CaseTableAdapter();
-            this.hDDTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.HDDTableAdapter();
-            this.sSDTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.SSDTableAdapter();
-            this.gPUTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.GPUTableAdapter();
-            this.pSUTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.PSUTableAdapter();
-            this.motherboardTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.MotherboardTableAdapter();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cleanConfigPictureBox = new System.Windows.Forms.PictureBox();
             this.warningPictureBox = new System.Windows.Forms.PictureBox();
             this.configPriceLabel = new System.Windows.Forms.Label();
             this.configName = new System.Windows.Forms.Label();
@@ -189,14 +176,33 @@
             this.saveConfigButton = new System.Windows.Forms.Label();
             this.saveConfigPictureBox = new System.Windows.Forms.PictureBox();
             this.psuGroupBox = new System.Windows.Forms.GroupBox();
+            this.priceLabel5 = new System.Windows.Forms.Label();
+            this.formFactorLabel1 = new System.Windows.Forms.Label();
+            this.certificateLabel1 = new System.Windows.Forms.Label();
+            this.powerSupplyLabel1 = new System.Windows.Forms.Label();
             this.psuComboBox = new System.Windows.Forms.ComboBox();
             this.hddGroupBox = new System.Windows.Forms.GroupBox();
+            this.priceLabel7 = new System.Windows.Forms.Label();
+            this.speedLabel1 = new System.Windows.Forms.Label();
+            this.hddCapacityLabel = new System.Windows.Forms.Label();
             this.hddComboBox = new System.Windows.Forms.ComboBox();
             this.ssdGroupBox = new System.Windows.Forms.GroupBox();
+            this.priceLabel9 = new System.Windows.Forms.Label();
+            this.writingLabel1 = new System.Windows.Forms.Label();
+            this.readingLabel1 = new System.Windows.Forms.Label();
+            this.capacityLabel3 = new System.Windows.Forms.Label();
             this.ssdComboBox = new System.Windows.Forms.ComboBox();
             this.caseGroupBox = new System.Windows.Forms.GroupBox();
+            this.priceLabel3 = new System.Windows.Forms.Label();
+            this.sizeLabel1 = new System.Windows.Forms.Label();
+            this.formFaktorLabel1 = new System.Windows.Forms.Label();
             this.caseComboBox = new System.Windows.Forms.ComboBox();
             this.gpuGroupBox = new System.Windows.Forms.GroupBox();
+            this.priceLabel1 = new System.Windows.Forms.Label();
+            this.memoryTypeLabel1 = new System.Windows.Forms.Label();
+            this.memorySizeLabel1 = new System.Windows.Forms.Label();
+            this.gpuBoostLabel1 = new System.Windows.Forms.Label();
+            this.gpuFrequencyLabel1 = new System.Windows.Forms.Label();
             this.gpuComboBox = new System.Windows.Forms.ComboBox();
             this.tdpLabel1 = new System.Windows.Forms.Label();
             this.coolerGroupBox = new System.Windows.Forms.GroupBox();
@@ -229,25 +235,20 @@
             this.processorSocketLabel = new System.Windows.Forms.Label();
             this.processorPriceLabel = new System.Windows.Forms.Label();
             this.processorComboBox = new System.Windows.Forms.ComboBox();
-            this.hddCapacityLabel = new System.Windows.Forms.Label();
-            this.speedLabel1 = new System.Windows.Forms.Label();
-            this.priceLabel7 = new System.Windows.Forms.Label();
-            this.capacityLabel3 = new System.Windows.Forms.Label();
-            this.readingLabel1 = new System.Windows.Forms.Label();
-            this.writingLabel1 = new System.Windows.Forms.Label();
-            this.priceLabel9 = new System.Windows.Forms.Label();
-            this.powerSupplyLabel1 = new System.Windows.Forms.Label();
-            this.certificateLabel1 = new System.Windows.Forms.Label();
-            this.formFactorLabel1 = new System.Windows.Forms.Label();
-            this.priceLabel5 = new System.Windows.Forms.Label();
-            this.formFaktorLabel1 = new System.Windows.Forms.Label();
-            this.sizeLabel1 = new System.Windows.Forms.Label();
-            this.priceLabel3 = new System.Windows.Forms.Label();
-            this.gpuFrequencyLabel1 = new System.Windows.Forms.Label();
-            this.gpuBoostLabel1 = new System.Windows.Forms.Label();
-            this.memorySizeLabel1 = new System.Windows.Forms.Label();
-            this.memoryTypeLabel1 = new System.Windows.Forms.Label();
-            this.priceLabel1 = new System.Windows.Forms.Label();
+            this.mainPageSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.logoutButton = new System.Windows.Forms.Button();
+            this.profilePictureBox = new System.Windows.Forms.PictureBox();
+            this.userFIOLabel = new System.Windows.Forms.Label();
+            this.processorTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.ProcessorTableAdapter();
+            this.tableAdapterManager = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.TableAdapterManager();
+            this.rAMTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.RAMTableAdapter();
+            this.coolerTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.CoolerTableAdapter();
+            this.caseTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.CaseTableAdapter();
+            this.hDDTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.HDDTableAdapter();
+            this.sSDTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.SSDTableAdapter();
+            this.gPUTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.GPUTableAdapter();
+            this.pSUTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.PSUTableAdapter();
+            this.motherboardTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.MotherboardTableAdapter();
             tdpLabel = new System.Windows.Forms.Label();
             this.adminTabControl.SuspendLayout();
             this.userConfigurationsTab.SuspendLayout();
@@ -256,7 +257,7 @@
             this.processorsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processorDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.processorBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet)).BeginInit();
             this.ramTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rAMDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rAMBindingSource)).BeginInit();
@@ -287,12 +288,8 @@
             this.userEditorSplitContainer.Panel2.SuspendLayout();
             this.userEditorSplitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addNewUserPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mainPageSplitContainer)).BeginInit();
-            this.mainPageSplitContainer.Panel1.SuspendLayout();
-            this.mainPageSplitContainer.Panel2.SuspendLayout();
-            this.mainPageSplitContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cleanConfigPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warningPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveConfigPictureBox)).BeginInit();
             this.psuGroupBox.SuspendLayout();
@@ -304,7 +301,21 @@
             this.ramGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPageSplitContainer)).BeginInit();
+            this.mainPageSplitContainer.Panel1.SuspendLayout();
+            this.mainPageSplitContainer.Panel2.SuspendLayout();
+            this.mainPageSplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             this.SuspendLayout();
+            // 
+            // tdpLabel
+            // 
+            tdpLabel.AutoSize = true;
+            tdpLabel.Location = new System.Drawing.Point(43, 200);
+            tdpLabel.Name = "tdpLabel";
+            tdpLabel.Size = new System.Drawing.Size(29, 13);
+            tdpLabel.TabIndex = 14;
+            tdpLabel.Text = "Tdp:";
             // 
             // adminTabControl
             // 
@@ -622,12 +633,12 @@
             // processorBindingSource
             // 
             this.processorBindingSource.DataMember = "Processor";
-            this.processorBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.processorBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
-            // personalComputerConfiguratorDatabaseDataSet1
+            // personalComputerConfiguratorDatabaseDataSet
             // 
-            this.personalComputerConfiguratorDatabaseDataSet1.DataSetName = "personalComputerConfiguratorDatabaseDataSet1";
-            this.personalComputerConfiguratorDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.personalComputerConfiguratorDatabaseDataSet.DataSetName = "personalComputerConfiguratorDatabaseDataSet";
+            this.personalComputerConfiguratorDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // ramTab
             // 
@@ -739,7 +750,7 @@
             // rAMBindingSource
             // 
             this.rAMBindingSource.DataMember = "RAM";
-            this.rAMBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.rAMBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // coolersTab
             // 
@@ -843,7 +854,7 @@
             // coolerBindingSource
             // 
             this.coolerBindingSource.DataMember = "Cooler";
-            this.coolerBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.coolerBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // casesTab
             // 
@@ -933,7 +944,7 @@
             // caseBindingSource
             // 
             this.caseBindingSource.DataMember = "Case";
-            this.caseBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.caseBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // hddTab
             // 
@@ -1024,7 +1035,7 @@
             // hDDBindingSource
             // 
             this.hDDBindingSource.DataMember = "HDD";
-            this.hDDBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.hDDBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // ssdTab
             // 
@@ -1121,7 +1132,7 @@
             // sSDBindingSource
             // 
             this.sSDBindingSource.DataMember = "SSD";
-            this.sSDBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.sSDBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // gpuTab
             // 
@@ -1233,7 +1244,7 @@
             // gPUBindingSource
             // 
             this.gPUBindingSource.DataMember = "GPU";
-            this.gPUBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.gPUBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // psuTab
             // 
@@ -1330,7 +1341,7 @@
             // pSUBindingSource
             // 
             this.pSUBindingSource.DataMember = "PSU";
-            this.pSUBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.pSUBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // motherboardTab
             // 
@@ -1427,7 +1438,7 @@
             // motherboardBindingSource
             // 
             this.motherboardBindingSource.DataMember = "Motherboard";
-            this.motherboardBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet1;
+            this.motherboardBindingSource.DataSource = this.personalComputerConfiguratorDatabaseDataSet;
             // 
             // UserEditorAdminTab
             // 
@@ -1478,117 +1489,9 @@
             this.usersEdtiorFlowLayoutPanel.Size = new System.Drawing.Size(1370, 465);
             this.usersEdtiorFlowLayoutPanel.TabIndex = 0;
             // 
-            // mainPageSplitContainer
-            // 
-            this.mainPageSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPageSplitContainer.Location = new System.Drawing.Point(0, 0);
-            this.mainPageSplitContainer.Name = "mainPageSplitContainer";
-            this.mainPageSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // mainPageSplitContainer.Panel1
-            // 
-            this.mainPageSplitContainer.Panel1.Controls.Add(this.logoutButton);
-            this.mainPageSplitContainer.Panel1.Controls.Add(this.profilePictureBox);
-            this.mainPageSplitContainer.Panel1.Controls.Add(this.userFIOLabel);
-            // 
-            // mainPageSplitContainer.Panel2
-            // 
-            this.mainPageSplitContainer.Panel2.AutoScroll = true;
-            this.mainPageSplitContainer.Panel2.Controls.Add(this.adminTabControl);
-            this.mainPageSplitContainer.Size = new System.Drawing.Size(1384, 673);
-            this.mainPageSplitContainer.SplitterDistance = 87;
-            this.mainPageSplitContainer.TabIndex = 0;
-            // 
-            // logoutButton
-            // 
-            this.logoutButton.Location = new System.Drawing.Point(1302, 42);
-            this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(70, 20);
-            this.logoutButton.TabIndex = 9;
-            this.logoutButton.Text = "ВЫЙТИ";
-            this.logoutButton.UseVisualStyleBackColor = true;
-            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
-            // 
-            // profilePictureBox
-            // 
-            this.profilePictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.profilePictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.profilePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("profilePictureBox.Image")));
-            this.profilePictureBox.Location = new System.Drawing.Point(1070, 12);
-            this.profilePictureBox.Name = "profilePictureBox";
-            this.profilePictureBox.Size = new System.Drawing.Size(50, 50);
-            this.profilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.profilePictureBox.TabIndex = 7;
-            this.profilePictureBox.TabStop = false;
-            this.profilePictureBox.Click += new System.EventHandler(this.profilePictureBox_Click);
-            // 
-            // userFIOLabel
-            // 
-            this.userFIOLabel.AutoSize = true;
-            this.userFIOLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.userFIOLabel.Location = new System.Drawing.Point(1138, 12);
-            this.userFIOLabel.Name = "userFIOLabel";
-            this.userFIOLabel.Size = new System.Drawing.Size(24, 13);
-            this.userFIOLabel.TabIndex = 8;
-            this.userFIOLabel.Text = "FIO";
-            this.userFIOLabel.Click += new System.EventHandler(this.profilePictureBox_Click);
-            // 
-            // processorTableAdapter
-            // 
-            this.processorTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.CaseTableAdapter = null;
-            this.tableAdapterManager.ConfigurationTableAdapter = null;
-            this.tableAdapterManager.CoolerTableAdapter = null;
-            this.tableAdapterManager.DDRTypeTableAdapter = null;
-            this.tableAdapterManager.GPUTableAdapter = null;
-            this.tableAdapterManager.HDDTableAdapter = null;
-            this.tableAdapterManager.MotherboardTableAdapter = null;
-            this.tableAdapterManager.ProcessorTableAdapter = this.processorTableAdapter;
-            this.tableAdapterManager.PSUTableAdapter = null;
-            this.tableAdapterManager.RAMTableAdapter = null;
-            this.tableAdapterManager.SSDTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet1TableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            this.tableAdapterManager.UserRoleTableAdapter = null;
-            this.tableAdapterManager.UserTableAdapter = null;
-            // 
-            // rAMTableAdapter
-            // 
-            this.rAMTableAdapter.ClearBeforeFill = true;
-            // 
-            // coolerTableAdapter
-            // 
-            this.coolerTableAdapter.ClearBeforeFill = true;
-            // 
-            // caseTableAdapter
-            // 
-            this.caseTableAdapter.ClearBeforeFill = true;
-            // 
-            // hDDTableAdapter
-            // 
-            this.hDDTableAdapter.ClearBeforeFill = true;
-            // 
-            // sSDTableAdapter
-            // 
-            this.sSDTableAdapter.ClearBeforeFill = true;
-            // 
-            // gPUTableAdapter
-            // 
-            this.gPUTableAdapter.ClearBeforeFill = true;
-            // 
-            // pSUTableAdapter
-            // 
-            this.pSUTableAdapter.ClearBeforeFill = true;
-            // 
-            // motherboardTableAdapter
-            // 
-            this.motherboardTableAdapter.ClearBeforeFill = true;
-            // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cleanConfigPictureBox);
             this.tabPage1.Controls.Add(this.warningPictureBox);
             this.tabPage1.Controls.Add(this.configPriceLabel);
             this.tabPage1.Controls.Add(this.configName);
@@ -1611,6 +1514,18 @@
             this.tabPage1.TabIndex = 14;
             this.tabPage1.Text = "СОБРАТЬ ПК";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // cleanConfigPictureBox
+            // 
+            this.cleanConfigPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cleanConfigPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("cleanConfigPictureBox.Image")));
+            this.cleanConfigPictureBox.Location = new System.Drawing.Point(1325, 6);
+            this.cleanConfigPictureBox.Name = "cleanConfigPictureBox";
+            this.cleanConfigPictureBox.Size = new System.Drawing.Size(43, 46);
+            this.cleanConfigPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.cleanConfigPictureBox.TabIndex = 102;
+            this.cleanConfigPictureBox.TabStop = false;
+            this.cleanConfigPictureBox.Click += new System.EventHandler(this.cleanConfigPictureBox_Click);
             // 
             // warningPictureBox
             // 
@@ -1682,6 +1597,42 @@
             this.psuGroupBox.TabStop = false;
             this.psuGroupBox.Text = "БЛОК ПИТАНИЯ";
             // 
+            // priceLabel5
+            // 
+            this.priceLabel5.AutoSize = true;
+            this.priceLabel5.Location = new System.Drawing.Point(292, 103);
+            this.priceLabel5.Name = "priceLabel5";
+            this.priceLabel5.Size = new System.Drawing.Size(41, 13);
+            this.priceLabel5.TabIndex = 14;
+            this.priceLabel5.Text = "label10";
+            // 
+            // formFactorLabel1
+            // 
+            this.formFactorLabel1.AutoSize = true;
+            this.formFactorLabel1.Location = new System.Drawing.Point(278, 66);
+            this.formFactorLabel1.Name = "formFactorLabel1";
+            this.formFactorLabel1.Size = new System.Drawing.Size(41, 13);
+            this.formFactorLabel1.TabIndex = 13;
+            this.formFactorLabel1.Text = "label10";
+            // 
+            // certificateLabel1
+            // 
+            this.certificateLabel1.AutoSize = true;
+            this.certificateLabel1.Location = new System.Drawing.Point(6, 103);
+            this.certificateLabel1.Name = "certificateLabel1";
+            this.certificateLabel1.Size = new System.Drawing.Size(41, 13);
+            this.certificateLabel1.TabIndex = 12;
+            this.certificateLabel1.Text = "label10";
+            // 
+            // powerSupplyLabel1
+            // 
+            this.powerSupplyLabel1.AutoSize = true;
+            this.powerSupplyLabel1.Location = new System.Drawing.Point(6, 66);
+            this.powerSupplyLabel1.Name = "powerSupplyLabel1";
+            this.powerSupplyLabel1.Size = new System.Drawing.Size(41, 13);
+            this.powerSupplyLabel1.TabIndex = 11;
+            this.powerSupplyLabel1.Text = "label10";
+            // 
             // psuComboBox
             // 
             this.psuComboBox.DataSource = this.processorBindingSource;
@@ -1705,6 +1656,33 @@
             this.hddGroupBox.TabIndex = 23;
             this.hddGroupBox.TabStop = false;
             this.hddGroupBox.Text = "ЖЕСТКИЙ ДИСК";
+            // 
+            // priceLabel7
+            // 
+            this.priceLabel7.AutoSize = true;
+            this.priceLabel7.Location = new System.Drawing.Point(328, 103);
+            this.priceLabel7.Name = "priceLabel7";
+            this.priceLabel7.Size = new System.Drawing.Size(41, 13);
+            this.priceLabel7.TabIndex = 10;
+            this.priceLabel7.Text = "label10";
+            // 
+            // speedLabel1
+            // 
+            this.speedLabel1.AutoSize = true;
+            this.speedLabel1.Location = new System.Drawing.Point(10, 103);
+            this.speedLabel1.Name = "speedLabel1";
+            this.speedLabel1.Size = new System.Drawing.Size(41, 13);
+            this.speedLabel1.TabIndex = 9;
+            this.speedLabel1.Text = "label10";
+            // 
+            // hddCapacityLabel
+            // 
+            this.hddCapacityLabel.AutoSize = true;
+            this.hddCapacityLabel.Location = new System.Drawing.Point(6, 66);
+            this.hddCapacityLabel.Name = "hddCapacityLabel";
+            this.hddCapacityLabel.Size = new System.Drawing.Size(41, 13);
+            this.hddCapacityLabel.TabIndex = 8;
+            this.hddCapacityLabel.Text = "label10";
             // 
             // hddComboBox
             // 
@@ -1731,6 +1709,42 @@
             this.ssdGroupBox.TabStop = false;
             this.ssdGroupBox.Text = "ССД";
             // 
+            // priceLabel9
+            // 
+            this.priceLabel9.AutoSize = true;
+            this.priceLabel9.Location = new System.Drawing.Point(341, 103);
+            this.priceLabel9.Name = "priceLabel9";
+            this.priceLabel9.Size = new System.Drawing.Size(41, 13);
+            this.priceLabel9.TabIndex = 12;
+            this.priceLabel9.Text = "label10";
+            // 
+            // writingLabel1
+            // 
+            this.writingLabel1.AutoSize = true;
+            this.writingLabel1.Location = new System.Drawing.Point(6, 103);
+            this.writingLabel1.Name = "writingLabel1";
+            this.writingLabel1.Size = new System.Drawing.Size(41, 13);
+            this.writingLabel1.TabIndex = 11;
+            this.writingLabel1.Text = "label10";
+            // 
+            // readingLabel1
+            // 
+            this.readingLabel1.AutoSize = true;
+            this.readingLabel1.Location = new System.Drawing.Point(6, 75);
+            this.readingLabel1.Name = "readingLabel1";
+            this.readingLabel1.Size = new System.Drawing.Size(41, 13);
+            this.readingLabel1.TabIndex = 10;
+            this.readingLabel1.Text = "label10";
+            // 
+            // capacityLabel3
+            // 
+            this.capacityLabel3.AutoSize = true;
+            this.capacityLabel3.Location = new System.Drawing.Point(6, 49);
+            this.capacityLabel3.Name = "capacityLabel3";
+            this.capacityLabel3.Size = new System.Drawing.Size(41, 13);
+            this.capacityLabel3.TabIndex = 9;
+            this.capacityLabel3.Text = "label10";
+            // 
             // ssdComboBox
             // 
             this.ssdComboBox.DataSource = this.processorBindingSource;
@@ -1754,6 +1768,34 @@
             this.caseGroupBox.TabIndex = 21;
             this.caseGroupBox.TabStop = false;
             this.caseGroupBox.Text = "КОРПУС";
+            // 
+            // priceLabel3
+            // 
+            this.priceLabel3.AutoSize = true;
+            this.priceLabel3.Location = new System.Drawing.Point(292, 103);
+            this.priceLabel3.Name = "priceLabel3";
+            this.priceLabel3.Size = new System.Drawing.Size(41, 13);
+            this.priceLabel3.TabIndex = 17;
+            this.priceLabel3.Text = "label10";
+            // 
+            // sizeLabel1
+            // 
+            this.sizeLabel1.AutoSize = true;
+            this.sizeLabel1.Location = new System.Drawing.Point(231, 60);
+            this.sizeLabel1.Name = "sizeLabel1";
+            this.sizeLabel1.Size = new System.Drawing.Size(41, 13);
+            this.sizeLabel1.TabIndex = 16;
+            this.sizeLabel1.Text = "label10";
+            // 
+            // formFaktorLabel1
+            // 
+            this.formFaktorLabel1.AutoSize = true;
+            this.formFaktorLabel1.Location = new System.Drawing.Point(23, 60);
+            this.formFaktorLabel1.Name = "formFaktorLabel1";
+            this.formFaktorLabel1.Size = new System.Drawing.Size(41, 13);
+            this.formFaktorLabel1.TabIndex = 15;
+            this.formFaktorLabel1.Text = "label10";
+            this.formFaktorLabel1.Click += new System.EventHandler(this.label10_Click);
             // 
             // caseComboBox
             // 
@@ -1783,6 +1825,51 @@
             this.gpuGroupBox.TabStop = false;
             this.gpuGroupBox.Text = "ВИДЕОКАРТА";
             // 
+            // priceLabel1
+            // 
+            this.priceLabel1.AutoSize = true;
+            this.priceLabel1.Location = new System.Drawing.Point(290, 103);
+            this.priceLabel1.Name = "priceLabel1";
+            this.priceLabel1.Size = new System.Drawing.Size(41, 13);
+            this.priceLabel1.TabIndex = 20;
+            this.priceLabel1.Text = "label10";
+            // 
+            // memoryTypeLabel1
+            // 
+            this.memoryTypeLabel1.AutoSize = true;
+            this.memoryTypeLabel1.Location = new System.Drawing.Point(201, 82);
+            this.memoryTypeLabel1.Name = "memoryTypeLabel1";
+            this.memoryTypeLabel1.Size = new System.Drawing.Size(41, 13);
+            this.memoryTypeLabel1.TabIndex = 19;
+            this.memoryTypeLabel1.Text = "label10";
+            // 
+            // memorySizeLabel1
+            // 
+            this.memorySizeLabel1.AutoSize = true;
+            this.memorySizeLabel1.Location = new System.Drawing.Point(201, 50);
+            this.memorySizeLabel1.Name = "memorySizeLabel1";
+            this.memorySizeLabel1.Size = new System.Drawing.Size(41, 13);
+            this.memorySizeLabel1.TabIndex = 18;
+            this.memorySizeLabel1.Text = "label10";
+            // 
+            // gpuBoostLabel1
+            // 
+            this.gpuBoostLabel1.AutoSize = true;
+            this.gpuBoostLabel1.Location = new System.Drawing.Point(16, 93);
+            this.gpuBoostLabel1.Name = "gpuBoostLabel1";
+            this.gpuBoostLabel1.Size = new System.Drawing.Size(41, 13);
+            this.gpuBoostLabel1.TabIndex = 17;
+            this.gpuBoostLabel1.Text = "label10";
+            // 
+            // gpuFrequencyLabel1
+            // 
+            this.gpuFrequencyLabel1.AutoSize = true;
+            this.gpuFrequencyLabel1.Location = new System.Drawing.Point(16, 50);
+            this.gpuFrequencyLabel1.Name = "gpuFrequencyLabel1";
+            this.gpuFrequencyLabel1.Size = new System.Drawing.Size(41, 13);
+            this.gpuFrequencyLabel1.TabIndex = 16;
+            this.gpuFrequencyLabel1.Text = "label10";
+            // 
             // gpuComboBox
             // 
             this.gpuComboBox.DataSource = this.processorBindingSource;
@@ -1793,15 +1880,6 @@
             this.gpuComboBox.Size = new System.Drawing.Size(373, 21);
             this.gpuComboBox.TabIndex = 3;
             this.gpuComboBox.ValueMember = "ID";
-            // 
-            // tdpLabel
-            // 
-            tdpLabel.AutoSize = true;
-            tdpLabel.Location = new System.Drawing.Point(43, 200);
-            tdpLabel.Name = "tdpLabel";
-            tdpLabel.Size = new System.Drawing.Size(29, 13);
-            tdpLabel.TabIndex = 14;
-            tdpLabel.Text = "Tdp:";
             // 
             // tdpLabel1
             // 
@@ -2116,177 +2194,114 @@
             this.processorComboBox.TabIndex = 0;
             this.processorComboBox.ValueMember = "ID";
             // 
-            // hddCapacityLabel
+            // mainPageSplitContainer
             // 
-            this.hddCapacityLabel.AutoSize = true;
-            this.hddCapacityLabel.Location = new System.Drawing.Point(6, 66);
-            this.hddCapacityLabel.Name = "hddCapacityLabel";
-            this.hddCapacityLabel.Size = new System.Drawing.Size(41, 13);
-            this.hddCapacityLabel.TabIndex = 8;
-            this.hddCapacityLabel.Text = "label10";
+            this.mainPageSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPageSplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.mainPageSplitContainer.Name = "mainPageSplitContainer";
+            this.mainPageSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // speedLabel1
+            // mainPageSplitContainer.Panel1
             // 
-            this.speedLabel1.AutoSize = true;
-            this.speedLabel1.Location = new System.Drawing.Point(10, 103);
-            this.speedLabel1.Name = "speedLabel1";
-            this.speedLabel1.Size = new System.Drawing.Size(41, 13);
-            this.speedLabel1.TabIndex = 9;
-            this.speedLabel1.Text = "label10";
+            this.mainPageSplitContainer.Panel1.Controls.Add(this.logoutButton);
+            this.mainPageSplitContainer.Panel1.Controls.Add(this.profilePictureBox);
+            this.mainPageSplitContainer.Panel1.Controls.Add(this.userFIOLabel);
             // 
-            // priceLabel7
+            // mainPageSplitContainer.Panel2
             // 
-            this.priceLabel7.AutoSize = true;
-            this.priceLabel7.Location = new System.Drawing.Point(328, 103);
-            this.priceLabel7.Name = "priceLabel7";
-            this.priceLabel7.Size = new System.Drawing.Size(41, 13);
-            this.priceLabel7.TabIndex = 10;
-            this.priceLabel7.Text = "label10";
+            this.mainPageSplitContainer.Panel2.AutoScroll = true;
+            this.mainPageSplitContainer.Panel2.Controls.Add(this.adminTabControl);
+            this.mainPageSplitContainer.Size = new System.Drawing.Size(1384, 673);
+            this.mainPageSplitContainer.SplitterDistance = 87;
+            this.mainPageSplitContainer.TabIndex = 0;
             // 
-            // capacityLabel3
+            // logoutButton
             // 
-            this.capacityLabel3.AutoSize = true;
-            this.capacityLabel3.Location = new System.Drawing.Point(6, 49);
-            this.capacityLabel3.Name = "capacityLabel3";
-            this.capacityLabel3.Size = new System.Drawing.Size(41, 13);
-            this.capacityLabel3.TabIndex = 9;
-            this.capacityLabel3.Text = "label10";
+            this.logoutButton.Location = new System.Drawing.Point(1302, 42);
+            this.logoutButton.Name = "logoutButton";
+            this.logoutButton.Size = new System.Drawing.Size(70, 20);
+            this.logoutButton.TabIndex = 9;
+            this.logoutButton.Text = "ВЫЙТИ";
+            this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
-            // readingLabel1
+            // profilePictureBox
             // 
-            this.readingLabel1.AutoSize = true;
-            this.readingLabel1.Location = new System.Drawing.Point(6, 75);
-            this.readingLabel1.Name = "readingLabel1";
-            this.readingLabel1.Size = new System.Drawing.Size(41, 13);
-            this.readingLabel1.TabIndex = 10;
-            this.readingLabel1.Text = "label10";
+            this.profilePictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.profilePictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.profilePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("profilePictureBox.Image")));
+            this.profilePictureBox.Location = new System.Drawing.Point(1070, 12);
+            this.profilePictureBox.Name = "profilePictureBox";
+            this.profilePictureBox.Size = new System.Drawing.Size(50, 50);
+            this.profilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.profilePictureBox.TabIndex = 7;
+            this.profilePictureBox.TabStop = false;
+            this.profilePictureBox.Click += new System.EventHandler(this.profilePictureBox_Click);
             // 
-            // writingLabel1
+            // userFIOLabel
             // 
-            this.writingLabel1.AutoSize = true;
-            this.writingLabel1.Location = new System.Drawing.Point(6, 103);
-            this.writingLabel1.Name = "writingLabel1";
-            this.writingLabel1.Size = new System.Drawing.Size(41, 13);
-            this.writingLabel1.TabIndex = 11;
-            this.writingLabel1.Text = "label10";
+            this.userFIOLabel.AutoSize = true;
+            this.userFIOLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.userFIOLabel.Location = new System.Drawing.Point(1138, 12);
+            this.userFIOLabel.Name = "userFIOLabel";
+            this.userFIOLabel.Size = new System.Drawing.Size(24, 13);
+            this.userFIOLabel.TabIndex = 8;
+            this.userFIOLabel.Text = "FIO";
+            this.userFIOLabel.Click += new System.EventHandler(this.profilePictureBox_Click);
             // 
-            // priceLabel9
+            // processorTableAdapter
             // 
-            this.priceLabel9.AutoSize = true;
-            this.priceLabel9.Location = new System.Drawing.Point(341, 103);
-            this.priceLabel9.Name = "priceLabel9";
-            this.priceLabel9.Size = new System.Drawing.Size(41, 13);
-            this.priceLabel9.TabIndex = 12;
-            this.priceLabel9.Text = "label10";
+            this.processorTableAdapter.ClearBeforeFill = true;
             // 
-            // powerSupplyLabel1
+            // tableAdapterManager
             // 
-            this.powerSupplyLabel1.AutoSize = true;
-            this.powerSupplyLabel1.Location = new System.Drawing.Point(6, 66);
-            this.powerSupplyLabel1.Name = "powerSupplyLabel1";
-            this.powerSupplyLabel1.Size = new System.Drawing.Size(41, 13);
-            this.powerSupplyLabel1.TabIndex = 11;
-            this.powerSupplyLabel1.Text = "label10";
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.CaseTableAdapter = null;
+            this.tableAdapterManager.ConfigurationTableAdapter = null;
+            this.tableAdapterManager.CoolerTableAdapter = null;
+            this.tableAdapterManager.DDRTypeTableAdapter = null;
+            this.tableAdapterManager.GPUTableAdapter = null;
+            this.tableAdapterManager.HDDTableAdapter = null;
+            this.tableAdapterManager.MotherboardTableAdapter = null;
+            this.tableAdapterManager.ProcessorTableAdapter = this.processorTableAdapter;
+            this.tableAdapterManager.PSUTableAdapter = null;
+            this.tableAdapterManager.RAMTableAdapter = null;
+            this.tableAdapterManager.SSDTableAdapter = null;
+            this.tableAdapterManager.UpdateOrder = PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UserRoleTableAdapter = null;
+            this.tableAdapterManager.UserTableAdapter = null;
             // 
-            // certificateLabel1
+            // rAMTableAdapter
             // 
-            this.certificateLabel1.AutoSize = true;
-            this.certificateLabel1.Location = new System.Drawing.Point(6, 103);
-            this.certificateLabel1.Name = "certificateLabel1";
-            this.certificateLabel1.Size = new System.Drawing.Size(41, 13);
-            this.certificateLabel1.TabIndex = 12;
-            this.certificateLabel1.Text = "label10";
+            this.rAMTableAdapter.ClearBeforeFill = true;
             // 
-            // formFactorLabel1
+            // coolerTableAdapter
             // 
-            this.formFactorLabel1.AutoSize = true;
-            this.formFactorLabel1.Location = new System.Drawing.Point(278, 66);
-            this.formFactorLabel1.Name = "formFactorLabel1";
-            this.formFactorLabel1.Size = new System.Drawing.Size(41, 13);
-            this.formFactorLabel1.TabIndex = 13;
-            this.formFactorLabel1.Text = "label10";
+            this.coolerTableAdapter.ClearBeforeFill = true;
             // 
-            // priceLabel5
+            // caseTableAdapter
             // 
-            this.priceLabel5.AutoSize = true;
-            this.priceLabel5.Location = new System.Drawing.Point(292, 103);
-            this.priceLabel5.Name = "priceLabel5";
-            this.priceLabel5.Size = new System.Drawing.Size(41, 13);
-            this.priceLabel5.TabIndex = 14;
-            this.priceLabel5.Text = "label10";
+            this.caseTableAdapter.ClearBeforeFill = true;
             // 
-            // formFaktorLabel1
+            // hDDTableAdapter
             // 
-            this.formFaktorLabel1.AutoSize = true;
-            this.formFaktorLabel1.Location = new System.Drawing.Point(23, 60);
-            this.formFaktorLabel1.Name = "formFaktorLabel1";
-            this.formFaktorLabel1.Size = new System.Drawing.Size(41, 13);
-            this.formFaktorLabel1.TabIndex = 15;
-            this.formFaktorLabel1.Text = "label10";
-            this.formFaktorLabel1.Click += new System.EventHandler(this.label10_Click);
+            this.hDDTableAdapter.ClearBeforeFill = true;
             // 
-            // sizeLabel1
+            // sSDTableAdapter
             // 
-            this.sizeLabel1.AutoSize = true;
-            this.sizeLabel1.Location = new System.Drawing.Point(231, 60);
-            this.sizeLabel1.Name = "sizeLabel1";
-            this.sizeLabel1.Size = new System.Drawing.Size(41, 13);
-            this.sizeLabel1.TabIndex = 16;
-            this.sizeLabel1.Text = "label10";
+            this.sSDTableAdapter.ClearBeforeFill = true;
             // 
-            // priceLabel3
+            // gPUTableAdapter
             // 
-            this.priceLabel3.AutoSize = true;
-            this.priceLabel3.Location = new System.Drawing.Point(292, 103);
-            this.priceLabel3.Name = "priceLabel3";
-            this.priceLabel3.Size = new System.Drawing.Size(41, 13);
-            this.priceLabel3.TabIndex = 17;
-            this.priceLabel3.Text = "label10";
+            this.gPUTableAdapter.ClearBeforeFill = true;
             // 
-            // gpuFrequencyLabel1
+            // pSUTableAdapter
             // 
-            this.gpuFrequencyLabel1.AutoSize = true;
-            this.gpuFrequencyLabel1.Location = new System.Drawing.Point(16, 50);
-            this.gpuFrequencyLabel1.Name = "gpuFrequencyLabel1";
-            this.gpuFrequencyLabel1.Size = new System.Drawing.Size(41, 13);
-            this.gpuFrequencyLabel1.TabIndex = 16;
-            this.gpuFrequencyLabel1.Text = "label10";
+            this.pSUTableAdapter.ClearBeforeFill = true;
             // 
-            // gpuBoostLabel1
+            // motherboardTableAdapter
             // 
-            this.gpuBoostLabel1.AutoSize = true;
-            this.gpuBoostLabel1.Location = new System.Drawing.Point(16, 93);
-            this.gpuBoostLabel1.Name = "gpuBoostLabel1";
-            this.gpuBoostLabel1.Size = new System.Drawing.Size(41, 13);
-            this.gpuBoostLabel1.TabIndex = 17;
-            this.gpuBoostLabel1.Text = "label10";
-            // 
-            // memorySizeLabel1
-            // 
-            this.memorySizeLabel1.AutoSize = true;
-            this.memorySizeLabel1.Location = new System.Drawing.Point(201, 50);
-            this.memorySizeLabel1.Name = "memorySizeLabel1";
-            this.memorySizeLabel1.Size = new System.Drawing.Size(41, 13);
-            this.memorySizeLabel1.TabIndex = 18;
-            this.memorySizeLabel1.Text = "label10";
-            // 
-            // memoryTypeLabel1
-            // 
-            this.memoryTypeLabel1.AutoSize = true;
-            this.memoryTypeLabel1.Location = new System.Drawing.Point(201, 82);
-            this.memoryTypeLabel1.Name = "memoryTypeLabel1";
-            this.memoryTypeLabel1.Size = new System.Drawing.Size(41, 13);
-            this.memoryTypeLabel1.TabIndex = 19;
-            this.memoryTypeLabel1.Text = "label10";
-            // 
-            // priceLabel1
-            // 
-            this.priceLabel1.AutoSize = true;
-            this.priceLabel1.Location = new System.Drawing.Point(290, 103);
-            this.priceLabel1.Name = "priceLabel1";
-            this.priceLabel1.Size = new System.Drawing.Size(41, 13);
-            this.priceLabel1.TabIndex = 20;
-            this.priceLabel1.Text = "label10";
+            this.motherboardTableAdapter.ClearBeforeFill = true;
             // 
             // MainPageForm
             // 
@@ -2294,8 +2309,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 673);
             this.Controls.Add(this.mainPageSplitContainer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainPageForm";
-            this.Text = "MainPageForm";
+            this.Text = "КОНФИГУРАТОР ПК";
             this.Load += new System.EventHandler(this.MainPageForm_Load);
             this.adminTabControl.ResumeLayout(false);
             this.userConfigurationsTab.ResumeLayout(false);
@@ -2306,7 +2322,7 @@
             this.processorsTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processorDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.processorBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet)).EndInit();
             this.ramTab.ResumeLayout(false);
             this.ramTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rAMDataGridView)).EndInit();
@@ -2345,14 +2361,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.userEditorSplitContainer)).EndInit();
             this.userEditorSplitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.addNewUserPictureBox)).EndInit();
-            this.mainPageSplitContainer.Panel1.ResumeLayout(false);
-            this.mainPageSplitContainer.Panel1.PerformLayout();
-            this.mainPageSplitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mainPageSplitContainer)).EndInit();
-            this.mainPageSplitContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cleanConfigPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warningPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveConfigPictureBox)).EndInit();
             this.psuGroupBox.ResumeLayout(false);
@@ -2373,17 +2384,23 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.mainPageSplitContainer.Panel1.ResumeLayout(false);
+            this.mainPageSplitContainer.Panel1.PerformLayout();
+            this.mainPageSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mainPageSplitContainer)).EndInit();
+            this.mainPageSplitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private personalComputerConfiguratorDatabaseDataSet1 personalComputerConfiguratorDatabaseDataSet1;
+        private personalComputerConfiguratorDatabaseDataSet personalComputerConfiguratorDatabaseDataSet;
         private System.Windows.Forms.BindingSource processorBindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.ProcessorTableAdapter processorTableAdapter;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.TableAdapterManager tableAdapterManager;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.ProcessorTableAdapter processorTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.BindingSource rAMBindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.RAMTableAdapter rAMTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.RAMTableAdapter rAMTableAdapter;
         private System.Windows.Forms.TabControl adminTabControl;
         private System.Windows.Forms.TabPage profileTabPage;
         private System.Windows.Forms.Label deleteProfileLabel;
@@ -2415,21 +2432,21 @@
         private System.Windows.Forms.FlowLayoutPanel usersEdtiorFlowLayoutPanel;
         private System.Windows.Forms.SplitContainer mainPageSplitContainer;
         private System.Windows.Forms.BindingSource coolerBindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.CoolerTableAdapter coolerTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.CoolerTableAdapter coolerTableAdapter;
         private System.Windows.Forms.BindingSource caseBindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.CaseTableAdapter caseTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.CaseTableAdapter caseTableAdapter;
         private System.Windows.Forms.DataGridView caseDataGridView;
         private System.Windows.Forms.BindingSource hDDBindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.HDDTableAdapter hDDTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.HDDTableAdapter hDDTableAdapter;
         private System.Windows.Forms.DataGridView hDDDataGridView;
         private System.Windows.Forms.BindingSource sSDBindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.SSDTableAdapter sSDTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.SSDTableAdapter sSDTableAdapter;
         private System.Windows.Forms.DataGridView sSDDataGridView;
         private System.Windows.Forms.BindingSource gPUBindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.GPUTableAdapter gPUTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.GPUTableAdapter gPUTableAdapter;
         private System.Windows.Forms.DataGridView gPUDataGridView;
         private System.Windows.Forms.BindingSource pSUBindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.PSUTableAdapter pSUTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.PSUTableAdapter pSUTableAdapter;
         private System.Windows.Forms.DataGridView pSUDataGridView;
         private System.Windows.Forms.PictureBox addNewUserPictureBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -2479,7 +2496,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn61;
         private System.Windows.Forms.TabPage motherboardTab;
         private System.Windows.Forms.BindingSource motherboardBindingSource;
-        private personalComputerConfiguratorDatabaseDataSet1TableAdapters.MotherboardTableAdapter motherboardTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.MotherboardTableAdapter motherboardTableAdapter;
         private System.Windows.Forms.DataGridView motherboardDataGridView;
         private System.Windows.Forms.DataGridView coolerDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
@@ -2595,5 +2612,6 @@
         private System.Windows.Forms.Label memorySizeLabel1;
         private System.Windows.Forms.Label memoryTypeLabel1;
         private System.Windows.Forms.Label priceLabel1;
+        private System.Windows.Forms.PictureBox cleanConfigPictureBox;
     }
 }

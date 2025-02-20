@@ -33,5 +33,16 @@ namespace PersonalComputerConfigurator.Properties {
                 return ((string)(this["personalComputerConfiguratorDatabaseConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\personalCompu" +
+            "terConfiguratorDatabase.mdf;Integrated Security=True")]
+        public string personalComputerConfiguratorDatabaseConnectionString1 {
+            get {
+                return ((string)(this["personalComputerConfiguratorDatabaseConnectionString1"]));
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Mail;
+using System.Globalization;
 
 namespace PersonalComputerConfigurator.Forms
 {
@@ -121,7 +122,7 @@ namespace PersonalComputerConfigurator.Forms
             }
 
             // TODO: данная строка кода позволяет загрузить данные в таблицу "personalComputerConfiguratorDatabaseDataSet.userRole". При необходимости она может быть перемещена или удалена.
-            this.userRoleTableAdapter.Fill(this.personalComputerConfiguratorDatabaseDataSet.userRole);
+            this.UserRoleTableAdapter.Fill(this.personalComputerConfiguratorDatabaseDataSet.UserRole);
             passwordTextBox.PasswordChar = '*';
             repeatPasswordTextBox.PasswordChar = '*';
         }
@@ -133,12 +134,9 @@ namespace PersonalComputerConfigurator.Forms
 
         private bool isEmailValid(string email)
         {
-            try
-            {
-                var addr = new MailAddress(email);
-                return true;
-            }
-            catch { return false; }
+            return Regex.IsMatch(email,
+                @"^[^@\s]+@[^@\s]+\.[^@\s]+$", // Обычная проверка email
+                RegexOptions.IgnoreCase);
         }
     }
 }

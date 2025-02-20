@@ -480,6 +480,8 @@ namespace PersonalComputerConfigurator.Forms
 
         private void ClearAllLabels()
         {
+            configNameTextBox.Text = "";
+
             // Очистка процессора
             processorSocketLabel.Text = "";
             processorTDPLabel.Text = "";
@@ -641,5 +643,9 @@ namespace PersonalComputerConfigurator.Forms
             }
         }
 
+        private void cleanConfigPictureBox_Click(object sender, EventArgs e)
+        {
+            ClearAllLabels();
+        }
     }
 }

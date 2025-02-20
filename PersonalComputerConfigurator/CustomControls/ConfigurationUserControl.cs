@@ -41,6 +41,8 @@ namespace PersonalComputerConfigurator.CustomControls
         private void setLabels()
         {
             configLabel.Text = $"{_configuration.Processor.Name} + {_configuration.GPU.Name} + {_configuration.GPU.Name}";
+            configNameLabel.Text = _configuration.Name ;
+            configDateLabel.Text = _configuration.CreatedAt.ToString();
         }
 
         private void ConfigurationUserControl_Click(object sender, EventArgs e)

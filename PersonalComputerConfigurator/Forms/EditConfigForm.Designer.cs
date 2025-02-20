@@ -96,6 +96,7 @@
             this.processorComboBox = new System.Windows.Forms.ComboBox();
             this.configPriceLabel = new System.Windows.Forms.Label();
             this.deletePictureBox = new System.Windows.Forms.PictureBox();
+            this.warningPictureBox = new System.Windows.Forms.PictureBox();
             tdpLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.saveConfigPictureBox)).BeginInit();
             this.psuGroupBox.SuspendLayout();
@@ -108,6 +109,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deletePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warningPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tdpLabel
@@ -138,11 +140,13 @@
             // saveConfigButton
             // 
             this.saveConfigButton.AutoSize = true;
+            this.saveConfigButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.saveConfigButton.Location = new System.Drawing.Point(1012, 44);
             this.saveConfigButton.Name = "saveConfigButton";
             this.saveConfigButton.Size = new System.Drawing.Size(120, 13);
             this.saveConfigButton.TabIndex = 23;
             this.saveConfigButton.Text = "СОХРАНИТЬ СБОРКУ";
+            this.saveConfigButton.Click += new System.EventHandler(this.saveConfigPictureBox_Click);
             // 
             // saveConfigPictureBox
             // 
@@ -774,11 +778,22 @@
             this.deletePictureBox.TabStop = false;
             this.deletePictureBox.Click += new System.EventHandler(this.deletePictureBox_Click);
             // 
+            // warningPictureBox
+            // 
+            this.warningPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("warningPictureBox.Image")));
+            this.warningPictureBox.Location = new System.Drawing.Point(858, 29);
+            this.warningPictureBox.Name = "warningPictureBox";
+            this.warningPictureBox.Size = new System.Drawing.Size(50, 40);
+            this.warningPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.warningPictureBox.TabIndex = 102;
+            this.warningPictureBox.TabStop = false;
+            // 
             // EditConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1378, 668);
+            this.Controls.Add(this.warningPictureBox);
             this.Controls.Add(this.deletePictureBox);
             this.Controls.Add(this.configPriceLabel);
             this.Controls.Add(this.configName);
@@ -794,8 +809,9 @@
             this.Controls.Add(this.ramGroupBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditConfigForm";
-            this.Text = "Form1";
+            this.Text = "КОНФИГУРАТОР ПК";
             this.Load += new System.EventHandler(this.EditConfigForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.saveConfigPictureBox)).EndInit();
             this.psuGroupBox.ResumeLayout(false);
@@ -816,6 +832,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deletePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warningPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -889,5 +906,6 @@
         private System.Windows.Forms.ComboBox processorComboBox;
         private System.Windows.Forms.Label configPriceLabel;
         private System.Windows.Forms.PictureBox deletePictureBox;
+        private System.Windows.Forms.PictureBox warningPictureBox;
     }
 }

@@ -253,6 +253,7 @@ namespace PersonalComputerConfigurator.Forms
             ramFormFactorLabel.Text = $"ФОРМ ФАКТОР: {selectedRam.FormFactor}";
             ramPriceLabel.Text = $"Цена: {MoneyService.ToRubles(selectedRam.Price)} ₽";
 
+            UpdateWarnings();
             UpdateTotalPrice();
         }
 
@@ -270,6 +271,7 @@ namespace PersonalComputerConfigurator.Forms
             motherboardPriceLabel.Text = $"ЦЕНА: {MoneyService.ToRubles(selectedMotherboard.Price)} ₽";
             motherboardRamTypeLabel.Text = $"ТИП ОПЕРАТИВНОЙ ПАМЯТИ: {selectedMotherboard.RamType}";
 
+            UpdateWarnings();
             UpdateTotalPrice();
         }
 
@@ -406,29 +408,87 @@ namespace PersonalComputerConfigurator.Forms
 
         private void deletePictureBox_Click(object sender, EventArgs e)
         {
-            // Проверяем, существует ли конфигурация
-            Configuration existingConfiguration = Program.context.Configuration.FirstOrDefault(c => c.ID == _configuration.ID);
-
-            if (existingConfiguration != null)
+            if (_configuration == null || _configuration.ID <= 0)
             {
-                DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить эту сборку?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                MessageBox.Show("Ошибка: Некорректный ID конфигурации!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                if (result == DialogResult.Yes)
+            DialogResult result = MessageBox.Show($"Вы уверены, что хотите удалить сборку  {_configuration.Name}?",
+                                                  "Подтверждение удаления",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                try
                 {
-                    // Удаляем конфигурацию из базы данных
-                    Program.context.Configuration.Remove(existingConfiguration);
-                    Program.context.SaveChanges();
+                    // Используем существующий Program.context без повторной загрузки объекта
+                    var configToDelete = Program.context.Configuration
+                        .Where(c => c.ID == _configuration.ID)
+                        .FirstOrDefault();
+
+                    if (configToDelete == null)
+                    {
+                        MessageBox.Show("Конфигурация не найдена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    Program.context.Configuration.Attach(configToDelete); // Присоединяем объект
+                    Program.context.Configuration.Remove(configToDelete); // Удаляем объект
+                    Program.context.SaveChanges(); // Сохраняем изменения в БД
 
                     MessageBox.Show("Конфигурация успешно удалена!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    ConfigurationUpdated?.Invoke(this, EventArgs.Empty); // Если есть обработчик события обновления
+                    ConfigurationUpdated?.Invoke(this, EventArgs.Empty); // Обновляем UI
 
                     this.Close(); // Закрываем форму
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при удалении: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
+        private void UpdateWarnings()
+        {
+            List<string> warnings = new List<string>();
+
+            var motherboardId = motherboardComboBox.SelectedValue as int?;
+            var ramId = ramComboBox.SelectedValue as int?;
+
+            if (motherboardId == null || ramId == null)
+            {
+                warningPictureBox.Visible = false;
+                return; // Выходим из метода, если данные не загружены
+            }
+
+            var motherboard = Program.context.Motherboard.Find(motherboardId);
+            var ram = Program.context.RAM.Find(ramId);
+
+            // Проверка совместимости RAM и Материнской платы
+            if (motherboard != null && ram != null && motherboard.RamType != ram.Type)
+            {
+                warnings.Add($"ОЗУ ({ram.Type}) несовместимо с материнской платой ({motherboard.RamType})!");
+            }
+
+            // Если есть предупреждения, показываем значок и настраиваем всплывающую подсказку
+            if (warnings.Any())
+            {
+                warningPictureBox.Visible = true;
+                ToolTip toolTip = new ToolTip
+                {
+                    AutoPopDelay = 5000,
+                    InitialDelay = 500,
+                    ReshowDelay = 400
+                };
+                toolTip.SetToolTip(warningPictureBox, "⚠ Внимание! \n" + string.Join("\n", warnings));
             }
             else
             {
-                MessageBox.Show("Конфигурация не найдена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                warningPictureBox.Visible = false;
             }
         }
     }

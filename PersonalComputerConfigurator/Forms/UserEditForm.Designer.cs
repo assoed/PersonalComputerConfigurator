@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserEditForm));
             this.userRoleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.personalComputerConfiguratorDatabaseDataSet = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSet();
-            this.userTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.userTableAdapter();
+            this.UserTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.UserTableAdapter();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.РОЛЬ = new System.Windows.Forms.Label();
             this.saveUserButton = new System.Windows.Forms.Button();
             this.emailLabel = new System.Windows.Forms.Label();
             this.emailTextBox = new System.Windows.Forms.TextBox();
-            this.userRoleTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.userRoleTableAdapter();
+            this.UserRoleTableAdapter = new PersonalComputerConfigurator.personalComputerConfiguratorDatabaseDataSetTableAdapters.UserRoleTableAdapter();
             this.lastNameLabel = new System.Windows.Forms.Label();
             this.middleNameLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
@@ -72,9 +73,9 @@
             this.personalComputerConfiguratorDatabaseDataSet.DataSetName = "personalComputerConfiguratorDatabaseDataSet";
             this.personalComputerConfiguratorDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // userTableAdapter
+            // UserTableAdapter
             // 
-            this.userTableAdapter.ClearBeforeFill = true;
+            this.UserTableAdapter.ClearBeforeFill = true;
             // 
             // userBindingSource
             // 
@@ -117,9 +118,9 @@
             this.emailTextBox.Size = new System.Drawing.Size(561, 20);
             this.emailTextBox.TabIndex = 32;
             // 
-            // userRoleTableAdapter
+            // UserRoleTableAdapter
             // 
-            this.userRoleTableAdapter.ClearBeforeFill = true;
+            this.UserRoleTableAdapter.ClearBeforeFill = true;
             // 
             // lastNameLabel
             // 
@@ -296,8 +297,9 @@
             this.Controls.Add(this.lastNameTextBox);
             this.Controls.Add(this.middleNameTextBox);
             this.Controls.Add(this.nameTextBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserEditForm";
-            this.Text = "Form1";
+            this.Text = "КОНФИГУРАТОР ПК";
             this.Load += new System.EventHandler(this.UserEditForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.userRoleBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.personalComputerConfiguratorDatabaseDataSet)).EndInit();
@@ -311,13 +313,13 @@
         #endregion
         private System.Windows.Forms.BindingSource userRoleBindingSource;
         private personalComputerConfiguratorDatabaseDataSet personalComputerConfiguratorDatabaseDataSet;
-        private personalComputerConfiguratorDatabaseDataSetTableAdapters.userTableAdapter userTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.UserTableAdapter UserTableAdapter;
         private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.Label РОЛЬ;
         private System.Windows.Forms.Button saveUserButton;
         private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.TextBox emailTextBox;
-        private personalComputerConfiguratorDatabaseDataSetTableAdapters.userRoleTableAdapter userRoleTableAdapter;
+        private personalComputerConfiguratorDatabaseDataSetTableAdapters.UserRoleTableAdapter UserRoleTableAdapter;
         private System.Windows.Forms.Label lastNameLabel;
         private System.Windows.Forms.Label middleNameLabel;
         private System.Windows.Forms.Label nameLabel;
